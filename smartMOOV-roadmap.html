@@ -1,0 +1,502 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1300">
+<title>smartMOOV · Product Roadmap 2026 – Q1 2027</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orient:#004F7C;
+  --orient80:#337296;
+  --orient60:#6695AF;
+  --orient25:#CCE1E9;
+  --orange:#FE5000;
+  --orange80:#FE7F40;
+  --orange60:#FEA080;
+  --orange25:#FED8C0;
+  --mystic:#E6EBF0;
+  --mystic80:#E9EDF3;
+  --mystic60:#EDF0F6;
+  --mystic25:#F8FAFC;
+  --black:#000;
+  --white:#FFF;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC',sans-serif;background:var(--mystic);color:var(--black);min-width:1260px}
+
+/* HEADER */
+.header{background:var(--orient);padding:32px 48px 28px;color:var(--white)}
+.header-top{display:flex;align-items:flex-start;justify-content:space-between}
+.logo-img{height:36px;display:block}
+.lang-toggle{display:flex;gap:0;border:1.5px solid rgba(255,255,255,0.35);border-radius:6px;overflow:hidden;flex-shrink:0;margin-top:4px}
+.lang-btn{padding:6px 14px;font-size:12px;font-weight:700;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.55);letter-spacing:0.05em;transition:all 0.2s}
+.lang-btn.active{background:var(--orange);color:var(--white)}
+.header-title{font-size:26px;font-weight:700;margin-top:14px;color:var(--white)}
+.header-sub{color:var(--orient25);font-size:13px;margin-top:5px}
+.stats-row{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap;align-items:flex-start}
+.stat-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:10px;padding:12px 18px;min-width:120px}
+.stat-num{font-size:22px;font-weight:700;line-height:1}
+.stat-lbl{font-size:10px;color:var(--orient25);margin-top:3px;text-transform:uppercase;letter-spacing:0.05em}
+.s-done .stat-num{color:#6EE7B7}
+.s-cur .stat-num{color:var(--orange60)}
+.s-plan .stat-num{color:var(--orient25)}
+.s-all .stat-num{color:var(--white)}
+.header-note{margin-left:auto;font-size:12px;color:var(--orient25);line-height:1.7;border-left:2px solid var(--orange);padding-left:14px;max-width:360px}
+.header-note strong{color:var(--white)}
+
+/* CONTENT */
+.content{padding:24px 48px 48px}
+
+/* ROADMAP */
+.roadmap{background:var(--white);border-radius:14px;box-shadow:0 2px 16px rgba(0,79,124,0.10),0 0 0 1px #d0dce6;overflow:visible}
+.g{display:grid;grid-template-columns:196px 108px repeat(11,1fr)}
+
+/* PHASE HEADER */
+.phase-row{border-bottom:1px solid var(--mystic);overflow:hidden;border-radius:14px 14px 0 0}
+.ph{padding:9px 8px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;text-align:center;border-right:1px solid rgba(0,0,0,0.06)}
+.ph-lbl{background:var(--mystic25);color:var(--orient80);text-align:left;padding-left:16px}
+.ph-done{background:var(--orient25);color:var(--orient);grid-column:2}
+.ph-cur{background:var(--orange25);color:var(--orange);grid-column:3/span 2}
+.ph-h2{background:var(--orient25);color:var(--orient);grid-column:5/span 6}
+.ph-q1{background:var(--orange25);color:var(--orange);grid-column:11/span 3}
+
+/* MONTH HEADER */
+.month-row{border-bottom:2px solid var(--mystic);background:var(--mystic25)}
+.mh-lbl{display:flex;align-items:center;padding-left:16px;font-size:11px;font-weight:600;color:var(--orient80);border-right:1px solid var(--mystic);background:var(--mystic60)}
+.mh{padding:7px 3px;text-align:center;font-size:11px;font-weight:600;color:var(--orient80);border-right:1px solid var(--mystic);line-height:1.3}
+.mh.dc{background:var(--orient25);color:var(--orient)}
+.mh.cc{background:var(--orange25);color:var(--orange)}
+.mh.hc{background:var(--orient25);color:var(--orient)}
+.mh.qc{background:var(--orange25);color:var(--orange80)}
+.today-mh{position:relative}
+.today-mh::after{content:'▼ NOW';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);font-size:8px;color:var(--orange);font-weight:800;white-space:nowrap;background:var(--orange25);padding:0 4px;letter-spacing:0.06em}
+
+/* DOMAIN ROWS */
+.drow{border-bottom:1px solid var(--mystic);min-height:62px;align-items:stretch}
+.drow:last-child{border-bottom:none}
+.drow:nth-child(odd){background:var(--mystic25)}
+.drow:nth-child(even){background:var(--white)}
+.dl{padding:10px 10px 10px 16px;border-right:2px solid var(--orient25);display:flex;flex-direction:column;justify-content:center;background:var(--mystic60)}
+.dl-icon{font-size:15px;margin-bottom:2px}
+.dl-name{font-size:12.5px;font-weight:700;color:var(--orient);line-height:1.3}
+.dl-sub{font-size:10px;color:var(--orient60);margin-top:1px}
+
+/* CELLS */
+.cell{display:flex;align-items:center;padding:5px 4px;border-right:1px solid var(--mystic)}
+.cell.dc{background:rgba(204,225,233,0.3)}
+.cell.cc{background:rgba(254,216,192,0.3)}
+.cell.hc{background:rgba(204,225,233,0.2)}
+.cell.qc{background:rgba(254,216,192,0.25)}
+
+/* BLOCKS */
+.blk{flex:1;border-radius:7px;padding:7px 10px;font-size:11.5px;font-weight:600;cursor:default;position:relative;transition:transform 0.15s,box-shadow 0.15s;overflow:visible;line-height:1.3;color:var(--white)}
+.blk:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:50}
+.blk-done{background:linear-gradient(135deg,var(--orient),var(--orient80))}
+.blk-cur{background:linear-gradient(135deg,var(--orange),var(--orange80));box-shadow:0 0 0 2px rgba(254,80,0,0.2);animation:glow 2.5s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 2px rgba(254,80,0,0.15)}50%{box-shadow:0 0 0 5px rgba(254,80,0,0.08),0 2px 8px rgba(254,80,0,0.2)}}
+.blk-near{background:linear-gradient(135deg,var(--orient80),var(--orient60))}
+.blk-mid{background:linear-gradient(135deg,var(--orient),var(--orient80))}
+.blk-late{background:linear-gradient(135deg,var(--orient),var(--orient60))}
+.blk-q1{background:linear-gradient(135deg,var(--orange),var(--orange60))}
+.blk-done-full{background:linear-gradient(135deg,var(--orient),var(--orient80));color:var(--white);flex:1;display:flex;align-items:center;gap:8px;border-radius:7px;padding:7px 12px;font-size:11.5px;font-weight:600;position:relative;overflow:visible;cursor:default}
+.blk-done-full:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.2);z-index:50}
+.complete-badge{font-size:10px;font-weight:600;color:rgba(255,255,255,0.75);background:rgba(0,0,0,0.18);border-radius:4px;padding:2px 7px;white-space:nowrap;flex-shrink:0}
+
+/* TOOLTIP */
+.tip{display:none;position:absolute;top:calc(100% + 8px);left:0;z-index:200;background:var(--orient);color:var(--mystic25);border-radius:10px;padding:14px 16px;min-width:240px;max-width:300px;box-shadow:0 8px 28px rgba(0,79,124,0.35);font-size:12px;line-height:1.5;pointer-events:none;border:1px solid var(--orient80)}
+.tip-r{left:auto;right:0}
+.blk:hover .tip,.blk-done-full:hover .tip{display:block}
+.tip-title{font-weight:700;font-size:12.5px;color:var(--white);border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:7px;margin-bottom:8px}
+.tip ul{list-style:none}
+.tip ul li{display:flex;gap:6px;margin-bottom:4px;color:var(--orient25);font-size:11.5px}
+.tip ul li::before{content:'·';color:var(--orange60);font-size:18px;line-height:1;flex-shrink:0}
+
+/* LEGEND */
+.legend{display:flex;align-items:center;gap:16px;margin-top:16px;flex-wrap:wrap;padding:14px 18px;background:var(--white);border-radius:10px;border:1px solid var(--orient25);font-size:12px;color:var(--orient)}
+.li{display:flex;align-items:center;gap:7px}
+.ld{width:26px;height:10px;border-radius:3px}
+.ld-done{background:linear-gradient(90deg,var(--orient),var(--orient80))}
+.ld-cur{background:linear-gradient(90deg,var(--orange),var(--orange80))}
+.ld-near{background:linear-gradient(90deg,var(--orient80),var(--orient60))}
+.ld-q1{background:linear-gradient(90deg,var(--orange),var(--orange60))}
+.lsep{width:1px;height:16px;background:var(--orient25)}
+
+.footer{text-align:center;padding:18px;font-size:11px;color:var(--orient60);border-top:1px solid var(--mystic);margin-top:24px}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-top">
+    <img class="logo-img" src="data:image/png;base64,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" alt="smartMOOV">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('zh')" id="btn-zh">中文</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+  </div>
+  <div class="header-title" data-k="title"></div>
+  <div class="header-sub" data-k="sub"></div>
+  <div class="stats-row">
+    <div class="stat-card s-done"><div class="stat-num">35%</div><div class="stat-lbl" data-k="s1"></div></div>
+    <div class="stat-card s-cur"><div class="stat-num">20%</div><div class="stat-lbl" data-k="s2"></div></div>
+    <div class="stat-card s-plan"><div class="stat-num">45%</div><div class="stat-lbl" data-k="s3"></div></div>
+    <div class="stat-card s-all"><div class="stat-num">7</div><div class="stat-lbl" data-k="s4"></div></div>
+    <div class="header-note" data-k="note"></div>
+  </div>
+</div>
+
+<div class="content">
+<div class="roadmap">
+  <div class="g phase-row">
+    <div class="ph ph-lbl" data-k="phLbl"></div>
+    <div class="ph ph-done" data-k="phDone"></div>
+    <div class="ph ph-cur" data-k="phCur"></div>
+    <div class="ph ph-h2" data-k="phH2"></div>
+    <div class="ph ph-q1" data-k="phQ1"></div>
+  </div>
+  <div class="g month-row">
+    <div class="mh-lbl" data-k="mhLbl"></div>
+    <div class="mh dc" data-k="mhPre"></div>
+    <div class="mh cc today-mh">May<br>'26</div>
+    <div class="mh cc">Jun<br>'26</div>
+    <div class="mh hc">Jul<br>'26</div>
+    <div class="mh hc">Aug<br>'26</div>
+    <div class="mh hc">Sep<br>'26</div>
+    <div class="mh hc">Oct<br>'26</div>
+    <div class="mh hc">Nov<br>'26</div>
+    <div class="mh hc">Dec<br>'26</div>
+    <div class="mh qc">Jan<br>'27</div>
+    <div class="mh qc">Feb<br>'27</div>
+    <div class="mh qc">Mar<br>'27</div>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="g drow">
+    <div class="dl"><div class="dl-icon">🔌</div><div class="dl-name" data-k="d1n"></div><div class="dl-sub" data-k="d1s"></div></div>
+    <div class="cell dc" style="grid-column:2">
+      <div class="blk blk-done" data-bid="d1b1">
+        <span class="blk-lbl" data-k="d1b1l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipDone"></div><ul data-bid="d1b1"></ul></div>
+      </div>
+    </div>
+    <div class="cell cc" style="grid-column:3/span 2">
+      <div class="blk blk-cur" data-bid="d1b2">
+        <span class="blk-lbl" data-k="d1b2l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipCurMJ"></div><ul data-bid="d1b2"></ul></div>
+      </div>
+    </div>
+    <div style="grid-column:5/span 9"></div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="g drow">
+    <div class="dl"><div class="dl-icon">📦</div><div class="dl-name" data-k="d2n"></div><div class="dl-sub" data-k="d2s"></div></div>
+    <div class="cell dc" style="grid-column:2/span 12;background:rgba(204,225,233,0.25)">
+      <div class="blk-done-full" data-bid="d2b1">
+        <span class="blk-lbl" data-k="d2b1l"></span>
+        <span class="complete-badge" data-k="completeBadge"></span>
+        <div class="tip"><div class="tip-title" data-k="tipDoneAll"></div><ul data-bid="d2b1"></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="g drow">
+    <div class="dl"><div class="dl-icon">📋</div><div class="dl-name" data-k="d3n"></div><div class="dl-sub" data-k="d3s"></div></div>
+    <div class="cell dc" style="grid-column:2">
+      <div class="blk blk-done" data-bid="d3b1"><span class="blk-lbl" data-k="d3b1l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipDone"></div><ul data-bid="d3b1"></ul></div>
+      </div>
+    </div>
+    <div class="cell cc" style="grid-column:3/span 2">
+      <div class="blk blk-cur" data-bid="d3b2"><span class="blk-lbl" data-k="d3b2l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipCurMJ"></div><ul data-bid="d3b2"></ul></div>
+      </div>
+    </div>
+    <div class="cell hc" style="grid-column:5/span 2">
+      <div class="blk blk-near" data-bid="d3b3"><span class="blk-lbl" data-k="d3b3l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipJA"></div><ul data-bid="d3b3"></ul></div>
+      </div>
+    </div>
+    <div class="cell hc" style="grid-column:7/span 2">
+      <div class="blk blk-mid" data-bid="d3b4"><span class="blk-lbl" data-k="d3b4l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipSO"></div><ul data-bid="d3b4"></ul></div>
+      </div>
+    </div>
+    <div style="grid-column:9/span 5"></div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div class="g drow">
+    <div class="dl"><div class="dl-icon">🚢</div><div class="dl-name" data-k="d4n"></div><div class="dl-sub" data-k="d4s"></div></div>
+    <div class="cell dc" style="grid-column:2">
+      <div class="blk blk-done" data-bid="d4b1"><span class="blk-lbl" data-k="d4b1l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipDone"></div><ul data-bid="d4b1"></ul></div>
+      </div>
+    </div>
+    <div class="cell cc" style="grid-column:3/span 2">
+      <div class="blk blk-cur" data-bid="d4b2"><span class="blk-lbl" data-k="d4b2l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipCurMJ"></div><ul data-bid="d4b2"></ul></div>
+      </div>
+    </div>
+    <div class="cell hc" style="grid-column:5/span 3">
+      <div class="blk blk-near" data-bid="d4b3"><span class="blk-lbl" data-k="d4b3l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipJS"></div><ul data-bid="d4b3"></ul></div>
+      </div>
+    </div>
+    <div class="cell hc" style="grid-column:8/span 2">
+      <div class="blk blk-mid" data-bid="d4b4"><span class="blk-lbl" data-k="d4b4l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipON"></div><ul data-bid="d4b4"></ul></div>
+      </div>
+    </div>
+    <div style="grid-column:10/span 4"></div>
+  </div>
+
+  <!-- ROW 5 -->
+  <div class="g drow">
+    <div class="dl"><div class="dl-icon">👁</div><div class="dl-name" data-k="d5n"></div><div class="dl-sub" data-k="d5s"></div></div>
+    <div class="cell dc" style="grid-column:2"></div>
+    <div class="cell cc" style="grid-column:3/span 2">
+      <div class="blk blk-cur" data-bid="d5b1"><span class="blk-lbl" data-k="d5b1l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipCurMJ"></div><ul data-bid="d5b1"></ul></div>
+      </div>
+    </div>
+    <div class="cell hc" style="grid-column:5/span 3">
+      <div class="blk blk-near" data-bid="d5b2"><span class="blk-lbl" data-k="d5b2l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipJS"></div><ul data-bid="d5b2"></ul></div>
+      </div>
+    </div>
+    <div class="cell hc" style="grid-column:8/span 2">
+      <div class="blk blk-mid" data-bid="d5b3"><span class="blk-lbl" data-k="d5b3l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipON"></div><ul data-bid="d5b3"></ul></div>
+      </div>
+    </div>
+    <div class="cell qc" style="grid-column:10/span 4">
+      <div class="blk blk-q1" data-bid="d5b4"><span class="blk-lbl" data-k="d5b4l"></span>
+        <div class="tip tip-r"><div class="tip-title" data-k="tipDM"></div><ul data-bid="d5b4"></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 6 -->
+  <div class="g drow">
+    <div class="dl"><div class="dl-icon">🧠</div><div class="dl-name" data-k="d6n"></div><div class="dl-sub" data-k="d6s"></div></div>
+    <div class="cell dc" style="grid-column:2"></div>
+    <div style="grid-column:3/span 2"></div>
+    <div class="cell hc" style="grid-column:5/span 3">
+      <div class="blk blk-near" data-bid="d6b1"><span class="blk-lbl" data-k="d6b1l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipJS"></div><ul data-bid="d6b1"></ul></div>
+      </div>
+    </div>
+    <div class="cell hc" style="grid-column:8/span 3">
+      <div class="blk blk-mid" data-bid="d6b2"><span class="blk-lbl" data-k="d6b2l"></span>
+        <div class="tip"><div class="tip-title" data-k="tipOD"></div><ul data-bid="d6b2"></ul></div>
+      </div>
+    </div>
+    <div class="cell qc" style="grid-column:11/span 3">
+      <div class="blk blk-q1" data-bid="d6b3"><span class="blk-lbl" data-k="d6b3l"></span>
+        <div class="tip tip-r"><div class="tip-title" data-k="tipQ1"></div><ul data-bid="d6b3"></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 7 -->
+  <div class="g drow" style="border-radius:0 0 14px 14px;overflow:hidden">
+    <div class="dl"><div class="dl-icon">💰</div><div class="dl-name" data-k="d7n"></div><div class="dl-sub" data-k="d7s"></div></div>
+    <div class="cell dc" style="grid-column:2"></div>
+    <div style="grid-column:3/span 8;display:flex;align-items:center;justify-content:center;color:var(--orient60);font-size:11px;letter-spacing:0.04em;background:rgba(204,225,233,0.1)" data-k="pending"></div>
+    <div class="cell qc" style="grid-column:11/span 3">
+      <div class="blk blk-q1" data-bid="d7b1"><span class="blk-lbl" data-k="d7b1l"></span>
+        <div class="tip tip-r"><div class="tip-title" data-k="tipQ1"></div><ul data-bid="d7b1"></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="li"><div class="ld ld-done"></div><span data-k="lgDone"></span></div>
+  <div class="li"><div class="ld ld-cur"></div><span data-k="lgCur"></span></div>
+  <div class="lsep"></div>
+  <div class="li"><div class="ld ld-near"></div><span data-k="lgNear"></span></div>
+  <div class="li"><div class="ld ld-near" style="opacity:0.7"></div><span data-k="lgMid"></span></div>
+  <div class="li"><div class="ld ld-q1"></div><span data-k="lgQ1"></span></div>
+  <div class="lsep"></div>
+  <div style="color:var(--orient60);font-size:11px" data-k="lgNote"></div>
+</div>
+
+<div class="footer" data-k="footer"></div>
+</div>
+
+<script>
+var CUR_LANG = 'zh';
+
+var STR = {
+  zh:{
+    title:'Product Roadmap · 2026 – Q1 2027',
+    sub:'4PL 数字化供应链控制塔 · 功能演进路径全览',
+    s1:'✅ 已交付 Done',s2:'🔵 进行中 Building',s3:'🔮 规划中 Planned',s4:'能力模块 Domains',
+    note:'平台三阶段演进：<strong>① 底层架构搭建</strong>（主数据 + 接口 + 订舱核心）→ <strong>② 运营功能填充</strong>（订单 + 执行 + 全程可视化）→ <strong>③ 智能驱动优化</strong>（AI 预测 + 自动化 + 财务结算）<br>鼠标悬停各功能块可查看详细子功能列表',
+    phLbl:'模块 / Domain',phDone:'已交付 · Done',phCur:'进行中 · Q2 2026 (May–Jun)',phH2:'规划中 · Q3–Q4 2026 (Jul–Dec)',phQ1:'规划中 · Q1 2027 (Jan–Mar)',
+    mhLbl:'功能模块',mhPre:'Pre\n2026',
+    tipDone:'✅ 已完成',tipCurMJ:'🔵 进行中（May–Jun）',tipJA:'🔷 规划中（Jul–Aug）',tipJS:'🔷 规划中（Jul–Sep）',
+    tipSO:'🔷 规划中（Sep–Oct）',tipON:'🔷 规划中（Oct–Nov）',tipOD:'🔷 规划中（Oct–Dec）',
+    tipDM:'🟡 规划中（Dec–Mar）',tipQ1:'🟡 规划中（Q1 2027）',tipDone:'✅ 已完成',tipDoneAll:'✅ 已完成（全模块，无待开发项）',
+    completeBadge:'✓ 模块完整交付',
+    d1n:'系统集成 & 接口',d1s:'System Integration',
+    d2n:'主数据 & 合规',d2s:'Master Data & Compliance',
+    d3n:'订单管理（PO/TO）',d3s:'Order & Transport Management',
+    d4n:'运输规划 & 订舱',d4s:'Transport Planning & Booking',
+    d5n:'执行 & 监控',d5s:'Execution & Monitoring',
+    d6n:'智能化 & 控制塔',d6s:'Intelligence & Control Tower',
+    d7n:'财务结算',d7s:'Billing & Settlement',
+    d1b1l:'SAP · OHA · 承运人 · AIS',d1b2l:'报关 · WMS · 气体检测接口',
+    d2b1l:'MDM 全量 · 证书合规 · 角色权限',
+    d3b1l:'TO · CRD · 优先级 · Shipment',d3b2l:'SAP PO 导入 + TO 数据补录',d3b3l:'供应商拆单 + PO 优先级',d3b4l:'TO 校验 + Allocation 管理',
+    d4b1l:'OHA 订舱 + 生命周期审计',d4b2l:'EDI 自动订舱 + 单证管理',d4b3l:'决策驾驶舱 + 智能拼箱',d4b4l:'自动规划 + 智能订舱',
+    d5b1l:'箱号识别 + 里程碑监控',d5b2l:'Watchlist + D&D 监控',d5b3l:'数字 CLP + 快递跟踪',d5b4l:'Shipping Advice + 后程规划',
+    d6b1l:'可视化看板 + 告警框架',d6b2l:'Dark Processing + 例外自动化',d6b3l:'AI 预测 + 调度引擎 + 移动端',
+    d7b1l:'全套结算功能',
+    lgDone:'已交付 Done',lgCur:'进行中 In Progress',lgNear:'Q3 2026（Jul–Sep）',lgMid:'Q4 2026（Oct–Dec）',lgQ1:'Q1 2027（Jan–Mar）',
+    lgNote:'💡 鼠标悬停每个功能块可展开详细子功能列表',
+    pending:'· · · 待启动 · · ·',
+    footer:'smartMOOV · 4PL Digital Supply Chain Platform · Product Roadmap v1.0 · May 2026 | 荷瑞国际物流（上海）有限公司'
+  },
+  en:{
+    title:'Product Roadmap · 2026 – Q1 2027',
+    sub:'4PL Digital Supply Chain Control Tower · Feature Evolution Overview',
+    s1:'✅ Delivered',s2:'🔵 In Progress',s3:'🔮 Planned',s4:'Capability Domains',
+    note:'Three-stage evolution: <strong>① Foundation Build</strong> (master data + integrations + booking core) → <strong>② Core Operations</strong> (order management + execution + end-to-end visibility) → <strong>③ Intelligence &amp; Automation</strong> (AI forecasting + dark processing + financial settlement)<br>Hover over each feature block to see detailed sub-features',
+    phLbl:'Domain',phDone:'Delivered · Done',phCur:'In Progress · Q2 2026 (May–Jun)',phH2:'Planned · Q3–Q4 2026 (Jul–Dec)',phQ1:'Planned · Q1 2027 (Jan–Mar)',
+    mhLbl:'Domain',mhPre:'Pre\n2026',
+    tipDone:'✅ Completed',tipCurMJ:'🔵 In Progress (May–Jun)',tipJA:'🔷 Planned (Jul–Aug)',tipJS:'🔷 Planned (Jul–Sep)',
+    tipSO:'🔷 Planned (Sep–Oct)',tipON:'🔷 Planned (Oct–Nov)',tipOD:'🔷 Planned (Oct–Dec)',
+    tipDM:'🟡 Planned (Dec–Mar)',tipQ1:'🟡 Planned (Q1 2027)',tipDoneAll:'✅ Completed (Full module, no pending items)',
+    completeBadge:'✓ Fully Delivered',
+    d1n:'System Integration & Interfaces',d1s:'Integrations & APIs',
+    d2n:'Master Data & Compliance',d2s:'MDM & Compliance',
+    d3n:'Order Management (PO/TO)',d3s:'Order & Transport Management',
+    d4n:'Transport Planning & Booking',d4s:'Planning & Carrier Booking',
+    d5n:'Execution & Monitoring',d5s:'Track & Trace / Control',
+    d6n:'Intelligence & Control Tower',d6s:'AI / Analytics / Automation',
+    d7n:'Billing & Settlement',d7s:'Financial Settlement',
+    d1b1l:'SAP · OHA · Carrier · AIS',d1b2l:'Customs · WMS · Gas Detection',
+    d2b1l:'Full MDM · Certificate Compliance · RBAC',
+    d3b1l:'TO · CRD · Priority · Shipment',d3b2l:'SAP PO Import + TO Data Entry',d3b3l:'Supplier Split + PO Priority',d3b4l:'TO Validation + Allocation Mgmt',
+    d4b1l:'OHA Booking + Lifecycle Audit',d4b2l:'EDI Auto Booking + Doc Mgmt',d4b3l:'Decision Cockpit + Smart Consolidation',d4b4l:'Auto Planning + Smart Booking',
+    d5b1l:'Container ID + Milestone Monitoring',d5b2l:'Watchlist + D&D Monitoring',d5b3l:'Digital CLP + Courier Tracking',d5b4l:'Shipping Advice + On-carriage Planning',
+    d6b1l:'Visibility Dashboard + Alert Framework',d6b2l:'Dark Processing + Exception Automation',d6b3l:'AI Forecast + Scheduling Engine + Mobile',
+    d7b1l:'Full Settlement Suite',
+    lgDone:'Delivered Done',lgCur:'In Progress',lgNear:'Q3 2026 (Jul–Sep)',lgMid:'Q4 2026 (Oct–Dec)',lgQ1:'Q1 2027 (Jan–Mar)',
+    lgNote:'💡 Hover over each feature block to expand detailed sub-feature list',
+    pending:'· · · Not Yet Started · · ·',
+    footer:'smartMOOV · 4PL Digital Supply Chain Platform · Product Roadmap v1.0 · May 2026 | MOOV Logistics Shanghai'
+  }
+};
+
+var TIPS = {
+  d1b1:{
+    zh:['SAP→TMS 自动导入 PO 数据','TMS→SAP 发运数据回传（库存管理）','OHA 订舱指令下发 & 里程碑回写','OHA 上传本地单证（FCR / House B/L）','承运人班期导入（规划基础）','集装箱海运事件跟踪','第三方 AIS / 天气 / 预测数据接入'],
+    en:['SAP→TMS automated PO data import','TMS→SAP shipment data feedback (inventory)','OHA booking instruction & milestone write-back','OHA local document upload (FCR / House B/L)','Carrier schedule import (planning basis)','Ocean container event tracking','3rd-party AIS / weather / predictive data feed']
+  },
+  d1b2:{
+    zh:['报关系统数据输出（货值/HS Code/B/L/箱号）','清关状态回写 + 未放行自动阻断后程','WMS 到货预告 Inbound Advice','WMS POD & 收货通知（最终里程碑）','气体检测自动委托 & 结果回传','Not Free 触发 Hard Stop + 自动除气委托'],
+    en:['Customs data export (value/HS Code/B/L/container)','Customs status write-back + auto-block on-carriage if not released','WMS Inbound Advice','WMS POD & goods receipt (final milestone)','Gas measurement auto-commissioning & result return','Not Free triggers Hard Stop + auto fumigation']
+  },
+  d2b1:{
+    zh:['地理主数据（UN/LOCODE / 工厂 / 仓库 / 码头）','合作伙伴主数据（供应商 / 承运人 / OHA / LSP）','商品主数据（SKU / CBM / HS Code / 危化 / BBD）','合同配额（TEU / 周 / 航线 / 船司）','费率主数据（海运费 / THC / Haulage / OHA）','证书有效期预警（交通灯 + 到期提醒）','证书失效 Hard Stop（自动阻断订舱/发运）','RBAC 角色权限 + 外部 Silo View'],
+    en:['Location master (UN/LOCODE / factory / warehouse / port)','Partner master (supplier / carrier / OHA / LSP)','Material master (SKU / CBM / HS Code / DG / BBD)','Allocation contracts (TEU / week / trade lane / carrier)','Rate master (ocean freight / THC / haulage / OHA)','Certificate expiry alerts (traffic light + reminder)','Certificate expiry Hard Stop (blocks booking/shipment)','RBAC roles & permissions + external Silo View']
+  },
+  d3b1:{
+    zh:['TO 创建 & CRD 录入 / 维护','TO 优先级继承 + 动态升级','Booking Pool 需求聚合','Shipment 生成（1:1 / n:1 跨 PO）','PO ↔ TO 双向追溯'],
+    en:['TO creation & CRD entry / maintenance','TO priority inheritance + dynamic escalation','Booking Pool demand aggregation','Shipment generation (1:1 / n:1 cross-PO)','Bidirectional PO ↔ TO traceability']
+  },
+  d3b2:{
+    zh:['SAP 自动导入采购订单（PO）','PO 以「数量池」形式管理','Food / Non-Food / Production 差异化录入界面','BBD / 危化 / 箱型 / 设备需求补录'],
+    en:['SAP automated PO import','PO managed as quantity bucket','Differentiated input UIs for Food / Non-Food / Production','BBD / hazmat / container type / equipment data entry']
+  },
+  d3b3:{
+    zh:['供应商自助 PO → TO 拆分','PO 剩余数量实时扣减','PO 优先级自动评分（Promo > Standard）','手工升级（Hot Cargo / Must Go）'],
+    en:['Supplier self-service PO → TO split','Real-time PO remaining quantity drawdown','PO priority auto-scoring (Promo > Standard)','Manual escalation (Hot Cargo / Must Go)']
+  },
+  d3b4:{
+    zh:['TO 数量 / 尺寸与 PO 对比校验','超订自动阻断 + Open Balance 展示','合同配额自动匹配需求','Pipeline 透明度可视化','Open to Buy / Acceptance Rate 图表'],
+    en:['TO quantity/dimension vs PO validation','Overbooking auto-block + Open Balance display','Contract allocation auto-matching','Pipeline utilization visibility','Open to Buy / Acceptance Rate charts']
+  },
+  d4b1:{
+    zh:['方案固化推送 OHA 执行（OHA 无决策权）','订舱状态链（Booked / Confirmed / Rejected）','拒绝 / 取消原因强制记录','历史订舱永久归档'],
+    en:['Fixed plan pushed to OHA for execution (OHA has no discretion)','Booking status chain (Booked / Confirmed / Rejected)','Mandatory reason codes for rejection / cancellation','Permanent archival of booking confirmations']
+  },
+  d4b2:{
+    zh:['EDI / API / INTTRA 自动下发订舱','单证集中上传（B/L / 发票 / VGM / 证书）','里程碑触发自动推送单证','外部方自助拉取文件（Pull）'],
+    en:['EDI / API / INTTRA automated booking submission','Centralized document upload (B/L / invoice / VGM / certs)','Milestone-triggered automated document distribution','External parties self-service document pull']
+  },
+  d4b3:{
+    zh:['运输方案决策 Cockpit（路线 / 承运人 / 成本对比）','Allocation 可视化表（Target vs Actual）','智能拼箱推荐（CBM / 尺寸 / CRD 兼容性）','后台扫描 TO Pool 自动发现协同机会'],
+    en:['Transport plan decision cockpit (route / carrier / cost comparison)','Allocation visualization (Target vs Actual)','Smart consolidation recommendations (CBM / dimensions / CRD compatibility)','Background TO Pool scan for consolidation opportunities']
+  },
+  d4b4:{
+    zh:['多目标自动运输规划（成本 / 时效 / 运力）','自动分配理想目的仓','批量 / 事件触发自动订舱','订舱确认自动校验（100% 一致走暗流）'],
+    en:['Multi-objective auto transport planning (cost / transit / capacity)','Auto-assignment of optimal destination warehouse','Batch / event-triggered auto-booking','Automated booking confirmation audit (100% match = dark processing)']
+  },
+  d5b1:{
+    zh:['空箱提箱后即录入箱号（ISO 校验）','Track & Trace 提前于 B/L 启动','多源里程碑聚合（承运人 / 码头 / API / 人工）','ATD / 中转 / 预测 ETA / ATA 全链路','缺失 / 偏差里程碑主动预警'],
+    en:['Container no. captured at empty gate-out (ISO check-digit)','Track & Trace starts before B/L is issued','Multi-source milestone aggregation (carrier / terminal / API / manual)','ATD / transship / predictive ETA / ATA end-to-end','Proactive alerts for missing / deviated milestones']
+  },
+  d5b2:{
+    zh:['重点货物 Watchlist（Promo / Hot Cargo）','颜色 / 交通灯可视化 + 风险告警','D&D Last Free Day 自动计算','拖期成本 What-if 模拟与应计'],
+    en:['Priority cargo Watchlist (Promo / Hot Cargo)','Color / traffic light visualization + risk alerts','D&D Last Free Day auto-calculation','Demurrage/detention cost What-if simulation & accrual']
+  },
+  d5b3:{
+    zh:['物料级虚拟装箱（箱号 / 封号绑定）','Ordered vs Loaded 自动校验差异','Food BBD / 批次号 / 混箱组件录入','原件快递商 + 运单号强制录入追踪'],
+    en:['Item-level virtual stuffing (container / seal assignment)','Ordered vs Loaded auto-reconciliation','Food BBD / batch no. / mixed-load component capture','Mandatory OBL courier provider + tracking no. entry']
+  },
+  d5b4:{
+    zh:['船开后「数字孪生」数据集传 SAP LExIS','供应商 + 控制塔双重验证后才发送','目的港后程委托（卡 / 铁 / 驳）','链路断开自动生成新运输段','延误时系统化 Un-plan / Re-plan'],
+    en:['Post-departure "digital twin" dataset transmission to SAP LExIS','Dual validation (supplier + control tower) before sending','Destination on-carriage commissioning (truck / rail / barge)','Auto-generate new transport leg if chain breaks','Systematic Un-plan / Re-plan under ETA volatility']
+  },
+  d6b1:{
+    zh:['Shipment 全生命周期可视化看板','计划 vs 实际偏差自动识别框架','告警分类体系（时间延误 / 数据质量 / 操作风险）','可配置告警阈值与订阅规则','Watchlist 增强（Promo / Hot Cargo / VIP 客户）','跨域数据关联视图（订单 → 订舱 → 执行链路）','处置工作流（Acknowledge / Solved / Escalate）'],
+    en:['Shipment lifecycle visibility dashboard','Plan vs actual deviation detection framework','Alert classification (time delay / data quality / operational risk)','Configurable alert thresholds & subscription rules','Enhanced Watchlist (Promo / Hot Cargo / VIP client)','Cross-domain linked view (order → booking → execution)','Resolution workflow (Acknowledge / Solved / Escalate)']
+  },
+  d6b2:{
+    zh:['Dark Processing（90–95% 标准流程无人干预）','例外自动生成告警 / 任务 + 处置工作流','1 个船期 → N 箱告警智能聚合推送','操作 SOP 嵌入式关联（点击直达操作指引）','KPI 驾驶舱（准时率 / 数据完整率 / 处置率）','Silo View 客户门户（外部可视化权限管控）','异常分类（时间 / 数据质量 / AI 预测风险）'],
+    en:['Dark Processing (90–95% standard flows fully automated)','Exception → auto-alert/task + resolution workflow','Smart alert aggregation (1 sailing → N containers merged push)','Embedded SOP linking (click-through operational guidance)','KPI dashboard (on-time rate / data quality / resolution rate)','Silo View customer portal (external visibility permissions)','Exception classification (time / data quality / AI prediction risk)']
+  },
+  d6b3:{
+    zh:['TEU 需求预测（基于 PO CBM 滚动预测模型）','Shadow Scheduling 虚拟排程（锁柜前预占运力）','Allocation Forecast（周维度 vs 合同运力差异对比）','动态里程碑逆排引擎（从 CRD 自动计算最晚订舱节点）','Forecast vs Actual 误差归因分析（维度下钻）','移动 App（iOS / Android）+ 高优先级 Push 通知','一键授权决策（批准额外成本 / 紧急调拨指令）'],
+    en:['Rolling TEU demand forecast (PO CBM-based predictive model)','Shadow Scheduling (virtual capacity reservation pre-booking)','Allocation Forecast (weekly demand vs contracted capacity gap view)','Dynamic backward scheduling engine (CRD → auto-calculate booking deadline)','Forecast vs Actual variance attribution (multi-dimension drill-down)','Mobile App (iOS / Android) + high-priority push notifications','One-click authorization decisions (approve extra cost / emergency reallocation)']
+  },
+  d7b1:{
+    zh:['合同费率管理（多维 / 附加费 / 多币种）','里程碑触发自动计费','Ghost Billing（影子成本实时透明化）','SAP 发票导入 & 行项目关联','三方对账（合同费率 / 实际里程碑 / 发票）','防止「未发生服务付款」硬控制','审计通过后自动回传 SAP FI 付款'],
+    en:['Rate contract management (multi-dimensional / surcharges / multi-currency)','Milestone-triggered automatic rating','Ghost Billing (shadow cost real-time transparency)','SAP invoice import & line item linking','3-way match (rate contract / operational proof / invoice)','Hard control to prevent payment for unexecuted services','Auto SAP FI payment release after audit approval']
+  }
+};
+
+function setLang(l) {
+  CUR_LANG = l;
+  document.getElementById('btn-zh').classList.toggle('active', l==='zh');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  // Update simple text
+  document.querySelectorAll('[data-k]').forEach(function(el){
+    var k = el.getAttribute('data-k');
+    if(STR[l][k] !== undefined) el.innerHTML = STR[l][k];
+  });
+  // Update block labels
+  document.querySelectorAll('[data-bid] .blk-lbl').forEach(function(el){
+    var bid = el.closest('[data-bid]').getAttribute('data-bid');
+    var k = bid.replace(/[- ]/g,'')+'l';
+    if(k in STR[l]) el.textContent = STR[l][k];
+  });
+  // Update tooltip feature lists
+  document.querySelectorAll('ul[data-bid]').forEach(function(ul){
+    var bid = ul.getAttribute('data-bid');
+    if(TIPS[bid] && TIPS[bid][l]) {
+      ul.innerHTML = TIPS[bid][l].map(function(t){return '<li>'+t+'</li>'}).join('');
+    }
+  });
+}
+
+// Init
+setLang('zh');
+</script>
+</body>
+</html>
