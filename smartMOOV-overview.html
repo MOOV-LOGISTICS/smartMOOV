@@ -25,6 +25,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:cen
 .nav-links{display:flex;gap:22px;align-items:center}
 .nav-links a{color:var(--text);text-decoration:none;font-size:13px;letter-spacing:.4px;transition:color .2s}
 .nav-links a:hover{color:var(--orange)}
+.nav-links .nav-btn-guide{padding:6px 16px;border:1px solid rgba(0,150,220,0.6);border-radius:20px;color:#7DD4F8;font-size:13px;text-decoration:none;transition:all .2s}
+.nav-links .nav-btn-guide:hover{background:rgba(0,150,220,0.18);color:#fff}
 .nav-links .nav-btn{padding:6px 16px;border:1px solid var(--orange);border-radius:20px;color:var(--orange);font-size:13px;text-decoration:none;transition:all .2s}
 .nav-links .nav-btn:hover{background:var(--orange);color:#fff}
 .lang-toggle{display:flex;gap:0;border:1.5px solid rgba(255,255,255,0.30);border-radius:6px;overflow:hidden;flex-shrink:0}
@@ -150,6 +152,7 @@ footer{background:var(--bg);border-top:1px solid rgba(0,150,220,.15);padding:48p
     <a href="#journey" data-k="nav_journey">全程追踪</a>
     <a href="#capabilities" data-k="nav_cap">核心能力</a>
     <a href="#specs" data-k="nav_specs">技术规格</a>
+    <a href="smartMOOV-guide.html" class="nav-btn-guide" data-k="nav_guide">操作指南</a>
     <a href="smartMOOV-roadmap.html" class="nav-btn" data-k="nav_roadmap">查看路线图 →</a>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('zh')" id="btn-zh">中文</button>
@@ -525,6 +528,7 @@ const STR = {
   'nav_journey':['全程追踪','Journey'],
   'nav_cap':['核心能力','Capabilities'],
   'nav_specs':['技术规格','Tech Specs'],
+  'nav_guide':['操作指南','User Guide'],
   'nav_roadmap':['查看路线图 →','View Roadmap →'],
   'hero_title1':['智慧驱动，','Intelligent · '],
   'hero_title2':['全链可控','Total Visibility'],

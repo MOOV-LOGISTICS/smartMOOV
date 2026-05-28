@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>smartMOOV | 操作指南</title>
+<style>
+:root{
+  --orient:#004F7C;--orange:#FE5000;--bg:#04111E;--bg2:#071929;--bg3:#0A2236;
+  --glass:rgba(0,79,124,0.10);--glass-border:rgba(0,150,220,0.22);
+  --text:#C8D8E8;--text-bright:#E6EBF0;--sidebar-w:260px;
+  --font:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex;flex-direction:column;min-height:100vh}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--orient);border-radius:3px}
+
+/* ── TOPBAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;height:56px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+  background:rgba(4,17,30,0.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(0,150,220,0.18)}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.topbar-logo img{height:28px}
+.topbar-sep{color:rgba(0,150,220,.3);font-size:18px}
+.topbar-title{font-size:13px;color:var(--text);letter-spacing:.5px;opacity:.65}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.back-btn{padding:5px 12px;font-size:11px;font-weight:600;border:1.5px solid rgba(254,80,0,0.55);border-radius:6px;color:rgba(254,80,0,0.9);text-decoration:none;transition:all .2s;white-space:nowrap}
+.back-btn:hover{background:rgba(254,80,0,0.15)}
+.guide-badge{padding:4px 10px;font-size:11px;background:rgba(0,100,160,.25);border:1px solid rgba(0,150,220,.35);border-radius:12px;color:#7DD4F8;letter-spacing:.5px}
+.lang-toggle{display:flex;border:1.5px solid rgba(255,255,255,.25);border-radius:6px;overflow:hidden}
+.lang-btn{padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.45);transition:all .2s}
+.lang-btn.active{background:var(--orange);color:#fff}
+
+/* ── LAYOUT ── */
+.layout{display:flex;padding-top:56px;min-height:calc(100vh - 56px)}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sidebar-w);flex-shrink:0;position:fixed;top:56px;bottom:0;left:0;
+  overflow-y:auto;background:var(--bg2);border-right:1px solid rgba(0,150,220,.14);padding:16px 0 32px}
+.sidebar-group-btn{width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:9px 18px;background:none;border:none;cursor:pointer;color:rgba(168,200,232,.55);
+  font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+  text-align:left;transition:color .2s}
+.sidebar-group-btn:hover{color:var(--text-bright)}
+.sidebar-group-btn .arrow{font-size:9px;transition:transform .22s;opacity:.5}
+.sidebar-group-btn.open{color:var(--text)}
+.sidebar-group-btn.open .arrow{transform:rotate(90deg)}
+.sidebar-items{display:none;padding:2px 0 6px}
+.sidebar-group-btn.open + .sidebar-items{display:block}
+.sidebar-item{display:block;padding:6px 18px 6px 26px;font-size:12.5px;color:rgba(168,200,232,.7);
+  text-decoration:none;border-left:2px solid transparent;margin-left:0;transition:all .18s;line-height:1.35}
+.sidebar-item:hover{color:#fff;border-left-color:rgba(0,150,220,.4);background:rgba(0,79,124,.12)}
+.sidebar-item.active{color:var(--orange);border-left-color:var(--orange);background:rgba(254,80,0,.06);font-weight:600}
+.sidebar-divider{height:1px;background:rgba(0,150,220,.09);margin:8px 16px}
+
+/* ── MAIN CONTENT ── */
+.main{margin-left:var(--sidebar-w);flex:1;padding:44px 60px 90px;overflow-y:auto;
+  max-width:calc(var(--sidebar-w) + 880px)}
+.content-section{display:none;animation:fadeIn .28s ease}
+.content-section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ── MODULE HEADER ── */
+.mod-header{margin-bottom:30px;padding-bottom:18px;border-bottom:1px solid rgba(0,150,220,.13)}
+.mod-label{font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+.mod-title{font-size:26px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px}
+.mod-subtitle{font-size:14px;color:var(--text);line-height:1.75;max-width:660px}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{display:flex;align-items:center;gap:10px;margin:28px 0 16px;
+  color:rgba(168,200,232,.4);font-size:10.5px;letter-spacing:2px;text-transform:uppercase}
+.section-divider::after{content:'';flex:1;height:1px;background:rgba(0,150,220,.1)}
+
+/* ── STEPS ── */
+.steps-bar{display:flex;gap:0;margin:0 0 18px;position:relative}
+.steps-bar::before{content:'';position:absolute;top:15px;left:16px;right:16px;height:2px;
+  background:rgba(0,150,220,.12);z-index:0}
+.step-pill{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;z-index:1}
+.step-dot{width:30px;height:30px;border-radius:50%;background:var(--bg3);
+  border:2px solid rgba(0,150,220,.25);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:rgba(168,200,232,.4);margin-bottom:5px}
+.step-label{font-size:10px;color:rgba(168,200,232,.35);text-align:center;max-width:70px;line-height:1.3}
+.ph-step-content{background:rgba(0,40,80,.1);border:1px solid rgba(0,150,220,.1);
+  border-radius:8px;padding:16px 20px;margin-bottom:10px}
+.ph-step-title{font-size:12.5px;font-weight:600;color:rgba(168,200,232,.4);margin-bottom:5px}
+.ph-step-body{font-size:12px;color:rgba(168,200,232,.25);font-style:italic}
+
+/* ── SCREENSHOT SLOT ── */
+.screenshot-slot{border:2px dashed rgba(0,150,220,.18);border-radius:10px;
+  min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(0,30,60,.12);margin:0 0 4px;gap:10px}
+.screenshot-slot .ss-icon{font-size:34px;opacity:.25}
+.screenshot-slot .ss-text{font-size:12px;color:rgba(168,200,232,.3);letter-spacing:.5px}
+
+/* ── RULES ACCORDION ── */
+.rules-accordion{margin:20px 0}
+.rules-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:11px 16px;background:rgba(0,40,80,.18);border:1px solid rgba(0,150,220,.13);
+  border-radius:8px;cursor:pointer;color:rgba(168,200,232,.7);font-size:13px;font-weight:600;
+  text-align:left;transition:background .2s}
+.rules-toggle:hover{background:rgba(0,40,80,.3)}
+.rules-toggle .arr{transition:transform .22s;opacity:.5;font-size:11px}
+.rules-toggle.open{border-radius:8px 8px 0 0;background:rgba(0,40,80,.3)}
+.rules-toggle.open .arr{transform:rotate(180deg)}
+.rules-body{display:none;padding:14px 16px;background:rgba(0,30,60,.12);
+  border:1px solid rgba(0,150,220,.13);border-top:none;border-radius:0 0 8px 8px;
+  font-size:12px;color:rgba(168,200,232,.35);font-style:italic;line-height:1.7}
+.rules-toggle.open + .rules-body{display:block}
+
+/* ── ROLE CARDS ── */
+.role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 8px}
+.role-card{padding:22px 18px;border-radius:10px;border:1px solid var(--glass-border);background:var(--glass);text-align:center}
+.role-card .rc-icon{font-size:28px;margin-bottom:10px}
+.role-card .rc-name{font-size:14px;font-weight:700;color:#fff;margin-bottom:7px}
+.role-card .rc-desc{font-size:12px;color:var(--text);line-height:1.65}
+
+/* ── PLACEHOLDER ── */
+.placeholder-block{border:1.5px dashed rgba(0,150,220,.2);border-radius:10px;
+  padding:40px 24px;text-align:center;color:rgba(168,200,232,.35);margin:24px 0;background:rgba(0,40,80,.07)}
+.placeholder-block .ph-icon{font-size:30px;margin-bottom:10px}
+.placeholder-block .ph-text{font-size:12.5px;letter-spacing:.5px}
+
+@media(max-width:900px){
+  .sidebar{display:none}
+  .main{margin-left:0;padding:28px 20px 60px}
+  .role-cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-logo" href="smartMOOV-overview.html"><img src="data:image/png;base64,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" alt="smartMOOV"></a>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-title" data-k="page_title">操作指南</span>
+  </div>
+  <div class="topbar-right">
+    <a href="smartMOOV-overview.html" class="back-btn">← 平台概览</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('zh')" id="btn-zh">中文</button>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar">
+
+    <div class="sidebar-section">
+      <button class="sidebar-group-btn open" onclick="toggleGroup(this)">
+        <span data-k="grp_start">快速开始</span><span class="arrow">▶</span>
+      </button>
+      <div class="sidebar-items">
+        <a class="sidebar-item active" href="#" onclick="showSection('about');return false" data-k="nav_about">关于 smartMOOV</a>
+        <a class="sidebar-item" href="#" onclick="showSection('roles');return false" data-k="nav_roles">三大角色介绍</a>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-group-btn open" onclick="toggleGroup(this)">
+        <span data-k="grp_origin">起运地操作</span><span class="arrow">▶</span>
+      </button>
+      <div class="sidebar-items">
+        <a class="sidebar-item" href="#" onclick="showSection('login');return false" data-k="nav_login">登录与账号设置</a>
+        <a class="sidebar-item" href="#" onclick="showSection('booking-note');return false" data-k="nav_booking_note">委托订舱 Booking Note</a>
+        <a class="sidebar-item" href="#" onclick="showSection('carrier-booking');return false" data-k="nav_carrier_booking">承运订舱 Carrier Booking</a>
+        <a class="sidebar-item" href="#" onclick="showSection('pickup');return false" data-k="nav_pickup">提货装箱 Pick-up &amp; Containerize</a>
+        <a class="sidebar-item" href="#" onclick="showSection('docs-upload');return false" data-k="nav_docs_upload">上传核验单证</a>
+        <a class="sidebar-item" href="#" onclick="showSection('departure');return false" data-k="nav_departure">实际开船 Vessel Departure</a>
+        <a class="sidebar-item" href="#" onclick="showSection('hbl');return false" data-k="nav_hbl">签发提单与发票</a>
+        <a class="sidebar-item" href="#" onclick="showSection('prealert');return false" data-k="nav_prealert">预知通 Pre Alert</a>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-group-btn open" onclick="toggleGroup(this)">
+        <span data-k="grp_dest">目的地操作</span><span class="arrow">▶</span>
+      </button>
+      <div class="sidebar-items">
+        <a class="sidebar-item" href="#" onclick="showSection('docs-verify');return false" data-k="nav_docs_verify">单证核验</a>
+        <a class="sidebar-item" href="#" onclick="showSection('delivery-preplan');return false" data-k="nav_delivery_preplan">送货预计划</a>
+        <a class="sidebar-item" href="#" onclick="showSection('broker-assign');return false" data-k="nav_broker_assign">报关行指派</a>
+        <a class="sidebar-item" href="#" onclick="showSection('delivery-plan');return false" data-k="nav_delivery_plan">送货计划</a>
+        <a class="sidebar-item" href="#" onclick="showSection('customs-invoice');return false" data-k="nav_customs_invoice">向海关提交发票</a>
+        <a class="sidebar-item" href="#" onclick="showSection('vessel-arrival');return false" data-k="nav_vessel_arrival">到港与清关</a>
+        <a class="sidebar-item" href="#" onclick="showSection('discharged');return false" data-k="nav_discharged">卸箱卸货</a>
+        <a class="sidebar-item" href="#" onclick="showSection('arrival-dc');return false" data-k="nav_arrival_dc">到达配送中心</a>
+        <a class="sidebar-item" href="#" onclick="showSection('empty-return');return false" data-k="nav_empty_return">空箱归还</a>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-section">
+      <button class="sidebar-group-btn open" onclick="toggleGroup(this)">
+        <span data-k="grp_sys">系统功能</span><span class="arrow">▶</span>
+      </button>
+      <div class="sidebar-items">
+        <a class="sidebar-item" href="#" onclick="showSection('order-mgmt');return false" data-k="nav_order_mgmt">订单管理</a>
+        <a class="sidebar-item" href="#" onclick="showSection('dest-mgmt');return false" data-k="nav_dest_mgmt">目的地管理</a>
+        <a class="sidebar-item" href="#" onclick="showSection('smart-board');return false" data-k="nav_smart_board">智能看板</a>
+        <a class="sidebar-item" href="#" onclick="showSection('forecast');return false" data-k="nav_forecast">预测 Forecast</a>
+        <a class="sidebar-item" href="#" onclick="showSection('tracking');return false" data-k="nav_tracking">路由追踪</a>
+        <a class="sidebar-item" href="#" onclick="showSection('master-data');return false" data-k="nav_master_data">主数据管理</a>
+        <a class="sidebar-item" href="#" onclick="showSection('user-mgmt');return false" data-k="nav_user_mgmt">用户管理</a>
+        <a class="sidebar-item" href="#" onclick="showSection('sys-setup');return false" data-k="nav_sys_setup">系统设置</a>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ── 关于 smartMOOV ── -->
+    <section class="content-section active" id="sec-about">
+      <div class="mod-header">
+        <div class="mod-label">QUICK START</div>
+        <h1 class="mod-title" data-k="about_title">关于 smartMOOV</h1>
+        <p class="mod-subtitle" data-k="about_sub">smartMOOV 是 MOOV 自主研发的 4PL 数字化供应链协同平台，覆盖从货物就绪到空箱归还的完整生命周期，实现多方实时协同与全程可视化。</p>
+      </div>
+      <div class="placeholder-block">
+        <div class="ph-icon">📋</div>
+        <div class="ph-text" data-k="ph_content">内容待填充 · Content to be added</div>
+      </div>
+    </section>
+
+    <!-- ── 三大角色介绍 ── -->
+    <section class="content-section" id="sec-roles">
+      <div class="mod-header">
+        <div class="mod-label">ROLES &amp; PERMISSIONS</div>
+        <h1 class="mod-title" data-k="roles_title">三大角色介绍</h1>
+        <p class="mod-subtitle" data-k="roles_sub">smartMOOV 围绕三类核心用户角色设计，不同角色拥有不同的操作权限与视图范围。</p>
+      </div>
+      <div class="role-cards">
+        <div class="role-card">
+          <div class="rc-icon">🏭</div>
+          <div class="rc-name">Supplier</div>
+          <div class="rc-desc" data-k="role_supplier_desc">发货方 / 供应商，负责货物准备、尺寸录入、在线订舱</div>
+        </div>
+        <div class="role-card">
+          <div class="rc-icon">⚓</div>
+          <div class="rc-name">OHA</div>
+          <div class="rc-desc" data-k="role_oha_desc">起运港代理，负责验证订舱、分配运输方案、承运订舱</div>
+        </div>
+        <div class="role-card">
+          <div class="rc-icon">👔</div>
+          <div class="rc-name">Customer</div>
+          <div class="rc-desc" data-k="role_customer_desc">货主 / 进口商，审批订舱、监控全程里程碑、管理目的地操作</div>
+        </div>
+      </div>
+      <div class="placeholder-block">
+        <div class="ph-icon">📋</div>
+        <div class="ph-text" data-k="ph_content">内容待填充 · Content to be added</div>
+      </div>
+    </section>
+
+
+    <section class="content-section" id="sec-login">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="login_title">登录与账号设置</h1>
+        <p class="mod-subtitle" data-k="login_sub">登录系统、修改密码、用户授权设置。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 3</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-booking-note">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="booking-note_title">委托订舱</h1>
+        <p class="mod-subtitle" data-k="booking-note_sub">供应商发起订舱流程，完成 PO 录入、货物信息填写、运价确认，提交至 OHA 审核。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div><div class="step-pill"><div class="step-dot">4</div><div class="step-label">完成</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 3</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 4</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-carrier-booking">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="carrier-booking_title">承运订舱</h1>
+        <p class="mod-subtitle" data-k="carrier-booking_sub">OHA 向船公司发出订舱并确认 Booking Confirmation。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-pickup">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="pickup_title">提货装箱</h1>
+        <p class="mod-subtitle" data-k="pickup_sub">SO 放行、SI/VGM 提交、进港入仓、装载结果录入。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div><div class="step-pill"><div class="step-dot">4</div><div class="step-label">完成</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 3</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 4</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-docs-upload">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="docs-upload_title">上传核验单证</h1>
+        <p class="mod-subtitle" data-k="docs-upload_sub">上传装运文件并完成核验。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-departure">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="departure_title">实际开船</h1>
+        <p class="mod-subtitle" data-k="departure_sub">确认实际开船时间（ATD）。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-hbl">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="hbl_title">签发提单与发票</h1>
+        <p class="mod-subtitle" data-k="hbl_sub">向发货方释放 HBL 和发票文件。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-prealert">
+      <div class="mod-header">
+        <div class="mod-label">ORIGIN</div>
+        <h1 class="mod-title" data-k="prealert_title">预知通</h1>
+        <p class="mod-subtitle" data-k="prealert_sub">开船后向目的地发送到港预警通知。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-docs-verify">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="docs-verify_title">单证核验</h1>
+        <p class="mod-subtitle" data-k="docs-verify_sub">目的地客户核验装运文件。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-delivery-preplan">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="delivery-preplan_title">送货预计划</h1>
+        <p class="mod-subtitle" data-k="delivery-preplan_sub">提前规划到港后的送货安排。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-broker-assign">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="broker-assign_title">报关行指派</h1>
+        <p class="mod-subtitle" data-k="broker-assign_sub">指定目的地清关代理（支持批量上传）。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-delivery-plan">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="delivery-plan_title">送货计划</h1>
+        <p class="mod-subtitle" data-k="delivery-plan_sub">最终确认送货时间与路线安排。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-customs-invoice">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="customs-invoice_title">向海关提交发票</h1>
+        <p class="mod-subtitle" data-k="customs-invoice_sub">上传报关发票文件至海关系统。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-vessel-arrival">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="vessel-arrival_title">到港与清关</h1>
+        <p class="mod-subtitle" data-k="vessel-arrival_sub">记录实际到港（ATA）并完成清关。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-discharged">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="discharged_title">卸箱卸货</h1>
+        <p class="mod-subtitle" data-k="discharged_sub">记录集装箱卸港完成。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-arrival-dc">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="arrival-dc_title">到达配送中心</h1>
+        <p class="mod-subtitle" data-k="arrival-dc_sub">货物签收入仓，支持批量上传。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-empty-return">
+      <div class="mod-header">
+        <div class="mod-label">DESTINATION</div>
+        <h1 class="mod-title" data-k="empty-return_title">空箱归还</h1>
+        <p class="mod-subtitle" data-k="empty-return_sub">归还空箱，完成整个货运周期闭环。</p>
+      </div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-order-mgmt">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="order-mgmt_title">订单管理</h1>
+        <p class="mod-subtitle" data-k="order-mgmt_sub">PO 全生命周期管理，含统计卡、筛选器与里程碑视图。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-dest-mgmt">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="dest-mgmt_title">目的地管理</h1>
+        <p class="mod-subtitle" data-k="dest-mgmt_sub">管理 HBL、集装箱及目的地状态，含清关、卫生风险标记。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-smart-board">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="smart-board_title">智能看板</h1>
+        <p class="mod-subtitle" data-k="smart-board_sub">六张实时 KPI 卡片：待订舱、在途 TEU、7日内到港/开船等。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-forecast">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="forecast_title">预测</h1>
+        <p class="mod-subtitle" data-k="forecast_sub">汇聚 9 个港口 TEU 预测数据，支持手动修正 ETU/ETB。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-tracking">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="tracking_title">路由追踪</h1>
+        <p class="mod-subtitle" data-k="tracking_sub">世界地图实时船位、速度、ETA 与港口轮转，支持 IMO/MMSI 搜索。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-master-data">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="master-data_title">主数据管理</h1>
+        <p class="mod-subtitle" data-k="master-data_sub">产品、供应商、箱型、用户、字典数据统一维护。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-user-mgmt">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="user-mgmt_title">用户管理</h1>
+        <p class="mod-subtitle" data-k="user-mgmt_sub">租户→部门→角色→数据范围四级权限体系，多方数据隔离。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+    <section class="content-section" id="sec-sys-setup">
+      <div class="mod-header">
+        <div class="mod-label">SYSTEM</div>
+        <h1 class="mod-title" data-k="sys-setup_title">系统设置</h1>
+        <p class="mod-subtitle" data-k="sys-setup_sub">SLA 规则、通知邮件模板等后台配置。</p>
+      </div>
+      
+      <div class="section-divider" data-k="div_screenshot">界面截图</div>
+      <div class="screenshot-slot">
+        <div class="ss-icon">🖼</div>
+        <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
+      </div>
+      <div class="rules-accordion">
+        <button class="rules-toggle" onclick="toggleRules(this)">
+          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
+        </button>
+        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ── BILINGUAL ── */
+const STR = {
+  page_title:['操作指南','User Guide'],
+  grp_start:['快速开始','Quick Start'],
+  grp_origin:['起运地操作','Origin Operations'],
+  grp_dest:['目的地操作','Destination Operations'],
+  grp_sys:['系统功能','System Functions'],
+  nav_about:['关于 smartMOOV','About smartMOOV'],
+  nav_roles:['三大角色介绍','Roles Overview'],
+  nav_login:['登录与账号设置','Login & Account Setup'],
+  nav_booking_note:['委托订舱 Booking Note','Booking Note'],
+  nav_carrier_booking:['承运订舱 Carrier Booking','Carrier Booking'],
+  nav_pickup:['提货装箱 Pick-up & Containerize','Pick-up & Containerize'],
+  nav_docs_upload:['上传核验单证','Upload & Verify Docs'],
+  nav_departure:['实际开船 Vessel Departure','Vessel Departure'],
+  nav_hbl:['签发提单与发票','Release HBL & Invoice'],
+  nav_prealert:['预知通 Pre Alert','Pre Alert'],
+  nav_docs_verify:['单证核验','Docs Verify by Customer'],
+  nav_delivery_preplan:['送货预计划','Delivery Pre-plan'],
+  nav_broker_assign:['报关行指派','Customs Broker Assign'],
+  nav_delivery_plan:['送货计划','Delivery Plan'],
+  nav_customs_invoice:['向海关提交发票','Invoices to Customs'],
+  nav_vessel_arrival:['到港与清关','Vessel Arrival & Customs'],
+  nav_discharged:['卸箱卸货','Container Discharged'],
+  nav_arrival_dc:['到达配送中心','Arrival DC'],
+  nav_empty_return:['空箱归还','Empty Container Return'],
+  nav_order_mgmt:['订单管理','Order Management'],
+  nav_dest_mgmt:['目的地管理','Destination Management'],
+  nav_smart_board:['智能看板','Smart Board'],
+  nav_forecast:['预测 Forecast','Forecast'],
+  nav_tracking:['路由追踪','Tracking'],
+  nav_master_data:['主数据管理','Master Data'],
+  nav_user_mgmt:['用户管理','User Management'],
+  nav_sys_setup:['系统设置','System Setup'],
+  about_title:['关于 smartMOOV','About smartMOOV'],
+  about_sub:['smartMOOV 是 MOOV 自主研发的 4PL 数字化供应链协同平台，覆盖从货物就绪到空箱归还的完整生命周期，实现多方实时协同与全程可视化。',"smartMOOV is MOOV's proprietary 4PL digital supply chain platform, covering the full lifecycle from cargo readiness to empty container return."],
+  roles_title:['三大角色介绍','Roles Overview'],
+  roles_sub:['smartMOOV 围绕三类核心用户角色设计，不同角色拥有不同的操作权限与视图范围。','smartMOOV is designed around three core user roles, each with distinct permissions and views.'],
+  role_supplier_desc:['发货方 / 供应商，负责货物准备、尺寸录入、在线订舱','Shipper/Supplier: cargo preparation, dimension entry, online booking'],
+  role_oha_desc:['起运港代理，负责验证订舱、分配运输方案、承运订舱','Origin Handling Agent: booking validation, transport plan assignment, carrier booking'],
+  role_customer_desc:['货主 / 进口商，审批订舱、监控全程里程碑、管理目的地操作','Shipper/Importer: booking approval, milestone monitoring, destination operations'],
+  div_steps:['操作步骤','Steps'],
+  div_screenshot:['界面截图','Screenshots'],
+  ph_content:['内容待填充 · Content to be added','Content to be added'],
+  ph_screenshot:['截图待补充 · Screenshots to be added','Screenshots to be added'],
+  ph_rules:['业务规则内容待填充 · Business rules to be added','Business rules to be added'],
+  rules_btn:['业务规则','Business Rules'],
+};
+
+const MOD_STR = {
+  'login_title':['登录与账号设置','Login & Account Setup'],
+  'login_sub':['登录系统、修改密码、用户授权设置。','Log in, change password, user consent settings.'],
+  'booking-note_title':['委托订舱','Booking Note'],
+  'booking-note_sub':['供应商发起订舱流程，完成 PO 录入、货物信息填写、运价确认，提交至 OHA 审核。','Supplier initiates booking: PO entry, cargo info, rate confirmation, submit to OHA.'],
+  'carrier-booking_title':['承运订舱','Carrier Booking'],
+  'carrier-booking_sub':['OHA 向船公司发出订舱并确认 Booking Confirmation。','OHA sends carrier booking and confirms Booking Confirmation.'],
+  'pickup_title':['提货装箱','Pick-up & Containerize'],
+  'pickup_sub':['SO 放行、SI/VGM 提交、进港入仓、装载结果录入。','SO release, SI/VGM submit, container gate-in, loading result.'],
+  'docs-upload_title':['上传核验单证','Upload & Verify Shipping Docs'],
+  'docs-upload_sub':['上传装运文件并完成核验。','Upload shipping documents and complete verification.'],
+  'departure_title':['实际开船','Vessel Departure'],
+  'departure_sub':['确认实际开船时间（ATD）。','Confirm Actual Time of Departure (ATD).'],
+  'hbl_title':['签发提单与发票','Release HBL & Invoice'],
+  'hbl_sub':['向发货方释放 HBL 和发票文件。','Release HBL and invoice to shipper.'],
+  'prealert_title':['预知通','Pre Alert'],
+  'prealert_sub':['开船后向目的地发送到港预警通知。','Send pre-alert notification to destination after vessel departure.'],
+  'docs-verify_title':['单证核验','Shipping Docs Verify by Customer'],
+  'docs-verify_sub':['目的地客户核验装运文件。','Customer at destination verifies shipping documents.'],
+  'delivery-preplan_title':['送货预计划','Delivery Pre-plan'],
+  'delivery-preplan_sub':['提前规划到港后的送货安排。','Pre-plan delivery arrangement before vessel arrival.'],
+  'broker-assign_title':['报关行指派','Customs Broker Assign'],
+  'broker-assign_sub':['指定目的地清关代理（支持批量上传）。','Assign customs broker at destination (batch upload supported).'],
+  'delivery-plan_title':['送货计划','Delivery Plan'],
+  'delivery-plan_sub':['最终确认送货时间与路线安排。','Finalize delivery time and route.'],
+  'customs-invoice_title':['向海关提交发票','Invoices to Customs'],
+  'customs-invoice_sub':['上传报关发票文件至海关系统。','Upload invoice documents to customs.'],
+  'vessel-arrival_title':['到港与清关','Vessel Arrival & Customs'],
+  'vessel-arrival_sub':['记录实际到港（ATA）并完成清关。','Record ATA and complete customs clearance.'],
+  'discharged_title':['卸箱卸货','Container Discharged'],
+  'discharged_sub':['记录集装箱卸港完成。','Record container discharged at port.'],
+  'arrival-dc_title':['到达配送中心','Arrival DC'],
+  'arrival-dc_sub':['货物签收入仓，支持批量上传。','Cargo received at DC warehouse (batch upload supported).'],
+  'empty-return_title':['空箱归还','Empty Container Return'],
+  'empty-return_sub':['归还空箱，完成整个货运周期闭环。','Return empty container to complete the logistics cycle.'],
+  'order-mgmt_title':['订单管理','Order Management'],
+  'order-mgmt_sub':['PO 全生命周期管理，含统计卡、筛选器与里程碑视图。','Full PO lifecycle management with stats, filters and milestone views.'],
+  'dest-mgmt_title':['目的地管理','Destination Management'],
+  'dest-mgmt_sub':['管理 HBL、集装箱及目的地状态，含清关、卫生风险标记。','Manage HBLs, containers and destination status including customs and sanitary flags.'],
+  'smart-board_title':['智能看板','Smart Board'],
+  'smart-board_sub':['六张实时 KPI 卡片：待订舱、在途 TEU、7日内到港/开船等。','Six real-time KPI cards: pending bookings, in-transit TEU, 7-day arrivals/departures.'],
+  'forecast_title':['预测','Forecast'],
+  'forecast_sub':['汇聚 9 个港口 TEU 预测数据，支持手动修正 ETU/ETB。','Aggregates TEU forecast from 9 ports with manual ETU/ETB override.'],
+  'tracking_title':['路由追踪','Tracking'],
+  'tracking_sub':['世界地图实时船位、速度、ETA 与港口轮转，支持 IMO/MMSI 搜索。','World-map vessel tracking with real-time position, speed, ETA and port rotation.'],
+  'master-data_title':['主数据管理','Master Data'],
+  'master-data_sub':['产品、供应商、箱型、用户、字典数据统一维护。','Unified management for product, supplier, container, user and dictionary data.'],
+  'user-mgmt_title':['用户管理','User Management'],
+  'user-mgmt_sub':['租户→部门→角色→数据范围四级权限体系，多方数据隔离。','4-level RBAC (tenant→department→role→data scope) with multi-party isolation.'],
+  'sys-setup_title':['系统设置','System Setup'],
+  'sys-setup_sub':['SLA 规则、通知邮件模板等后台配置。','Backend configuration for SLA rules, notification email templates, etc.'],
+};
+
+let curLang = 'zh';
+function setLang(l) {
+  curLang = l;
+  document.getElementById('btn-zh').classList.toggle('active', l==='zh');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  const idx = l==='zh' ? 0 : 1;
+  document.querySelectorAll('[data-k]').forEach(el => {
+    const v = STR[el.dataset.k] || MOD_STR[el.dataset.k];
+    if (v) el.innerHTML = v[idx];
+  });
+}
+
+/* ── SECTION NAVIGATION ── */
+let curSection = 'about';
+function showSection(id) {
+  const old = document.getElementById('sec-' + curSection);
+  if (old) old.classList.remove('active');
+  const el = document.getElementById('sec-' + id);
+  if (el) el.classList.add('active');
+  curSection = id;
+  document.querySelectorAll('.sidebar-item').forEach(a => {
+    const oc = a.getAttribute('onclick') || '';
+    a.classList.toggle('active', oc.includes("'" + id + "'"));
+  });
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* ── SIDEBAR GROUP TOGGLE ── */
+function toggleGroup(btn) {
+  btn.classList.toggle('open');
+}
+
+/* ── RULES ACCORDION ── */
+function toggleRules(btn) {
+  btn.classList.toggle('open');
+}
+
+/* ── URL HASH ROUTING ── */
+(function() {
+  const hash = location.hash.replace('#', '');
+  if (hash) showSection(hash);
+})();
+</script>
+</body>
+</html>
