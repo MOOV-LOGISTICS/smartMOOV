@@ -645,6 +645,7 @@ const SVG_TXT = {
 let curLang = 'zh';
 function setLang(l) {
   curLang = l;
+  localStorage.setItem('smv_lang', l);
   document.getElementById('btn-zh').classList.toggle('active', l==='zh');
   document.getElementById('btn-en').classList.toggle('active', l==='en');
   const idx = l==='zh' ? 0 : 1;
@@ -658,6 +659,11 @@ function setLang(l) {
     if (el) el.textContent = txt;
   });
 }
+// Restore saved language preference on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const saved = localStorage.getItem('smv_lang');
+  if (saved && saved !== 'zh') setLang(saved);
+});
 
 /* ── PARTICLES ── */
 (function(){
