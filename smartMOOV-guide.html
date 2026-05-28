@@ -86,7 +86,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
 .step-label{font-size:10px;color:rgba(168,200,232,.35);text-align:center;max-width:70px;line-height:1.3}
 .ph-step-content{background:rgba(0,40,80,.1);border:1px solid rgba(0,150,220,.1);
   border-radius:8px;padding:16px 20px;margin-bottom:10px}
-.ph-step-title{font-size:12.5px;font-weight:600;color:rgba(168,200,232,.4);margin-bottom:5px}
+.ph-step-title{font-size:13px;font-weight:700;color:var(--text-bright);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px}
+.step-num-badge{display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;background:var(--orient);
+  font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.step-title-zh{color:var(--text-bright)}
+.step-title-en{font-size:11px;font-weight:400;color:rgba(168,200,232,.5);margin-left:4px}
+.step-items{padding-left:18px;margin:0;list-style:none}
+.step-items li{position:relative;padding:5px 0 5px 18px;font-size:13.5px;
+  color:var(--text);line-height:1.7;border-bottom:1px solid rgba(0,150,220,.07)}
+.step-items li:last-child{border-bottom:none}
+.step-items li::before{content:"›";position:absolute;left:0;color:var(--orange);font-weight:700;font-size:15px}
 .ph-step-body{font-size:12px;color:rgba(168,200,232,.25);font-style:italic}
 
 /* ── SCREENSHOT SLOT ── */
@@ -110,6 +121,22 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
   border:1px solid rgba(0,150,220,.13);border-top:none;border-radius:0 0 8px 8px;
   font-size:12px;color:rgba(168,200,232,.35);font-style:italic;line-height:1.7}
 .rules-toggle.open + .rules-body{display:block}
+.rules-list{padding-left:0;margin:0;list-style:none}
+.rules-list li{padding:6px 0 6px 20px;position:relative;font-size:13px;
+  color:var(--text);font-style:normal;line-height:1.65;
+  border-bottom:1px solid rgba(0,150,220,.07)}
+.rules-list li:last-child{border-bottom:none}
+.rules-list li::before{content:"⚡";position:absolute;left:0;font-size:11px;top:8px}
+
+/* ── SYSTEM MODULE BODY ── */
+.sys-body{margin:24px 0 8px}
+.sys-desc{font-size:14.5px;color:var(--text);line-height:1.85;margin-bottom:20px;
+  padding:16px 20px;background:rgba(0,40,80,.1);border-left:3px solid var(--orient);border-radius:0 8px 8px 0}
+.sys-feat-list{padding-left:0;margin:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sys-feat-list li{padding:10px 14px 10px 36px;position:relative;font-size:13px;
+  color:var(--text);line-height:1.6;background:rgba(0,40,80,.1);
+  border:1px solid rgba(0,150,220,.1);border-radius:8px}
+.sys-feat-list li::before{content:"✦";position:absolute;left:12px;color:var(--orange);font-size:11px;top:12px}
 
 /* ── ROLE CARDS ── */
 .role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0 8px}
@@ -275,7 +302,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="login_title">登录与账号设置</h1>
         <p class="mod-subtitle" data-k="login_sub">登录系统、修改密码、用户授权设置。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 3</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div><div class="step-pill"><div class="step-dot">4</div><div class="step-label">完成</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">登录账户</span><span class="step-title-en">Log In</span></div><ul class="step-items"><li data-zh="访问登录页面: https://www.smartmoovhub.com/login" data-en="Navigate to: https://www.smartmoovhub.com/login">访问登录页面: https://www.smartmoovhub.com/login</li><li data-zh="输入注册邮箱和密码，点击登录按钮" data-en="Enter your registered email and password, then click Login">输入注册邮箱和密码，点击登录按钮</li><li data-zh="首次登录或密码不符合安全策略时，系统将强制要求重置密码" data-en="If the password does not comply with the password policy, the system forces a password reset">首次登录或密码不符合安全策略时，系统将强制要求重置密码</li><li data-zh="5次输错密码后账户将被锁定30分钟，可通过链接自助解锁或联系管理员" data-en="After 5 failed attempts the account is locked for 30 minutes; self-service unlock is available via the password link">5次输错密码后账户将被锁定30分钟，可通过链接自助解锁或联系管理员</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">2</span><span class="step-title-zh">解锁账户</span><span class="step-title-en">Unlock the Account</span></div><ul class="step-items"><li data-zh="账户因连续5次认证失败而被锁定后，等待30分钟可自动解锁" data-en="After lock-out, wait 30 minutes for automatic unlock">账户因连续5次认证失败而被锁定后，等待30分钟可自动解锁</li><li data-zh="或点击登录页面的 'password' 链接，通过邮箱验证码完成解锁" data-en="Alternatively, click the 'password' link on the login page and use the email verification code to unlock">或点击登录页面的 'password' 链接，通过邮箱验证码完成解锁</li><li data-zh="管理员也可在后台直接重置密码以解锁账户" data-en="An administrator can also reset the password to unlock the account">管理员也可在后台直接重置密码以解锁账户</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">3</span><span class="step-title-zh">修改密码</span><span class="step-title-en">Change Password</span></div><ul class="step-items"><li data-zh="点击登录页面 'password' 链接，输入注册邮箱获取验证码" data-en="Click the 'password' link on the login page and enter your registered email to get a verification code">点击登录页面 'password' 链接，输入注册邮箱获取验证码</li><li data-zh="填写验证码及新密码（两次输入须一致），密码需符合安全策略" data-en="Enter the code and a new password (confirmed twice); the password must comply with the password policy">填写验证码及新密码（两次输入须一致），密码需符合安全策略</li><li data-zh="新密码不得与最近5次使用过的密码相同" data-en="The new password must not match any of the last 5 previously used passwords">新密码不得与最近5次使用过的密码相同</li><li data-zh="验证码仅最后一次获取的有效，多次获取时前面的验证码失效" data-en="Only the most recently obtained verification code is valid">验证码仅最后一次获取的有效，多次获取时前面的验证码失效</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">4</span><span class="step-title-zh">用户协议</span><span class="step-title-en">User Consent</span></div><ul class="step-items"><li data-zh="当用户隐私协议更新时，用户重新登录后将看到新版协议弹窗，必须同意后方可继续使用系统" data-en="When the user privacy agreement is updated, users must agree to the new version upon re-login before continuing">当用户隐私协议更新时，用户重新登录后将看到新版协议弹窗，必须同意后方可继续使用系统</li><li data-zh="同意后再次登录不再弹出，直到协议再次更新" data-en="Once agreed, the prompt will not appear again until the agreement is updated again">同意后再次登录不再弹出，直到协议再次更新</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -285,7 +312,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="邮箱格式错误时登录流程被阻断，输入框高亮显示为红色" data-en="Invalid email format blocks login; the input box is highlighted red">邮箱格式错误时登录流程被阻断，输入框高亮显示为红色</li><li data-zh="人工用户密码不符合安全策略时强制弹窗提示重置" data-en="Human users with weak passwords are forced to reset before proceeding">人工用户密码不符合安全策略时强制弹窗提示重置</li><li data-zh="5次连续认证失败后账户锁定，触发锁定通知邮件" data-en="5 consecutive failures lock the account and trigger a lock notification email">5次连续认证失败后账户锁定，触发锁定通知邮件</li><li data-zh="服务账号(API)使用白名单内的弱密码可正常登录" data-en="Service accounts (API) in the whitelist may log in with weak passwords">服务账号(API)使用白名单内的弱密码可正常登录</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-booking-note">
@@ -294,7 +321,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="booking-note_title">委托订舱</h1>
         <p class="mod-subtitle" data-k="booking-note_sub">供应商发起订舱流程，完成 PO 录入、货物信息填写、运价确认，提交至 OHA 审核。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div><div class="step-pill"><div class="step-dot">4</div><div class="step-label">完成</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 3</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 4</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div><div class="step-pill"><div class="step-dot">4</div><div class="step-label">完成</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">提交 PO 信息</span><span class="step-title-en">Submit PO Information</span></div><ul class="step-items"><li data-zh="系统自动从配置的 SFTP 服务器获取 PO 文件（仅处理含时间戳的 XML 文件）" data-en="The system automatically retrieves PO files from the configured SFTP server (XML files with timestamp in the filename only)">系统自动从配置的 SFTP 服务器获取 PO 文件（仅处理含时间戳的 XML 文件）</li><li data-zh="按文件名中时间戳的升序依次处理，确保较早生成的文件优先入库" data-en="Files are processed in ascending order by timestamp to ensure earlier files are handled first">按文件名中时间戳的升序依次处理，确保较早生成的文件优先入库</li><li data-zh="单文件处理失败时记录日志并抛出异常，任务整体不中断" data-en="A single file failure is logged and an exception is thrown without terminating the overall task">单文件处理失败时记录日志并抛出异常，任务整体不中断</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">2</span><span class="step-title-zh">提交订舱信息</span><span class="step-title-en">Submit Booking Information</span></div><ul class="step-items"><li data-zh="货好日期 (CRD): 供应商在 Order Management > PO Management 中找到状态为 'Cargo Ready Date' 的任务，填写并提交货好日期" data-en="Cargo Ready Date: Supplier locates the 'Cargo Ready Date' task in Order Management > PO Management and submits the date">货好日期 (CRD): 供应商在 Order Management > PO Management 中找到状态为 'Cargo Ready Date' 的任务，填写并提交货好日期</li><li data-zh="尺寸信息 (Dimensions, 可选功能): 供应商填写每个外箱的长/宽/高/毛重/净重，系统自动计算体积 (CBM)" data-en="Dimensions (optional feature): Supplier fills in Length/Width/Height/Gross Weight/Net Weight per outer carton; system auto-calculates volume (CBM)">尺寸信息 (Dimensions, 可选功能): 供应商填写每个外箱的长/宽/高/毛重/净重，系统自动计算体积 (CBM)</li><li data-zh="供应商订舱: 填写订单详情、总体信息、起运/目的地、装箱联系人、货物及运输方式等，可保存草稿或模板" data-en="Shipper Booking: Fill in Order Details, General Info, Origin/Destination, Booking Contact, Parties, Products, Containers, and Remarks; can save as draft or template">供应商订舱: 填写订单详情、总体信息、起运/目的地、装箱联系人、货物及运输方式等，可保存草稿或模板</li><li data-zh="提交后在 E-Booking > Customer Shipping Order 页面可查看订单详情及操作日志" data-en="After submission, the booking is visible in E-Booking > Customer Shipping Order with operation logs">提交后在 E-Booking > Customer Shipping Order 页面可查看订单详情及操作日志</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">3</span><span class="step-title-zh">订舱验证与分配运输</span><span class="step-title-en">Booking Validation & Assign Transport</span></div><ul class="step-items"><li data-zh="OHA 审核供应商订舱信息，在 Customer Shipper Booking List 页面执行接受或拒绝操作（拒绝需填写原因）" data-en="OHA reviews booking on the Customer Shipper Booking List and accepts or rejects it (rejection requires a reason)">OHA 审核供应商订舱信息，在 Customer Shipper Booking List 页面执行接受或拒绝操作（拒绝需填写原因）</li><li data-zh="接受时需确认 PO 装港 (POL) 与订舱装港是否匹配" data-en="On acceptance, OHA must confirm whether the PO POL matches the booked POL">接受时需确认 PO 装港 (POL) 与订舱装港是否匹配</li><li data-zh="接受后，OHA 分配运输计划：手动录入或通过 Get Schedule 选择船期，支持多票拼箱（FCL 不可多选）" data-en="After acceptance, OHA assigns transport: manually enter vessel/voyage or use Get Schedule; multi-select is allowed for LCL only">接受后，OHA 分配运输计划：手动录入或通过 Get Schedule 选择船期，支持多票拼箱（FCL 不可多选）</li><li data-zh="拒绝订舱时系统自动向供应商发送通知邮件" data-en="When a booking is rejected, the system automatically sends a notification email to the supplier">拒绝订舱时系统自动向供应商发送通知邮件</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">4</span><span class="step-title-zh">审批与评分</span><span class="step-title-en">Approval & Score</span></div><ul class="step-items"><li data-zh="Customer 审核订舱: 在 Customer Shipper Booking List 页面对已分配运输计划的订舱进行 SAApproved / Pending / Reject 操作，支持批量审批" data-en="Customer Booking Approval: Customer reviews transport-assigned bookings on the Shipper Booking List and SAApproves, sets Pending, or Rejects (batch approval supported)">Customer 审核订舱: 在 Customer Shipper Booking List 页面对已分配运输计划的订舱进行 SAApproved / Pending / Reject 操作，支持批量审批</li><li data-zh="拒绝时 PO 状态回退至 Shipper Booking Validation，订舱状态变为 Customer Rejected" data-en="On rejection, PO status reverts to Shipper Booking Validation and booking status becomes Customer Rejected">拒绝时 PO 状态回退至 Shipper Booking Validation，订舱状态变为 Customer Rejected</li><li data-zh="Customer 评分: 下载评分模板，填写 1-4 分的订单优先级评分后上传提交" data-en="Customer Booking Score: Download the score template, fill in priority scores (1-4 per order), and upload to submit">Customer 评分: 下载评分模板，填写 1-4 分的订单优先级评分后上传提交</li><li data-zh="评分完成后 PO 状态变为 Carrier Booking，进入下一阶段" data-en="After scoring, PO status advances to Carrier Booking">评分完成后 PO 状态变为 Carrier Booking，进入下一阶段</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -304,7 +331,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="CRD 状态: Possible=PO已上传; Urgent=距计划货好日期35天; Overdue=距计划货好日期28天" data-en="CRD status: Possible=PO uploaded; Urgent=35 days before PCRD; Overdue=28 days before PCRD">CRD 状态: Possible=PO已上传; Urgent=距计划货好日期35天; Overdue=距计划货好日期28天</li><li data-zh="尺寸状态: Possible=CRD完成; Urgent=距CRD 28天; Overdue=距CRD 21天" data-en="Dimensions status: Possible=CRD done; Urgent=28 days before CRD; Overdue=21 days before CRD">尺寸状态: Possible=CRD完成; Urgent=距CRD 28天; Overdue=距CRD 21天</li><li data-zh="供应商订舱状态: Possible=尺寸完成; Urgent=距CRD 21天; Overdue=距CRD 14天" data-en="Shipper Booking status: Possible=Dimensions done; Urgent=21 days before CRD; Overdue=14 days before CRD">供应商订舱状态: Possible=尺寸完成; Urgent=距CRD 21天; Overdue=距CRD 14天</li><li data-zh="'Assign Transport Plan' 激活后，CRD 修改需通过 OHA 审核" data-en="After Assign Transport Plan is activated, CRD amendments require OHA approval">'Assign Transport Plan' 激活后，CRD 修改需通过 OHA 审核</li><li data-zh="Container Loading Result 完成后供应商不可再修改 CRD 或尺寸信息" data-en="CRD and Dimensions cannot be modified after Container Loading Result is completed">Container Loading Result 完成后供应商不可再修改 CRD 或尺寸信息</li><li data-zh="FCL 订舱不允许拼箱（多选），违反时系统报错" data-en="FCL bookings cannot be consolidated (multi-select blocked)">FCL 订舱不允许拼箱（多选），违反时系统报错</li><li data-zh="评分值必须在 1-4 范围内，否则系统报错" data-en="Score value must be between 1 and 4; otherwise the system returns an error">评分值必须在 1-4 范围内，否则系统报错</li><li data-zh="当 Transport Mode、POL、CRD 及 TC QTY 均匹配时，Customer Booking Approval 里程碑自动通过" data-en="Customer Booking Approval auto-passes when Transport Mode, POL, CRD, and TC QTY all match">当 Transport Mode、POL、CRD 及 TC QTY 均匹配时，Customer Booking Approval 里程碑自动通过</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-carrier-booking">
@@ -313,7 +340,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="carrier-booking_title">承运订舱</h1>
         <p class="mod-subtitle" data-k="carrier-booking_sub">OHA 向船公司发出订舱并确认 Booking Confirmation。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">订舱</span><span class="step-title-en">Carrier Booking</span></div><ul class="step-items"><li data-zh="前提: 订舱已预分配运输计划、状态为 SAApproved 且 Customer Booking Score 已完成" data-en="Pre-condition: booking must be pre-assigned, SAApproved, and Customer Booking Score completed">前提: 订舱已预分配运输计划、状态为 SAApproved 且 Customer Booking Score 已完成</li><li data-zh="OHA 在 Customer Shipper Booking List 中选择订单，点击 Create Shipment 并选择承运人类型（Tailwind 或 Non-Tailwind）" data-en="OHA selects the booking on the Customer Shipper Booking List, clicks Create Shipment, and chooses Tailwind or Non-Tailwind carrier">OHA 在 Customer Shipper Booking List 中选择订单，点击 Create Shipment 并选择承运人类型（Tailwind 或 Non-Tailwind）</li><li data-zh="Non-Tailwind: 填写 Basic Info（含付款地点）、船期、货物/集装箱信息及联系人，提交" data-en="Non-Tailwind: fill in Basic Info (including Payment Location), Shipping Schedule, Containers/Products, and Contact Info, then submit">Non-Tailwind: 填写 Basic Info（含付款地点）、船期、货物/集装箱信息及联系人，提交</li><li data-zh="Tailwind: 填写 Basic Info、Contact Info、船期、Orders、Containers and Products，提交；后续变更需联系 Tailwind 客服并同步系统" data-en="Tailwind: fill in Basic Info, Contact Info, Shipping Schedule, Orders, and Containers/Products, then submit; post-submission changes must be raised to Tailwind Customer Service">Tailwind: 填写 Basic Info、Contact Info、船期、Orders、Containers and Products，提交；后续变更需联系 Tailwind 客服并同步系统</li><li data-zh="OHA 可在 E-Booking > Carrier Booking 下通过复制功能快速创建相似的运单" data-en="OHA can copy an existing carrier booking under E-Booking > Carrier Booking to speed up creation">OHA 可在 E-Booking > Carrier Booking 下通过复制功能快速创建相似的运单</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">2</span><span class="step-title-zh">订舱确认</span><span class="step-title-en">Booking Confirmation</span></div><ul class="step-items"><li data-zh="OHA 在 Shipment Detail 页面点击 Booking Receipt 的 Edit 按钮，手动录入订舱号和收到日期，提交后状态变为 Booking Accept" data-en="OHA clicks Edit on Booking Receipt in the Shipment Detail page, enters the booking number and receipt date, and submits (status becomes Booking Accept)">OHA 在 Shipment Detail 页面点击 Booking Receipt 的 Edit 按钮，手动录入订舱号和收到日期，提交后状态变为 Booking Accept</li><li data-zh="再点击 Booking Confirmation 的 Edit 按钮，选择确认日期（只能选今天或之前），提交后状态变为 Booking Confirmation" data-en="OHA then clicks Edit on Booking Confirmation, selects the confirmation date (today or earlier), and submits (status becomes Booking Confirmation)">再点击 Booking Confirmation 的 Edit 按钮，选择确认日期（只能选今天或之前），提交后状态变为 Booking Confirmation</li><li data-zh="Non-Tailwind 订舱号需手动录入；Tailwind 订舱号由承运方自动回传" data-en="Non-Tailwind booking numbers must be entered manually; Tailwind booking numbers are auto-returned by the carrier">Non-Tailwind 订舱号需手动录入；Tailwind 订舱号由承运方自动回传</li><li data-zh="里程碑完成后，PO 状态变为 SO Release to Supplier，Container Gate In 里程碑同时开放" data-en="After completion, PO status becomes SO Release to Supplier and Container Gate In is activated">里程碑完成后，PO 状态变为 SO Release to Supplier，Container Gate In 里程碑同时开放</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -323,7 +350,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Carrier Booking 状态: Possible=距ETD>21天; Urgent=距ETD≤21天内1个工作日; FCL Overdue=距ETD≤14天内3个工作日; LCL Overdue=距ETD≤10天内3个工作日" data-en="Carrier Booking: Possible if today-ETD>21; Urgent within 1 working day when ETD<=21; FCL Overdue within 3 working days when ETD<=14; LCL Overdue within 3 working days when ETD<=10">Carrier Booking 状态: Possible=距ETD>21天; Urgent=距ETD≤21天内1个工作日; FCL Overdue=距ETD≤14天内3个工作日; LCL Overdue=距ETD≤10天内3个工作日</li><li data-zh="Booking Confirmation 状态: Urgent=订舱完成后1个工作日（危品/电池为3天）; Overdue=2个工作日（危品/电池为4天）" data-en="Booking Confirmation: Urgent=1 working day after carrier booking (3 days for DG/battery); Overdue=2 working days (4 days for DG/battery)">Booking Confirmation 状态: Urgent=订舱完成后1个工作日（危品/电池为3天）; Overdue=2个工作日（危品/电池为4天）</li><li data-zh="Tailwind 订舱的任何变更或取消均需联系 Tailwind 客服并保持系统同步" data-en="Any change or cancellation for Tailwind bookings must be raised to Tailwind Customer Service and kept in sync in the system">Tailwind 订舱的任何变更或取消均需联系 Tailwind 客服并保持系统同步</li><li data-zh="备注信息可通过 EDI 发送给 Tailwind" data-en="Remark information can be sent to Tailwind through EDI">备注信息可通过 EDI 发送给 Tailwind</li><li data-zh="FCL 不允许拼箱，创建运单时系统报错 'FCL SO is not allowed to make consol'" data-en="FCL cannot be consolidated; system error 'FCL SO is not allowed to make consol' blocks the operation">FCL 不允许拼箱，创建运单时系统报错 'FCL SO is not allowed to make consol'</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-pickup">
@@ -332,7 +359,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="pickup_title">提货装箱</h1>
         <p class="mod-subtitle" data-k="pickup_sub">SO 放行、SI/VGM 提交、进港入仓、装载结果录入。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div><div class="step-pill"><div class="step-dot">4</div><div class="step-label">完成</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 3</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 4</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div><div class="step-pill"><div class="step-dot">3</div><div class="step-label">确认</div></div><div class="step-pill"><div class="step-dot">4</div><div class="step-label">完成</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">SO 发放</span><span class="step-title-en">SO Release</span></div><ul class="step-items"><li data-zh="OHA 在 Order Management > PO Management 找到 'SO Release to Supplier' 任务" data-en="OHA locates the 'SO Release to Supplier' task in Order Management > PO Management">OHA 在 Order Management > PO Management 找到 'SO Release to Supplier' 任务</li><li data-zh="选择 SO 发放日期（只能选今天或之前），同一运单中关联的 PO 只读展示，点击 Submit" data-en="Select the SO Release Date (today or earlier only); related POs in the same shipment are read-only reference, then Submit">选择 SO 发放日期（只能选今天或之前），同一运单中关联的 PO 只读展示，点击 Submit</li><li data-zh="完成后 PO 状态变为 SI/VGM Submit" data-en="After completion, PO status advances to SI/VGM Submit">完成后 PO 状态变为 SI/VGM Submit</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">2</span><span class="step-title-zh">SI/VGM 提交</span><span class="step-title-en">SI/VGM Submit</span></div><ul class="step-items"><li data-zh="供应商在 E-Booking > Customer Shipping Order > More > SI/VGM 入口提交装运指令 (SI) 和核实毛重 (VGM)" data-en="Supplier submits Shipping Instructions (SI) and Verified Gross Mass (VGM) via E-Booking > Customer Shipping Order > More > SI/VGM">供应商在 E-Booking > Customer Shipping Order > More > SI/VGM 入口提交装运指令 (SI) 和核实毛重 (VGM)</li><li data-zh="FCL: 需额外录入集装箱号、封条号及货物详细信息" data-en="FCL: container number, seal number, and detailed cargo info are required">FCL: 需额外录入集装箱号、封条号及货物详细信息</li><li data-zh="LCL: 核实订舱信息准确性后直接提交，暂不需填写集装箱号" data-en="LCL: verify booking info accuracy and submit; container number is not required for LCL at this stage">LCL: 核实订舱信息准确性后直接提交，暂不需填写集装箱号</li><li data-zh="可点击 Save Draft 保存草稿预览，SI/VGM 状态保持 Pending；点击 Submit 后状态变为 Submitted" data-en="Click Save Draft to preview without changing status; Submit changes SI/VGM status to Submitted">可点击 Save Draft 保存草稿预览，SI/VGM 状态保持 Pending；点击 Submit 后状态变为 Submitted</li><li data-zh="OHA 审核前供应商可直接修改 SI/VGM；OHA 审核提交后需通过 Amend 按钮申请修改，须经 OHA 批准" data-en="Before OHA submits to carrier, supplier can update directly; after OHA submission, amendments require OHA approval">OHA 审核前供应商可直接修改 SI/VGM；OHA 审核提交后需通过 Amend 按钮申请修改，须经 OHA 批准</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">3</span><span class="step-title-zh">集装箱进场/货物入库</span><span class="step-title-en">Container Gate In / Cargo Inbound</span></div><ul class="step-items"><li data-zh="OHA 根据 SO 类型处理: FCL 填写集装箱进场日期，LCL 填写货物入库日期（均只能选今天或之前）" data-en="OHA handles by SO type: FCL fills Container Gate In date; LCL fills Cargo Inbound date (today or earlier only)">OHA 根据 SO 类型处理: FCL 填写集装箱进场日期，LCL 填写货物入库日期（均只能选今天或之前）</li><li data-zh="从 Order Management > PO Management 中选择对应任务，或从首页快捷入口进入" data-en="Access via Order Management > PO Management task list or the homepage shortcut">从 Order Management > PO Management 中选择对应任务，或从首页快捷入口进入</li><li data-zh="自2025年9月2日起，系统可通过第三方网站自动获取集装箱进场日期，需确保承运人、订舱号、集装箱号均已正确录入" data-en="From 2 September 2025, the system auto-retrieves gate-in date from third-party sources if carrier, booking number, and container number are correctly entered">自2025年9月2日起，系统可通过第三方网站自动获取集装箱进场日期，需确保承运人、订舱号、集装箱号均已正确录入</li><li data-zh="完成后 PO 状态变为 Container Loading Result" data-en="After completion, PO status advances to Container Loading Result">完成后 PO 状态变为 Container Loading Result</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">4</span><span class="step-title-zh">集装箱装载结果</span><span class="step-title-en">Container Loading Result</span></div><ul class="step-items"><li data-zh="供应商按实际装箱情况填写: 已装外箱/内箱/件数、毛重 (KG) 和体积 (CBM)；可下载模板批量上传" data-en="Supplier fills Loaded Outer Cartons/Inner Cartons/Pieces, Gross Weight (KG), and Volume (CBM) per actual loading; template download and batch upload supported">供应商按实际装箱情况填写: 已装外箱/内箱/件数、毛重 (KG) 和体积 (CBM)；可下载模板批量上传</li><li data-zh="若货物包装含天然木材成分，需上传熏蒸证书" data-en="Upload a fumigation certificate if the packaging contains natural wood components">若货物包装含天然木材成分，需上传熏蒸证书</li><li data-zh="FCL: OHA 完成集装箱进场里程碑后，订舱状态变为 Container Loading Plan，供应商再提交装载结果" data-en="FCL: triggered after OHA completes Container Gate In; status changes to Container Loading Plan">FCL: OHA 完成集装箱进场里程碑后，订舱状态变为 Container Loading Plan，供应商再提交装载结果</li><li data-zh="LCL: CFS 完成货物入库里程碑后触发，无需供应商录入集装箱号" data-en="LCL: triggered after CFS completes Cargo Inbound; container number is not required">LCL: CFS 完成货物入库里程碑后触发，无需供应商录入集装箱号</li><li data-zh="提交数据与订舱信息不符时，系统弹窗提示差异，供应商可选择继续提交或返回修改" data-en="If submitted data differs from booking details, the system prompts the discrepancy and the supplier chooses to continue or return to modify">提交数据与订舱信息不符时，系统弹窗提示差异，供应商可选择继续提交或返回修改</li><li data-zh="完成后可在 E-Booking > Container Loading Plan 页面查看和更新记录" data-en="Records can be viewed and updated on E-Booking > Container Loading Plan page">完成后可在 E-Booking > Container Loading Plan 页面查看和更新记录</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -342,7 +369,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="SO Release 状态: Possible=距ETD>21天; Urgent=订舱确认后1个工作日; Overdue=2个工作日" data-en="SO Release: Possible if ETD>21 days away; Urgent=1 working day after Booking Confirmation; Overdue=2 working days">SO Release 状态: Possible=距ETD>21天; Urgent=订舱确认后1个工作日; Overdue=2个工作日</li><li data-zh="SI/VGM Submit 状态: 孟加拉Urgent=距ETD 4天; 其他产地Urgent=距ETD 7天; Overdue减1天" data-en="SI/VGM Submit: Urgent=4 days before ETD for Bangladesh, 7 days for others; Overdue is 1 day earlier">SI/VGM Submit 状态: 孟加拉Urgent=距ETD 4天; 其他产地Urgent=距ETD 7天; Overdue减1天</li><li data-zh="OHA 提交 SI/VGM 至承运方后 SI/VGM 状态变为 Accepted，之后供应商修改需走 Amend 流程" data-en="After OHA submits SI/VGM to carrier, status becomes Accepted; further supplier changes require the Amend process">OHA 提交 SI/VGM 至承运方后 SI/VGM 状态变为 Accepted，之后供应商修改需走 Amend 流程</li><li data-zh="Container Gate In 状态: Urgent=最晚距ETD 5天; Overdue=最晚距ETD 2天" data-en="Container Gate In: Urgent latest 5 days before ETD; Overdue latest 2 days before ETD">Container Gate In 状态: Urgent=最晚距ETD 5天; Overdue=最晚距ETD 2天</li><li data-zh="Cargo Inbound 状态: Urgent=最晚距ETD 10天; Overdue=最晚距ETD 6天" data-en="Cargo Inbound: Urgent latest 10 days before ETD; Overdue latest 6 days before ETD">Cargo Inbound 状态: Urgent=最晚距ETD 10天; Overdue=最晚距ETD 6天</li><li data-zh="Container Loading Result 状态: Urgent=最晚ETD前2个工作日; Overdue=最晚ETD当天" data-en="Container Loading Result: Urgent latest 2 working days before ETD; Overdue latest by ETD">Container Loading Result 状态: Urgent=最晚ETD前2个工作日; Overdue=最晚ETD当天</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-docs-upload">
@@ -351,7 +378,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="docs-upload_title">上传核验单证</h1>
         <p class="mod-subtitle" data-k="docs-upload_sub">上传装运文件并完成核验。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">上传装运单证</span><span class="step-title-en">Upload Shipping Docs</span></div><ul class="step-items"><li data-zh="供应商在 Order Management > PO Management 找到 'Uploading Shipping Documents' 任务，点击 Upload 按钮" data-en="Supplier locates the 'Uploading Shipping Documents' task in Order Management > PO Management and clicks Upload">供应商在 Order Management > PO Management 找到 'Uploading Shipping Documents' 任务，点击 Upload 按钮</li><li data-zh="填写单证编号，选择单证类型（商业发票/箱单/其他/电邮单证/装箱照片/报关单/无需上传）" data-en="Fill in Document Number, select Document Type (Commercial Invoice/Packing List/Others/Shipping Docs by Email/Container Loading Picture/Customs Declaration/No Need Upload Document)">填写单证编号，选择单证类型（商业发票/箱单/其他/电邮单证/装箱照片/报关单/无需上传）</li><li data-zh="上传文件后点击 Confirm 提交；可预览、下载或删除已上传文件" data-en="Upload the file then click Confirm; uploaded files can be previewed, downloaded, or deleted">上传文件后点击 Confirm 提交；可预览、下载或删除已上传文件</li><li data-zh="完成后 PO 状态变为 Verify Shipping Documents" data-en="After completion, PO status advances to Verify Shipping Documents">完成后 PO 状态变为 Verify Shipping Documents</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">2</span><span class="step-title-zh">核验装运单证</span><span class="step-title-en">Verify Shipping Docs</span></div><ul class="step-items"><li data-zh="OHA 在 'Verify Shipping Documents' 任务中下载/预览供应商上传的单证" data-en="OHA downloads/previews documents in the 'Verify Shipping Documents' task">OHA 在 'Verify Shipping Documents' 任务中下载/预览供应商上传的单证</li><li data-zh="核实无误后点击 Confirm（二次确认后可添加备注）；有问题则点击 Refuse" data-en="Click Confirm if accurate (add optional comment after double confirmation); click Refuse if there are issues">核实无误后点击 Confirm（二次确认后可添加备注）；有问题则点击 Refuse</li><li data-zh="OHA 可修改单证编号：点击编辑图标，修改后点击 Confirm" data-en="OHA can modify the Document Number by clicking the edit icon and confirming the change">OHA 可修改单证编号：点击编辑图标，修改后点击 Confirm</li><li data-zh="拒绝后 PO 状态回退至 Upload Shipping Documents，供应商重新上传" data-en="Rejection reverts PO status to Upload Shipping Documents for re-upload">拒绝后 PO 状态回退至 Upload Shipping Documents，供应商重新上传</li><li data-zh="核验通过后 PO 状态变为 Vessel Departure" data-en="After approval, PO status advances to Vessel Departure">核验通过后 PO 状态变为 Vessel Departure</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -361,7 +388,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Upload Shipping Docs 状态: Possible=SI/VGM Submit to Carrier 完成; Urgent=ATD当天; Overdue=ATD后2个工作日" data-en="Upload Shipping Docs: Possible after SI/VGM Submit to Carrier; Urgent=same day as ATD; Overdue=2 working days after ATD">Upload Shipping Docs 状态: Possible=SI/VGM Submit to Carrier 完成; Urgent=ATD当天; Overdue=ATD后2个工作日</li><li data-zh="含天然木材包装的货物须上传熏蒸证书" data-en="Goods with natural wood packaging must include a fumigation certificate">含天然木材包装的货物须上传熏蒸证书</li><li data-zh="LCL 运往西班牙须上传装箱照片；运往罗马尼亚须上传报关单" data-en="LCL to Spain requires Container Loading Pictures; LCL to Romania requires Customs Declaration">LCL 运往西班牙须上传装箱照片；运往罗马尼亚须上传报关单</li><li data-zh="FCL 单证类型可灵活选择 'Shipping Documents by Email' 或 'No Need to Upload Document'" data-en="FCL document type can be 'Shipping Documents by Email' or 'No Need to Upload Document'">FCL 单证类型可灵活选择 'Shipping Documents by Email' 或 'No Need to Upload Document'</li><li data-zh="Verify Shipping Docs 状态: Urgent=Upload完成后1个工作日; Overdue=2个工作日" data-en="Verify Shipping Docs: Urgent=1 working day after upload; Overdue=2 working days">Verify Shipping Docs 状态: Urgent=Upload完成后1个工作日; Overdue=2个工作日</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-departure">
@@ -370,7 +397,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="departure_title">实际开船</h1>
         <p class="mod-subtitle" data-k="departure_sub">确认实际开船时间（ATD）。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">船舶离港</span><span class="step-title-en">Vessel Departure</span></div><ul class="step-items"><li data-zh="OHA 在 Shipment Info 区域点击 'Departure POL' 的编辑按钮" data-en="OHA clicks the Edit button of 'Departure POL' in the Shipment Info section">OHA 在 Shipment Info 区域点击 'Departure POL' 的编辑按钮</li><li data-zh="在弹窗中选择实际离港日期（只能选今天或之前），点击 Confirm" data-en="Select the actual departure date (today or earlier) in the pop-up and click Confirm">在弹窗中选择实际离港日期（只能选今天或之前），点击 Confirm</li><li data-zh="完成后里程碑颜色变为深蓝，PO 状态变为 Release HBL and Invoice to Shipper，Pre Alert 里程碑同时开放" data-en="The milestone turns dark blue; PO status advances to Release HBL and Invoice to Shipper, and Pre Alert is also activated">完成后里程碑颜色变为深蓝，PO 状态变为 Release HBL and Invoice to Shipper，Pre Alert 里程碑同时开放</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -380,7 +407,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Vessel Departure 状态: Possible=SI/VGM Submit to Carrier 完成; Urgent=ATD后1个工作日; Overdue=ATD后2个工作日" data-en="Vessel Departure: Possible after SI/VGM Submit to Carrier; Urgent=1 working day after ATD; Overdue=2 working days after ATD">Vessel Departure 状态: Possible=SI/VGM Submit to Carrier 完成; Urgent=ATD后1个工作日; Overdue=ATD后2个工作日</li><li data-zh="完成后承运方层级的运单标记为 'Departure POL'" data-en="After completion, the carrier-level booking is marked as 'Departure POL'">完成后承运方层级的运单标记为 'Departure POL'</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-hbl">
@@ -389,7 +416,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="hbl_title">签发提单与发票</h1>
         <p class="mod-subtitle" data-k="hbl_sub">向发货方释放 HBL 和发票文件。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">签发提单与发票</span><span class="step-title-en">Release HBL & Invoice</span></div><ul class="step-items"><li data-zh="OHA 在 'Release HBL and Invoice to Shipper' 任务中点击 Upload 按钮" data-en="OHA clicks Upload in the 'Release HBL and Invoice to Shipper' task">OHA 在 'Release HBL and Invoice to Shipper' 任务中点击 Upload 按钮</li><li data-zh="填写单证编号，选择单证类型: Invoice to Supplier / HBL / Customs Declaration" data-en="Fill in Document Number and select Document Type: Invoice to Supplier / HBL / Customs Declaration">填写单证编号，选择单证类型: Invoice to Supplier / HBL / Customs Declaration</li><li data-zh="选择 HBL 类型时需选择提单类型 (TELEX RELEASE / ORIGINAL / Original pending TELEX) 并填写 HBL 签发日期" data-en="When HBL is selected, also choose BL Type (TELEX RELEASE / ORIGINAL / Original pending TELEX) and enter the HBL Issue Date">选择 HBL 类型时需选择提单类型 (TELEX RELEASE / ORIGINAL / Original pending TELEX) 并填写 HBL 签发日期</li><li data-zh="HBL 必须上传，否则 Pre Alert 里程碑将被阻断" data-en="HBL must be uploaded, otherwise the Pre Alert milestone will be blocked">HBL 必须上传，否则 Pre Alert 里程碑将被阻断</li><li data-zh="完成后 PO 状态变为 Pre Alert" data-en="After completion, PO status advances to Pre Alert">完成后 PO 状态变为 Pre Alert</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -399,7 +426,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="HBL Issue Date 不可早于 Draft HBL Date，且只能选今天或之前" data-en="HBL Issue Date cannot be earlier than Draft HBL Date, and only today or earlier can be selected">HBL Issue Date 不可早于 Draft HBL Date，且只能选今天或之前</li><li data-zh="未上传 HBL 文件将阻断 Pre Alert 里程碑" data-en="Pre Alert milestone is blocked if HBL is not uploaded">未上传 HBL 文件将阻断 Pre Alert 里程碑</li><li data-zh="Release HBL & Invoice 状态: Possible=Vessel Departure 完成" data-en="Release HBL & Invoice: Possible after Vessel Departure is completed">Release HBL & Invoice 状态: Possible=Vessel Departure 完成</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-prealert">
@@ -408,7 +435,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="prealert_title">预知通</h1>
         <p class="mod-subtitle" data-k="prealert_sub">开船后向目的地发送到港预警通知。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">预通知</span><span class="step-title-en">Pre Alert</span></div><ul class="step-items"><li data-zh="OHA 在 'Pre Alert' 任务中确认四项前置条件均已满足后方可提交" data-en="OHA submits Pre Alert only after all four conditions are met">OHA 在 'Pre Alert' 任务中确认四项前置条件均已满足后方可提交</li><li data-zh="条件 1: MBL 已上传（在本里程碑上传，系统自动填入 MBL 号，否则状态为 Undone）" data-en="Condition 1: MBL uploaded in this milestone (system fills in MBL number; otherwise status shows Undone)">条件 1: MBL 已上传（在本里程碑上传，系统自动填入 MBL 号，否则状态为 Undone）</li><li data-zh="条件 2: HBL 已由 OHA 在 Release HBL & Invoice 里程碑上传" data-en="Condition 2: HBL uploaded by OHA at the Release HBL & Invoice milestone">条件 2: HBL 已由 OHA 在 Release HBL & Invoice 里程碑上传</li><li data-zh="条件 3: 供应商已完成 Container Loading Result 里程碑（CLR 状态为 Done）" data-en="Condition 3: Supplier has completed the Container Loading Result milestone (CLR status is Done)">条件 3: 供应商已完成 Container Loading Result 里程碑（CLR 状态为 Done）</li><li data-zh="条件 4: 已填写预通知日期 (Pre-Alert Date)" data-en="Condition 4: Pre-Alert Date is filled in">条件 4: 已填写预通知日期 (Pre-Alert Date)</li><li data-zh="四项均满足后点击 Submit，PO 状态变为 Destination In Process" data-en="Click Submit once all conditions are met; PO status advances to Destination In Process">四项均满足后点击 Submit，PO 状态变为 Destination In Process</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -418,7 +445,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Pre Alert 状态: Possible=Vessel Departure 完成; Urgent=ATD后5天; Overdue=ATD后10天" data-en="Pre Alert: Possible after Vessel Departure; Urgent=5 days after ATD; Overdue=10 days after ATD">Pre Alert 状态: Possible=Vessel Departure 完成; Urgent=ATD后5天; Overdue=ATD后10天</li><li data-zh="MBL、HBL、CLR 任一条件未完成均会阻断提交" data-en="Missing any of MBL, HBL, or CLR will block submission">MBL、HBL、CLR 任一条件未完成均会阻断提交</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-docs-verify">
@@ -427,7 +454,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="docs-verify_title">单证核验</h1>
         <p class="mod-subtitle" data-k="docs-verify_sub">目的地客户核验装运文件。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">客户核验货运单证</span><span class="step-title-en">Shipping Docs Verify by Customer</span></div><ul class="step-items"><li data-zh="Customer 海关团队在 Destination Management > Destination Overview 或 Customer HBLs 页面找到待处理记录" data-en="Customer Customs Team finds pending records in Destination Management > Destination Overview or Customer HBLs page">Customer 海关团队在 Destination Management > Destination Overview 或 Customer HBLs 页面找到待处理记录</li><li data-zh="选择 LP 后点击 'Verify Documents' 按钮，在弹窗中选择 Complete 或 Not Complete" data-en="Select LP and click 'Verify Documents'; in the pop-up select Complete or Not Complete">选择 LP 后点击 'Verify Documents' 按钮，在弹窗中选择 Complete 或 Not Complete</li><li data-zh="选择 Not Complete 时须填写原因" data-en="Not Complete requires a reason to be provided">选择 Not Complete 时须填写原因</li><li data-zh="已完成的核验可通过 Revoke 按钮撤销，里程碑状态回退至 Possible" data-en="Completed verifications can be revoked via the Revoke button, reverting the milestone to Possible">已完成的核验可通过 Revoke 按钮撤销，里程碑状态回退至 Possible</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -437,7 +464,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Shipping Docs Verify 状态: Possible=Pre Alert 完成; Urgent=ETA前18天; Overdue=ETA前14天" data-en="Docs Verify: Possible after Pre Alert; Urgent=18 days before ETA; Overdue=14 days before ETA">Shipping Docs Verify 状态: Possible=Pre Alert 完成; Urgent=ETA前18天; Overdue=ETA前14天</li><li data-zh="未选择任何记录时系统报错 'Please select at least one record'" data-en="Selecting no records triggers error: 'Please select at least one record'">未选择任何记录时系统报错 'Please select at least one record'</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-delivery-preplan">
@@ -446,7 +473,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="delivery-preplan_title">送货预计划</h1>
         <p class="mod-subtitle" data-k="delivery-preplan_sub">提前规划到港后的送货安排。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">运输预计划</span><span class="step-title-en">Delivery Pre-plan</span></div><ul class="step-items"><li data-zh="Customer 运输团队在 Destination Management > Customer Containers 或 Destination Overview 进入 Delivery Pre-plan 入口" data-en="Customer Transport accesses Delivery Pre-plan via Destination Management > Customer Containers or Destination Overview">Customer 运输团队在 Destination Management > Customer Containers 或 Destination Overview 进入 Delivery Pre-plan 入口</li><li data-zh="单条操作: 选择运输方式 (INTERMODAL / DIRECT TRUCK)、计划交货日期、时间、承运商、评分及优先级，点击 Submit" data-en="Single entry: select Mode of Transport (INTERMODAL/DIRECT TRUCK), Delivery Schedule Date/Hour, Haulier, Score, Priority Type, then Submit">单条操作: 选择运输方式 (INTERMODAL / DIRECT TRUCK)、计划交货日期、时间、承运商、评分及优先级，点击 Submit</li><li data-zh="批量上传: 下载模板，填写所有字段后上传，系统二次确认后执行导入" data-en="Batch upload: download template, fill required fields, upload file, confirm the secondary prompt to import">批量上传: 下载模板，填写所有字段后上传，系统二次确认后执行导入</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -456,7 +483,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Delivery Pre-plan 状态: Possible=Pre Alert 完成; Urgent=ETA前14天; Overdue=ETA前5天" data-en="Delivery Pre-plan: Possible after Pre Alert; Urgent=14 days before ETA; Overdue=5 days before ETA">Delivery Pre-plan 状态: Possible=Pre Alert 完成; Urgent=ETA前14天; Overdue=ETA前5天</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-broker-assign">
@@ -465,7 +492,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="broker-assign_title">报关行指派</h1>
         <p class="mod-subtitle" data-k="broker-assign_sub">指定目的地清关代理（支持批量上传）。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">指派报关行</span><span class="step-title-en">Customs Broker Assign</span></div><ul class="step-items"><li data-zh="Customer 海关团队在 Destination Management > Destination Overview 或 Customer Containers 页面点击 'Broker Assign' 按钮" data-en="Customer Customs accesses via Destination Management > Destination Overview or Customer Containers and clicks 'Broker Assign'">Customer 海关团队在 Destination Management > Destination Overview 或 Customer Containers 页面点击 'Broker Assign' 按钮</li><li data-zh="单条操作: 选择客户后点击 Submit；里程碑标记为 Finished" data-en="Single: select Customer and Submit; milestone is marked Finished">单条操作: 选择客户后点击 Submit；里程碑标记为 Finished</li><li data-zh="批量操作: 下载模板，选择 Customs Broker 后上传，二次确认后执行导入" data-en="Batch: download template, select Customs Broker, upload file, confirm secondary prompt to import">批量操作: 下载模板，选择 Customs Broker 后上传，二次确认后执行导入</li><li data-zh="已完成的指派可通过 Revoke 按钮撤销，里程碑状态回退至 Possible" data-en="Completed assignments can be revoked via the Revoke button, reverting to Possible">已完成的指派可通过 Revoke 按钮撤销，里程碑状态回退至 Possible</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -475,7 +502,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Customs Broker Assign 状态: Possible=Pre Alert 完成; Urgent=ETA前14天; Overdue=ETA前5天" data-en="Customs Broker Assign: Possible after Pre Alert; Urgent=14 days before ETA; Overdue=5 days before ETA">Customs Broker Assign 状态: Possible=Pre Alert 完成; Urgent=ETA前14天; Overdue=ETA前5天</li><li data-zh="未选择报关行时系统报错 'Please select a broker'" data-en="Not selecting a broker triggers error: 'Please select a broker'">未选择报关行时系统报错 'Please select a broker'</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-delivery-plan">
@@ -484,7 +511,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="delivery-plan_title">送货计划</h1>
         <p class="mod-subtitle" data-k="delivery-plan_sub">最终确认送货时间与路线安排。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">运输计划</span><span class="step-title-en">Delivery Plan</span></div><ul class="step-items"><li data-zh="DHA 在 Destination Management > Customer Containers 或 Destination Overview 进入 Delivery Plan 入口" data-en="DHA accesses Delivery Plan via Destination Management > Customer Containers or Destination Overview">DHA 在 Destination Management > Customer Containers 或 Destination Overview 进入 Delivery Plan 入口</li><li data-zh="单条操作: 选择运输方式、计划交货日期/时间、承运商、评分及优先级，点击 Submit" data-en="Single entry: select Mode of Transport, Delivery Schedule Date/Hour, Haulier, Score, Priority Type, then Submit">单条操作: 选择运输方式、计划交货日期/时间、承运商、评分及优先级，点击 Submit</li><li data-zh="批量上传: 下载模板，填写 Mode of Transport、Delivery Schedule Date/Hour、Haulier、Score、Priority Type 后上传，二次确认后导入" data-en="Batch upload: download template, fill all fields, upload, and confirm the secondary prompt to import">批量上传: 下载模板，填写 Mode of Transport、Delivery Schedule Date/Hour、Haulier、Score、Priority Type 后上传，二次确认后导入</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -494,7 +521,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Delivery Plan 状态: Possible=Pre Alert 完成; Urgent=ETA前1天; Overdue=ATA后1天" data-en="Delivery Plan: Possible after Pre Alert; Urgent=1 day before ETA; Overdue=1 day after ATA">Delivery Plan 状态: Possible=Pre Alert 完成; Urgent=ETA前1天; Overdue=ATA后1天</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-customs-invoice">
@@ -503,7 +530,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="customs-invoice_title">向海关提交发票</h1>
         <p class="mod-subtitle" data-k="customs-invoice_sub">上传报关发票文件至海关系统。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">向海关提交发票文件</span><span class="step-title-en">Invoices to Customs</span></div><ul class="step-items"><li data-zh="Customer 货运发票团队在 Destination Management > Destination Overview 或 Customer Containers 页面选择集装箱，点击 'Invoice to Customs' 按钮" data-en="Customer Freight Invoice accesses via Destination Management > Destination Overview or Customer Containers and clicks 'Invoice to Customs'">Customer 货运发票团队在 Destination Management > Destination Overview 或 Customer Containers 页面选择集装箱，点击 'Invoice to Customs' 按钮</li><li data-zh="在弹窗中选择 Complete 或 Not Complete（Not Complete 需填写原因），点击 Submit" data-en="Select Complete or Not Complete (Not Complete requires a reason), then click Submit">在弹窗中选择 Complete 或 Not Complete（Not Complete 需填写原因），点击 Submit</li><li data-zh="完成后 Invoices to Customs 里程碑标记为 Finished" data-en="After submission, the Invoices to Customs milestone is marked Finished">完成后 Invoices to Customs 里程碑标记为 Finished</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -513,7 +540,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Invoices to Customs 状态: Possible=Pre Alert 完成; Urgent=ETA前7天; Overdue=ETA后12天" data-en="Invoices to Customs: Possible after Pre Alert; Urgent=7 days before ETA; Overdue=12 days after ETA">Invoices to Customs 状态: Possible=Pre Alert 完成; Urgent=ETA前7天; Overdue=ETA后12天</li><li data-zh="未选择记录时系统报错 'Please select at least one record'" data-en="No record selected triggers error: 'Please select at least one record'">未选择记录时系统报错 'Please select at least one record'</li><li data-zh="Not Complete 时未填写原因则报错 'Please fill in the reason'" data-en="Not Complete without a reason triggers error: 'Please fill in the reason'">Not Complete 时未填写原因则报错 'Please fill in the reason'</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-vessel-arrival">
@@ -522,7 +549,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="vessel-arrival_title">到港与清关</h1>
         <p class="mod-subtitle" data-k="vessel-arrival_sub">记录实际到港（ATA）并完成清关。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div><div class="ph-step-content"><div class="ph-step-title">Step 2</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div><div class="step-pill"><div class="step-dot">2</div><div class="step-label">操作</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">船舶到达（自动）</span><span class="step-title-en">Vessel Arrival (auto-recorded)</span></div><ul class="step-items"><li data-zh="系统通过第三方 API 自动获取实际到港时间 (ATA)" data-en="The system automatically obtains the Actual Time of Arrival (ATA) via third-party API">系统通过第三方 API 自动获取实际到港时间 (ATA)</li><li data-zh="到港后 Vessel Arrival 里程碑自动标记为 Finished，无需人工操作" data-en="The Vessel Arrival milestone is automatically marked Finished; no manual action is required">到港后 Vessel Arrival 里程碑自动标记为 Finished，无需人工操作</li></ul></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">2</span><span class="step-title-zh">海关清关完成</span><span class="step-title-en">Customs Clearance Finished</span></div><ul class="step-items"><li data-zh="报关行在 Destination Management > Destination Overview 或 Customer Containers 页面选择集装箱，点击 'Customs Clearance Finish' 按钮" data-en="Customs Broker accesses via Destination Management > Destination Overview or Customer Containers and clicks 'Customs Clearance Finish'">报关行在 Destination Management > Destination Overview 或 Customer Containers 页面选择集装箱，点击 'Customs Clearance Finish' 按钮</li><li data-zh="在弹窗中选择 Complete 或 Not Complete（Not Complete 需填写原因），点击 Submit" data-en="Select Complete or Not Complete (Not Complete requires a reason), then click Submit">在弹窗中选择 Complete 或 Not Complete（Not Complete 需填写原因），点击 Submit</li><li data-zh="完成后 Customs Clearance Finished 里程碑标记为 Finished" data-en="After submission, the Customs Clearance Finished milestone is marked Finished">完成后 Customs Clearance Finished 里程碑标记为 Finished</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -532,7 +559,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Vessel Arrival 状态: Possible=Pre Alert 完成; 由第三方 API 自动触发 Finished" data-en="Vessel Arrival: Possible after Pre Alert; Finished is auto-triggered by third-party API">Vessel Arrival 状态: Possible=Pre Alert 完成; 由第三方 API 自动触发 Finished</li><li data-zh="Customs Clearance Finished 状态: Urgent=ATA后1天（联运为ATA后7天）; Overdue=ATA后2天（联运为ATA后12天）" data-en="Customs Clearance Finished: Urgent=1 day after ATA (7 days for Intermodal); Overdue=2 days after ATA (12 days for Intermodal)">Customs Clearance Finished 状态: Urgent=ATA后1天（联运为ATA后7天）; Overdue=ATA后2天（联运为ATA后12天）</li><li data-zh="未选择记录或未填写原因时系统阻断操作并显示相应错误" data-en="No record selected or reason missing blocks the operation with an error message">未选择记录或未填写原因时系统阻断操作并显示相应错误</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-discharged">
@@ -541,7 +568,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="discharged_title">卸箱卸货</h1>
         <p class="mod-subtitle" data-k="discharged_sub">记录集装箱卸港完成。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">集装箱卸载（自动）</span><span class="step-title-en">Container Discharged (auto)</span></div><ul class="step-items"><li data-zh="系统通过第三方 API 自动获取集装箱卸船时间" data-en="The system automatically obtains the Container Discharged time via third-party API">系统通过第三方 API 自动获取集装箱卸船时间</li><li data-zh="卸载完成后 Container Discharged 里程碑自动标记为 Finished，无需人工操作" data-en="The Container Discharged milestone is automatically marked Finished; no manual action is required">卸载完成后 Container Discharged 里程碑自动标记为 Finished，无需人工操作</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -551,7 +578,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Possible=Pre Alert 完成; Urgent=ATA后1天; Overdue=ATA后2天; 由第三方 API 自动触发 Finished" data-en="Possible after Pre Alert; Urgent=1 day after ATA; Overdue=2 days after ATA; Finished auto-triggered by third-party API">Possible=Pre Alert 完成; Urgent=ATA后1天; Overdue=ATA后2天; 由第三方 API 自动触发 Finished</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-arrival-dc">
@@ -560,7 +587,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="arrival-dc_title">到达配送中心</h1>
         <p class="mod-subtitle" data-k="arrival-dc_sub">货物签收入仓，支持批量上传。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">到达配送中心</span><span class="step-title-en">Arrival DC</span></div><ul class="step-items"><li data-zh="Yard Admin 在 Destination Management > Customer Containers 或 Destination Overview 进入 'Arrival at DC' 入口" data-en="Yard Admin accesses 'Arrival at DC' via Destination Management > Customer Containers or Destination Overview">Yard Admin 在 Destination Management > Customer Containers 或 Destination Overview 进入 'Arrival at DC' 入口</li><li data-zh="单条操作: 选择到达日期和时间，点击 Submit" data-en="Single entry: select Arrive Date and Arrive Hour, then Submit">单条操作: 选择到达日期和时间，点击 Submit</li><li data-zh="批量上传: 下载模板，填写 Arrive Date 和 Arrive Hour 后上传，二次确认后导入" data-en="Batch upload: download template, fill Arrive Date and Arrive Hour, upload, and confirm secondary prompt">批量上传: 下载模板，填写 Arrive Date 和 Arrive Hour 后上传，二次确认后导入</li><li data-zh="完成后 Arrival DC 里程碑标记为 Finished" data-en="After submission, the Arrival DC milestone is marked Finished">完成后 Arrival DC 里程碑标记为 Finished</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -570,7 +597,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Arrival DC 状态: Possible=Pre Alert 完成; Urgent=ETA前14天; Overdue=ETA前5天" data-en="Arrival DC: Possible after Pre Alert; Urgent=14 days before ETA; Overdue=5 days before ETA">Arrival DC 状态: Possible=Pre Alert 完成; Urgent=ETA前14天; Overdue=ETA前5天</li><li data-zh="未填写到达日期或时间时系统报错，阻断提交" data-en="Missing arrive date or hour triggers an error blocking submission">未填写到达日期或时间时系统报错，阻断提交</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-empty-return">
@@ -579,7 +606,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="empty-return_title">空箱归还</h1>
         <p class="mod-subtitle" data-k="empty-return_sub">归还空箱，完成整个货运周期闭环。</p>
       </div>
-      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title">Step 1</div><div class="ph-step-body">操作步骤内容待填充 · Step content to be added</div></div>
+      <div class="section-divider" data-k="div_steps">操作步骤</div><div class="steps-bar"><div class="step-pill"><div class="step-dot">1</div><div class="step-label">准备</div></div></div><div class="ph-step-content"><div class="ph-step-title"><span class="step-num-badge">1</span><span class="step-title-zh">空箱归还（自动）</span><span class="step-title-en">Empty Container Returned (auto)</span></div><ul class="step-items"><li data-zh="系统通过第三方 API 自动获取空箱归还时间" data-en="The system automatically obtains the Empty Container Return time via third-party API">系统通过第三方 API 自动获取空箱归还时间</li><li data-zh="Empty Container Returned 里程碑自动标记为 Finished，无需人工操作" data-en="The Empty Container Returned milestone is automatically marked Finished; no manual action is required">Empty Container Returned 里程碑自动标记为 Finished，无需人工操作</li></ul></div>
       <div class="section-divider" data-k="div_screenshot">界面截图</div>
       <div class="screenshot-slot">
         <div class="ss-icon">🖼</div>
@@ -589,7 +616,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <button class="rules-toggle" onclick="toggleRules(this)">
           <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
         </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
+        <div class="rules-body"><ul class="rules-list"><li data-zh="Possible=Pre Alert 完成; Urgent=DC后1天; Overdue=DC后2天（仅适用于商家自提集装箱）" data-en="Possible after Pre Alert; Urgent=1 day after DC; Overdue=2 days after DC (merchant haulage only)">Possible=Pre Alert 完成; Urgent=DC后1天; Overdue=DC后2天（仅适用于商家自提集装箱）</li><li data-zh="由第三方 API 自动触发 Finished" data-en="Finished is auto-triggered by third-party API">由第三方 API 自动触发 Finished</li></ul></div>
       </div>
     </section>
     <section class="content-section" id="sec-order-mgmt">
@@ -598,17 +625,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="order-mgmt_title">订单管理</h1>
         <p class="mod-subtitle" data-k="order-mgmt_sub">PO 全生命周期管理，含统计卡、筛选器与里程碑视图。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="订单管理模块 (PO Management) 为供应商、OHA 和 Customer 团队提供集中化的采购订单管理入口，涵盖订单状态跟踪、里程碑推进、数据筛选与批量下载（最多6万条/次）等功能，支持跨部门协作与合规记录存档。" data-en="The Order Management module (PO Management) provides a centralized hub for suppliers, OHA, and Customer teams to manage purchase orders, track milestone statuses, apply filters, and download up to 60,000 records at a time for offline analysis and archiving.">订单管理模块 (PO Management) 为供应商、OHA 和 Customer 团队提供集中化的采购订单管理入口，涵盖订单状态跟踪、里程碑推进、数据筛选与批量下载（最多6万条/次）等功能，支持跨部门协作与合规记录存档。</p><ul class="sys-feat-list"><li data-zh="数据下载: 一次最多下载60,000条PO数据（Excel格式），与当前筛选条件完全一致" data-en="Data Download: export up to 60,000 PO records per download (Excel), matching current filter conditions">数据下载: 一次最多下载60,000条PO数据（Excel格式），与当前筛选条件完全一致</li><li data-zh="统计卡片: 显示未订舱PO数、已订舱PO数、目的地国家PO数及原产地国家PO数" data-en="Statistical Cards: show PO counts by booking status and by origin/destination country">统计卡片: 显示未订舱PO数、已订舱PO数、目的地国家PO数及原产地国家PO数</li><li data-zh="多维筛选: 支持按待处理状态、起运港、供应商、DC、HOD、SO类型、ETD等条件筛选" data-en="Multi-dimension Filter: filter by Pending Status, Origin Port, Supplier, DC, HOD, SO Type, ETD, and more">多维筛选: 支持按待处理状态、起运港、供应商、DC、HOD、SO类型、ETD等条件筛选</li><li data-zh="订单列表: 展示订单号、合同号、状态、标签、CRD、ETD、ETA 等关键字段及可展开的详情子标签" data-en="Order List: displays Order Number, Contract Number, Status, Tag, CRD, ETD, ETA, and expandable detail sub-tabs">订单列表: 展示订单号、合同号、状态、标签、CRD、ETD、ETA 等关键字段及可展开的详情子标签</li><li data-zh="里程碑概览: 可按用户角色（供应商/OHA/Customer）筛选可见里程碑任务" data-en="Milestone Overview: milestone visibility filtered by user role (Supplier / OHA / Customer)">里程碑概览: 可按用户角色（供应商/OHA/Customer）筛选可见里程碑任务</li><li data-zh="邮件提醒: OHA 可通过邮件功能提醒供应商或 Customer Import 及时处理当前里程碑" data-en="Email Reminder: OHA can send email reminders to suppliers or Customer Import to process the current milestone">邮件提醒: OHA 可通过邮件功能提醒供应商或 Customer Import 及时处理当前里程碑</li><li data-zh="创建供应商订舱: 供应商可在此页面选择PO后直接创建订舱" data-en="Create Shipper Booking: suppliers can select POs and create a shipper booking directly from this page">创建供应商订舱: 供应商可在此页面选择PO后直接创建订舱</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
     <section class="content-section" id="sec-dest-mgmt">
@@ -617,17 +639,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="dest-mgmt_title">目的地管理</h1>
         <p class="mod-subtitle" data-k="dest-mgmt_sub">管理 HBL、集装箱及目的地状态，含清关、卫生风险标记。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="目的地管理模块提供目的地维度的综合展示与操作能力，包含目的地概览（Destination Overview）、提单管理（Customer HBLs）和集装箱管理（Customer Containers）三大子模块，帮助用户实时掌握目的港各环节进度与合规状态。" data-en="The Destination Management module provides aggregated visibility and operational tools for destination-side workflows, comprising three sub-modules: Destination Overview, Customer HBLs, and Customer Containers, enabling real-time monitoring of progress and compliance from the destination port through to DC delivery.">目的地管理模块提供目的地维度的综合展示与操作能力，包含目的地概览（Destination Overview）、提单管理（Customer HBLs）和集装箱管理（Customer Containers）三大子模块，帮助用户实时掌握目的港各环节进度与合规状态。</p><ul class="sys-feat-list"><li data-zh="目的地概览: 集中展示各目的地的订单量、货量及运输方式分布，支持按国家/港口维度筛选" data-en="Destination Overview: aggregated view of order quantities, cargo volume, and transport modes per destination with country/port filtering">目的地概览: 集中展示各目的地的订单量、货量及运输方式分布，支持按国家/港口维度筛选</li><li data-zh="Customer HBLs: 集中管理提单数据，支持按HBL号筛选、文件核验操作及合规状态可视化" data-en="Customer HBLs: centralized HBL management with HBL number filtering, document verification, and compliance status visualization">Customer HBLs: 集中管理提单数据，支持按HBL号筛选、文件核验操作及合规状态可视化</li><li data-zh="Customer Containers: 统一展示集装箱全程信息，包括运输节点、交货计划、报关及到达DC状态" data-en="Customer Containers: unified container tracking with transport nodes, delivery plans, customs clearance, and DC arrival statuses">Customer Containers: 统一展示集装箱全程信息，包括运输节点、交货计划、报关及到达DC状态</li><li data-zh="批量操作: 目的地概览和集装箱页面均支持批量上传交货预计划、分配报关行、更新到达时间等操作" data-en="Batch Operations: batch upload for delivery pre-plans, broker assignments, and DC arrival times across Overview and Containers pages">批量操作: 目的地概览和集装箱页面均支持批量上传交货预计划、分配报关行、更新到达时间等操作</li><li data-zh="数据导出: 各子模块支持 Excel/CSV 格式导出" data-en="Data Export: each sub-module supports Excel/CSV export">数据导出: 各子模块支持 Excel/CSV 格式导出</li><li data-zh="状态标识: 使用 '√'（已完成）和 '×'（待处理）直观区分各环节状态" data-en="Status Indicators: uses checkmarks (done) and crosses (pending) to visually distinguish status per step">状态标识: 使用 '√'（已完成）和 '×'（待处理）直观区分各环节状态</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
     <section class="content-section" id="sec-smart-board">
@@ -636,17 +653,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="smart-board_title">智能看板</h1>
         <p class="mod-subtitle" data-k="smart-board_sub">六张实时 KPI 卡片：待订舱、在途 TEU、7日内到港/开船等。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="Smart Board 是 smartMOOV 平台的数据可视化仪表盘，为管理层和运营团队提供实时供应链关键绩效指标，支持一屏掌握在途货量、即将到离港运单及目的地TEU分布，辅助快速决策与资源调配。" data-en="Smart Board is the data visualization dashboard of smartMOOV, delivering real-time KPIs for management and operations teams — including in-transit TEU, 7-day arrival/departure forecasts, and destination TEU counts — to support timely decision-making and resource allocation.">Smart Board 是 smartMOOV 平台的数据可视化仪表盘，为管理层和运营团队提供实时供应链关键绩效指标，支持一屏掌握在途货量、即将到离港运单及目的地TEU分布，辅助快速决策与资源调配。</p><ul class="sys-feat-list"><li data-zh="总运单数: 统计 Booking Confirmation 完成的运单总数" data-en="Total Shipments: count of bookings where Booking Confirmation is completed">总运单数: 统计 Booking Confirmation 完成的运单总数</li><li data-zh="目的地 TEU 总量: 已到港（含已清关）的所有 FCL 货物集装箱 TEU 之和" data-en="Total TEU at Destination: sum of TEU for all FCL cargo that has arrived at destination (vessel arrived or customs cleared)">目的地 TEU 总量: 已到港（含已清关）的所有 FCL 货物集装箱 TEU 之和</li><li data-zh="在途 TEU 总量: 已离港 (ATD 有值) 但尚未到港 (ATA 为空) 的 FCL 货物 TEU 之和" data-en="Total TEU in Transit: sum of TEU for FCL cargo that has departed (ATD set) but not yet arrived (ATA null)">在途 TEU 总量: 已离港 (ATD 有值) 但尚未到港 (ATA 为空) 的 FCL 货物 TEU 之和</li><li data-zh="已订舱未离港 TEU: 已完成订舱但尚未实际离港的 FCL 货物 TEU 之和" data-en="Total TEU Booked, Not Departed: sum of TEU for booked FCL cargo with no actual departure yet">已订舱未离港 TEU: 已完成订舱但尚未实际离港的 FCL 货物 TEU 之和</li><li data-zh="7天内到港运单: 已离港且 ETA 在未来7天内的运单数量" data-en="Shipments Arriving Within 7 Days: count of departed bookings with ETA within the next 7 days">7天内到港运单: 已离港且 ETA 在未来7天内的运单数量</li><li data-zh="7天内离港运单: 已订舱且 ETD 在未来7天内的运单数量" data-en="Shipments Departing Within 7 Days: count of booked bookings with ETD within the next 7 days">7天内离港运单: 已订舱且 ETD 在未来7天内的运单数量</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
     <section class="content-section" id="sec-forecast">
@@ -655,17 +667,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="forecast_title">预测</h1>
         <p class="mod-subtitle" data-k="forecast_sub">汇聚 9 个港口 TEU 预测数据，支持手动修正 ETU/ETB。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="Forecast 模块集中管理船舶卸货预计时间 (ETU) 的多来源预测数据，支持用户查看来自不同预测源（如 TEL、星光、马士基等）的 ETU 预测值，并支持手动更新，提升物流计划与库存管理的准确性。" data-en="The Forecast module centralizes ETU (Estimated Time of Unloading) data from multiple prediction sources (e.g., TEL, Singuang, Maersk), allowing users to view, compare, and manually update ETU forecasts per vessel to improve logistics planning accuracy.">Forecast 模块集中管理船舶卸货预计时间 (ETU) 的多来源预测数据，支持用户查看来自不同预测源（如 TEL、星光、马士基等）的 ETU 预测值，并支持手动更新，提升物流计划与库存管理的准确性。</p><ul class="sys-feat-list"><li data-zh="多源ETU预测展示: 以表格形式展示各船舶来自不同来源的ETU原始值与变更值" data-en="Multi-source ETU display: tabular view of original and changed ETU per vessel from multiple prediction sources">多源ETU预测展示: 以表格形式展示各船舶来自不同来源的ETU原始值与变更值</li><li data-zh="手动更新功能: 点击 Update 按钮，在弹窗中修改各港口 (宁波/青岛/上海等) 的 ETU 预测值后提交" data-en="Manual Update: click Update to modify ETU values per port (Ningbo, Qingdao, Shanghai, etc.) in the update pop-up">手动更新功能: 点击 Update 按钮，在弹窗中修改各港口 (宁波/青岛/上海等) 的 ETU 预测值后提交</li><li data-zh="关键字搜索: 支持通过 Vessel ID 关键字快速查找目标船舶" data-en="Keyword Search: search by Vessel ID to quickly locate a target vessel">关键字搜索: 支持通过 Vessel ID 关键字快速查找目标船舶</li><li data-zh="条件筛选: 支持按承运人、航线等条件过滤数据" data-en="Condition Filter: filter by Carrier, Route, and other conditions">条件筛选: 支持按承运人、航线等条件过滤数据</li><li data-zh="数据字段: 展示 Vessel ID、Voyage、Carrier、ETU原始值/变更值及各来源预测列" data-en="Data Fields: Vessel ID, Voyage, Carrier, ETU Original/Changed, and forecast columns per prediction source">数据字段: 展示 Vessel ID、Voyage、Carrier、ETU原始值/变更值及各来源预测列</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
     <section class="content-section" id="sec-tracking">
@@ -674,17 +681,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="tracking_title">路由追踪</h1>
         <p class="mod-subtitle" data-k="tracking_sub">世界地图实时船位、速度、ETA 与港口轮转，支持 IMO/MMSI 搜索。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="Tracking 模块提供端到端的货物运输可视化追踪，通过全球地图展示船舶实时位置与航行路线，支持多维度筛选（订单号、船名航次、集装箱号等），替代人工查询，提升供应链透明度。" data-en="The Tracking module provides end-to-end cargo visibility with real-time vessel positions and routes displayed on a world map. Users can search by order number, vessel name/voyage, container number, or IMO/MMSI to monitor multimodal transport status, replacing manual inquiries and improving supply chain transparency.">Tracking 模块提供端到端的货物运输可视化追踪，通过全球地图展示船舶实时位置与航行路线，支持多维度筛选（订单号、船名航次、集装箱号等），替代人工查询，提升供应链透明度。</p><ul class="sys-feat-list"><li data-zh="全球地图可视化: 在世界地图上显示船舶当前位置、航行路线及出发/目的港" data-en="Global map: shows vessel current position, route track, and origin/destination ports on a world map">全球地图可视化: 在世界地图上显示船舶当前位置、航行路线及出发/目的港</li><li data-zh="船舶信息面板: 展示船名、类型、AIS、IMO、MMSI、国籍、建造年份、速度、ETA等详细信息" data-en="Vessel Info Panel: displays Vessel Name, Type, AIS, IMO, MMSI, Nationality, Build Date, Speed, ETA, and more">船舶信息面板: 展示船名、类型、AIS、IMO、MMSI、国籍、建造年份、速度、ETA等详细信息</li><li data-zh="停泊路径: 显示靠泊过程中的关键转折点及对应时间" data-en="Berthing Path: shows key turning points and timing during the berthing process">停泊路径: 显示靠泊过程中的关键转折点及对应时间</li><li data-zh="多维筛选: 通过订单号/船名/航次/集装箱号/MMSI/IMO等条件精确查找货物" data-en="Multi-dimension Search: filter by order number, vessel, voyage, container number, MMSI, or IMO">多维筛选: 通过订单号/船名/航次/集装箱号/MMSI/IMO等条件精确查找货物</li><li data-zh="时间轴回放: 支持查看过去2周/4周或自定义时段的船舶轨迹" data-en="Timeline Replay: view vessel track for the last 2 weeks, 4 weeks, or a custom time range">时间轴回放: 支持查看过去2周/4周或自定义时段的船舶轨迹</li><li data-zh="地图类型切换: 支持地理地图、海图和标准地图三种视图" data-en="Map Type Toggle: switch between Geo Map, Sea Map, and standard Map views">地图类型切换: 支持地理地图、海图和标准地图三种视图</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
     <section class="content-section" id="sec-master-data">
@@ -693,17 +695,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="master-data_title">主数据管理</h1>
         <p class="mod-subtitle" data-k="master-data_sub">产品、供应商、箱型、用户、字典数据统一维护。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="主数据管理模块是 MOOV 系统的核心基础模块，负责维护产品、供应商、集装箱类型、用户及字典等各类关键业务实体的标准化数据，确保全系统业务模块使用一致、准确的基础数据，支持业务流程规范化和数据质量提升。" data-en="The Master Data module is the core infrastructure of the MOOV system, managing standardized data for products, suppliers, container types, users, and dictionaries to ensure all business modules operate with consistent, accurate base data, supporting process standardization and data quality.">主数据管理模块是 MOOV 系统的核心基础模块，负责维护产品、供应商、集装箱类型、用户及字典等各类关键业务实体的标准化数据，确保全系统业务模块使用一致、准确的基础数据，支持业务流程规范化和数据质量提升。</p><ul class="sys-feat-list"><li data-zh="产品主数据: 查询/新增/编辑/删除产品，支持 Excel 批量导入和按产品代码/名称搜索" data-en="Product Master Data: query, add, edit, delete products; supports Excel batch import and search by code/name">产品主数据: 查询/新增/编辑/删除产品，支持 Excel 批量导入和按产品代码/名称搜索</li><li data-zh="供应商主数据: 管理供应商代码、名称、地址、联系方式及类型（OHA/Supplier），支持按国家筛选" data-en="Supplier Master Data: manage supplier code, name, address, contacts, and type (OHA/Supplier); filter by country">供应商主数据: 管理供应商代码、名称、地址、联系方式及类型（OHA/Supplier），支持按国家筛选</li><li data-zh="集装箱类型管理: 维护所有集装箱类型的标准信息，支持新增/编辑/删除及按类型代码搜索" data-en="Container Type Management: maintain container type standards; supports add/edit/delete and search by type code">集装箱类型管理: 维护所有集装箱类型的标准信息，支持新增/编辑/删除及按类型代码搜索</li><li data-zh="用户管理: 新增/编辑/禁用/启用用户账户，分配角色与数据权限，支持批量导入用户" data-en="User Management: add/edit/disable/enable user accounts, assign roles and data permissions, batch user import">用户管理: 新增/编辑/禁用/启用用户账户，分配角色与数据权限，支持批量导入用户</li><li data-zh="字典数据管理: 维护系统内各类下拉选项和枚举值，支持批量导入/导出" data-en="Dictionary Management: maintain system dropdown options and enumeration values; batch import/export supported">字典数据管理: 维护系统内各类下拉选项和枚举值，支持批量导入/导出</li><li data-zh="数据唯一性规则: 产品代码、供应商代码、集装箱类型代码须全局唯一" data-en="Data Uniqueness: product codes, supplier codes, and container type codes must be globally unique">数据唯一性规则: 产品代码、供应商代码、集装箱类型代码须全局唯一</li><li data-zh="权限隔离: 用户权限变更实时生效；不同租户数据完全隔离" data-en="Permission Control: user permission changes take effect in real time; data is fully isolated between tenants">权限隔离: 用户权限变更实时生效；不同租户数据完全隔离</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
     <section class="content-section" id="sec-user-mgmt">
@@ -712,17 +709,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="user-mgmt_title">用户管理</h1>
         <p class="mod-subtitle" data-k="user-mgmt_sub">租户→部门→角色→数据范围四级权限体系，多方数据隔离。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="用户管理系统是 MOOV 物流管理平台的核心安全模块，提供统一的用户身份管理、权限控制和访问管理服务，支持多租户、多角色的复杂组织架构，确保系统安全性和数据隔离。" data-en="The User Management System is the core security module of the MOOV platform, providing unified identity management, role-based permission control, and access management services that support complex multi-tenant, multi-role organizational structures, ensuring system security and data isolation.">用户管理系统是 MOOV 物流管理平台的核心安全模块，提供统一的用户身份管理、权限控制和访问管理服务，支持多租户、多角色的复杂组织架构，确保系统安全性和数据隔离。</p><ul class="sys-feat-list"><li data-zh="用户生命周期管理: 创建、编辑、启用/禁用、锁定/解锁用户账户，支持密码重置" data-en="User Lifecycle: create, edit, enable/disable, lock/unlock user accounts; password reset supported">用户生命周期管理: 创建、编辑、启用/禁用、锁定/解锁用户账户，支持密码重置</li><li data-zh="角色与权限管理: 创建/编辑/删除角色，为角色或用户直接分配权限" data-en="Role & Permission Management: create/edit/delete roles; assign permissions to roles or directly to users">角色与权限管理: 创建/编辑/删除角色，为角色或用户直接分配权限</li><li data-zh="数据权限控制: 基于部门、公司类型和国家/地区进行数据访问范围控制" data-en="Data Access Control: scope data access based on department, company type, and country/region">数据权限控制: 基于部门、公司类型和国家/地区进行数据访问范围控制</li><li data-zh="多租户隔离: 不同租户数据完全隔离；同租户内跨部门访问需通过权限配置授权" data-en="Multi-tenant Isolation: complete data isolation between tenants; cross-department access requires permission configuration">多租户隔离: 不同租户数据完全隔离；同租户内跨部门访问需通过权限配置授权</li><li data-zh="权限规则: CUSTOMER/OHA Management/PGS/CUSTOMER SCM 类型用户可访问全部数据；CFS类型用户有特定访问限制" data-en="Permission Rules: CUSTOMER, OHA Management, PGS, and CUSTOMER SCM users access all data; CFS users have specific restrictions">权限规则: CUSTOMER/OHA Management/PGS/CUSTOMER SCM 类型用户可访问全部数据；CFS类型用户有特定访问限制</li><li data-zh="密码策略: 长度至少8位，含字母和数字，支持定期过期强制修改" data-en="Password Policy: minimum 8 characters, must include letters and numbers, supports periodic expiry and forced reset">密码策略: 长度至少8位，含字母和数字，支持定期过期强制修改</li><li data-zh="用户筛选与导出: 支持按用户ID/邮箱/部门/公司类型筛选，支持导出用户列表" data-en="User Filter & Export: filter by user ID, email, department, or company type; user list export supported">用户筛选与导出: 支持按用户ID/邮箱/部门/公司类型筛选，支持导出用户列表</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
     <section class="content-section" id="sec-sys-setup">
@@ -731,17 +723,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);display:flex
         <h1 class="mod-title" data-k="sys-setup_title">系统设置</h1>
         <p class="mod-subtitle" data-k="sys-setup_sub">SLA 规则、通知邮件模板等后台配置。</p>
       </div>
-      
-      <div class="section-divider" data-k="div_screenshot">界面截图</div>
-      <div class="screenshot-slot">
+      <div class="sys-body">
+        <p class="sys-desc" data-zh="系统配置模块允许 OHA 对任务状态类型、通知邮件模板、第三方 API 日志及字典数据进行配置与管理，使平台能够适配客户特定的工作流规则、SLA 提醒和集成设置。" data-en="The System Setup module allows OHA to configure task status types, email notification templates, third-party API logs, and dictionary data, enabling the platform to adapt to customer-specific workflow rules, SLA alerts, and integration settings.">系统配置模块允许 OHA 对任务状态类型、通知邮件模板、第三方 API 日志及字典数据进行配置与管理，使平台能够适配客户特定的工作流规则、SLA 提醒和集成设置。</p><ul class="sys-feat-list"><li data-zh="任务配置: 配置各里程碑任务的状态类型 (Possible/Urgent/Overdue/Finished) 及处理逻辑" data-en="Task Configuration: configure milestone status types (Possible/Urgent/Overdue/Finished) and processing logic">任务配置: 配置各里程碑任务的状态类型 (Possible/Urgent/Overdue/Finished) 及处理逻辑</li><li data-zh="通知管理: 管理系统邮件模板，为不同业务场景配置邮件内容，支持模板变量和动态内容" data-en="Notification Management: manage email templates per business scenario with template variables and dynamic content">通知管理: 管理系统邮件模板，为不同业务场景配置邮件内容，支持模板变量和动态内容</li><li data-zh="第三方 API 日志: 记录第三方 API 调用的请求/响应详情，便于排查集成问题" data-en="Third-Party API Log: records detailed request/response data for third-party API calls for integration troubleshooting">第三方 API 日志: 记录第三方 API 调用的请求/响应详情，便于排查集成问题</li><li data-zh="字典管理: 管理业务代码、类型、状态等标准化数据的字典条目，支持新增/编辑/删除/查询操作" data-en="Dictionary Management: manage standardized business codes, types, and status dictionary entries with full CRUD support">字典管理: 管理业务代码、类型、状态等标准化数据的字典条目，支持新增/编辑/删除/查询操作</li></ul>
+      </div>
+      <div class="screenshot-slot" style="margin-top:24px">
         <div class="ss-icon">🖼</div>
         <div class="ss-text" data-k="ph_screenshot">截图待补充 · Screenshots to be added</div>
-      </div>
-      <div class="rules-accordion">
-        <button class="rules-toggle" onclick="toggleRules(this)">
-          <span data-k="rules_btn">业务规则</span> <span class="arr">▼</span>
-        </button>
-        <div class="rules-body" data-k="ph_rules">业务规则内容待填充 · Business rules to be added</div>
       </div>
     </section>
 
@@ -860,6 +847,10 @@ function setLang(l) {
   document.querySelectorAll('[data-k]').forEach(el => {
     const v = STR[el.dataset.k] || MOD_STR[el.dataset.k];
     if (v) el.innerHTML = v[idx];
+  });
+  // Bilingual: step items and rule items with data-zh / data-en
+  document.querySelectorAll('[data-zh][data-en]').forEach(el => {
+    el.innerHTML = l === 'zh' ? el.dataset.zh : el.dataset.en;
   });
 }
 
