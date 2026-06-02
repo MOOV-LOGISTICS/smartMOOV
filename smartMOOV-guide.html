@@ -19,114 +19,176 @@
   --bg:#EEF4F8;
   --sidebar-w:260px;
   --font:'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
-  --shadow-sm:0 1px 4px rgba(0,79,124,.1);
-  --shadow-md:0 3px 12px rgba(0,79,124,.12);
+  --shadow-sm:0 2px 8px rgba(0,79,124,.07),0 1px 3px rgba(0,79,124,.04);
+  --shadow-md:0 6px 24px rgba(0,79,124,.11),0 2px 8px rgba(0,79,124,.06);
+  --shadow-card:0 4px 20px rgba(0,79,124,.09),0 1px 4px rgba(0,79,124,.05);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text-body);font-family:var(--font);display:flex;flex-direction:column;min-height:100vh}
-::-webkit-scrollbar{width:6px}
+body{
+  background:var(--bg);
+  background-image:radial-gradient(circle,rgba(0,79,124,.055) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--text-body);font-family:var(--font);display:flex;flex-direction:column;min-height:100vh
+}
+::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--orient-light)}
 ::-webkit-scrollbar-thumb{background:var(--orange);border-radius:3px}
 
 /* ── TOPBAR ── */
 .topbar{position:fixed;top:0;left:0;right:0;z-index:999;height:56px;
-  display:flex;align-items:center;justify-content:space-between;padding:0 24px;
-  background:var(--orient);
-  box-shadow:0 2px 10px rgba(0,0,0,.18)}
+  display:flex;align-items:center;justify-content:space-between;padding:0 28px;
+  background:linear-gradient(90deg,var(--orient-dark) 0%,var(--orient) 100%);
+  box-shadow:0 2px 20px rgba(0,0,0,.2);
+  border-bottom:1.5px solid rgba(254,80,0,.28)}
 .topbar-left{display:flex;align-items:center;gap:14px}
 .topbar-logo img{height:28px}
-.topbar-sep{color:rgba(255,255,255,.25);font-size:18px}
-.topbar-title{font-size:13px;color:rgba(255,255,255,.85);letter-spacing:.5px}
+.topbar-sep{color:rgba(255,255,255,.2);font-size:20px;font-weight:100}
+.topbar-title{font-size:12px;color:rgba(255,255,255,.7);letter-spacing:2px;text-transform:uppercase}
 .topbar-right{display:flex;align-items:center;gap:10px}
-.back-btn{padding:5px 14px;font-size:11px;font-weight:600;border:1.5px solid rgba(255,255,255,.5);
-  border-radius:20px;color:#fff;text-decoration:none;transition:all .2s;white-space:nowrap}
-.back-btn:hover{background:rgba(255,255,255,.15);border-color:#fff}
-.guide-badge{padding:4px 12px;font-size:11px;background:var(--orange);border:none;
-  border-radius:20px;color:#fff;letter-spacing:.5px;font-weight:600}
-.lang-toggle{display:flex;border:1.5px solid rgba(255,255,255,.35);border-radius:20px;overflow:hidden}
-.lang-btn{padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;border:none;
-  background:transparent;color:rgba(255,255,255,.55);transition:all .2s}
-.lang-btn.active{background:var(--orange);color:#fff}
+.back-btn{padding:5px 16px;font-size:11px;font-weight:600;
+  border:1px solid rgba(255,255,255,.35);border-radius:20px;
+  color:rgba(255,255,255,.85);text-decoration:none;transition:all .2s;
+  white-space:nowrap;letter-spacing:.5px}
+.back-btn:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.7);color:#fff}
+.lang-toggle{display:flex;border:1px solid rgba(255,255,255,.3);border-radius:20px;overflow:hidden}
+.lang-btn{padding:4px 13px;font-size:11px;font-weight:700;cursor:pointer;border:none;
+  background:transparent;color:rgba(255,255,255,.5);transition:all .2s;letter-spacing:.5px}
+.lang-btn.active{background:var(--orange);color:#fff;box-shadow:0 0 10px rgba(254,80,0,.4)}
 
 /* ── LAYOUT ── */
 .layout{display:flex;padding-top:56px;min-height:calc(100vh - 56px)}
 
 /* ── SIDEBAR ── */
 .sidebar{width:var(--sidebar-w);flex-shrink:0;position:fixed;top:56px;bottom:0;left:0;
-  overflow-y:auto;background:var(--orient-dark);padding:20px 0 40px;
-  box-shadow:2px 0 10px rgba(0,0,0,.12)}
+  overflow-y:auto;padding:20px 0 40px;
+  background:var(--orient-dark);
+  background-image:
+    linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:20px 20px;
+  border-right:1px solid rgba(0,42,66,.4);
+  box-shadow:4px 0 24px rgba(0,0,0,.2),inset -1px 0 0 rgba(255,255,255,.06)}
+
 .sidebar-group-btn{width:100%;display:flex;align-items:center;justify-content:space-between;
-  padding:10px 20px;background:none;border:none;cursor:pointer;color:rgba(255,255,255,.5);
-  font-size:12.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  text-align:left;transition:color .2s}
-.sidebar-group-btn:hover{color:rgba(255,255,255,.85)}
-.sidebar-group-btn .arrow{font-size:9px;transition:transform .22s}
-.sidebar-group-btn.open{color:var(--orange)}
-.sidebar-group-btn.open .arrow{transform:rotate(90deg)}
-.sidebar-items{display:none;padding:2px 0 8px}
+  padding:12px 20px 10px;background:none;border:none;
+  border-left:3px solid transparent;
+  cursor:pointer;color:rgba(255,255,255,.55);
+  font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  font-family:var(--font);
+  text-align:left;transition:all .2s}
+.sidebar-group-btn::before{content:'// ';opacity:.5;font-size:11px;letter-spacing:0;
+  font-family:'Courier New',monospace}
+.sidebar-group-btn:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.07)}
+.sidebar-group-btn .arrow{font-size:9px;transition:transform .22s;
+  opacity:.4;color:rgba(255,255,255,.5);font-family:var(--font)}
+.sidebar-group-btn.open{color:var(--orange);border-left-color:rgba(254,80,0,.55)}
+.sidebar-group-btn.open::before{opacity:1}
+.sidebar-group-btn.open .arrow{transform:rotate(90deg);opacity:1;color:var(--orange)}
+
+.sidebar-items{display:none;padding:2px 0 10px}
 .sidebar-group-btn.open + .sidebar-items{display:block}
-.sidebar-item{display:block;padding:7px 20px 7px 28px;font-size:12.5px;
-  color:rgba(255,255,255,.68);text-decoration:none;
-  border-left:3px solid transparent;transition:all .15s;line-height:1.4}
-.sidebar-item:hover{color:#fff;background:rgba(255,255,255,.07);border-left-color:rgba(255,255,255,.25)}
-.sidebar-item.active{color:#fff;border-left-color:var(--orange);
-  background:rgba(254,80,0,.18);font-weight:600}
-.sidebar-divider{height:1px;background:rgba(255,255,255,.08);margin:10px 20px}
+
+.sidebar-item{display:block;padding:7px 20px 7px 30px;font-size:12.5px;
+  color:rgba(255,255,255,.5);text-decoration:none;
+  border-left:2px solid transparent;transition:all .18s;line-height:1.4;
+  position:relative;overflow:hidden}
+.sidebar-item::before{content:'';position:absolute;left:0;top:0;
+  width:0;height:100%;
+  background:linear-gradient(90deg,rgba(255,255,255,.08) 0%,transparent 100%);
+  transition:width .22s ease}
+.sidebar-item:hover::before{width:100%}
+.sidebar-item:hover{color:rgba(255,255,255,.88);border-left-color:rgba(255,255,255,.25)}
+.sidebar-item.active{color:#fff;font-weight:600;
+  border-left:2px solid var(--orange);
+  background:linear-gradient(90deg,rgba(254,80,0,.18) 0%,transparent 75%);
+  text-shadow:0 0 16px rgba(254,80,0,.3)}
+.sidebar-item.active::after{content:'';position:absolute;right:14px;top:50%;
+  transform:translateY(-50%);width:4px;height:4px;border-radius:50%;
+  background:var(--orange);
+  box-shadow:0 0 6px var(--orange),0 0 14px rgba(254,80,0,.6)}
+
+.sidebar-divider{height:1px;margin:12px 16px;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.15) 30%,rgba(255,255,255,.15) 70%,transparent 100%)}
 
 /* ── MAIN CONTENT ── */
 .main{margin-left:var(--sidebar-w);flex:1;padding:40px 56px 90px;
-  max-width:calc(var(--sidebar-w) + 880px);background:var(--bg)}
+  max-width:calc(var(--sidebar-w) + 880px);background:transparent}
 .content-section{display:none;animation:fadeIn .25s ease}
 .content-section.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ── MODULE HEADER ── */
-.mod-header{margin-bottom:28px;padding:24px 28px;background:#fff;
-  border-radius:10px;border-left:4px solid var(--orange);
-  box-shadow:var(--shadow-sm)}
-.mod-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--orange);margin-bottom:6px;font-weight:700}
-.mod-title{font-size:24px;font-weight:700;color:var(--orient);line-height:1.2;margin-bottom:8px}
-.mod-subtitle{font-size:14px;color:var(--text-body);line-height:1.8;max-width:640px}
+.mod-header{margin-bottom:28px;padding:24px 28px 24px 32px;background:#fff;
+  border-radius:12px;position:relative;overflow:hidden;
+  box-shadow:var(--shadow-md);border:1px solid rgba(0,79,124,.08)}
+.mod-header::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+  background:linear-gradient(180deg,var(--orange) 0%,rgba(254,80,0,.2) 100%)}
+.mod-header::after{content:'';position:absolute;top:0;right:0;width:260px;height:100%;
+  background:linear-gradient(135deg,transparent 20%,rgba(0,79,124,.025) 100%);
+  pointer-events:none}
+.mod-label{display:inline-flex;align-items:center;
+  background:linear-gradient(90deg,var(--orange) 0%,#FF6A2E 100%);
+  color:#fff;padding:3px 11px;border-radius:3px;
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+  margin-bottom:10px;box-shadow:0 3px 10px rgba(254,80,0,.28)}
+.mod-title{font-size:22px;font-weight:800;color:var(--orient);line-height:1.2;
+  margin-bottom:8px;letter-spacing:-.3px}
+.mod-subtitle{font-size:13.5px;color:var(--text-body);line-height:1.85;max-width:640px}
 
 /* ── SECTION DIVIDER ── */
-.section-divider{display:flex;align-items:center;gap:10px;margin:24px 0 14px;
-  color:var(--orange);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
-.section-divider::after{content:'';flex:1;height:1px;background:rgba(254,80,0,.25)}
+.section-divider{display:flex;align-items:center;gap:10px;margin:28px 0 16px;
+  color:var(--orient);font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:800}
+.section-divider::before{content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--orange);flex-shrink:0;
+  box-shadow:0 0 7px rgba(254,80,0,.55)}
+.section-divider::after{content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,rgba(0,79,124,.22) 0%,transparent 100%)}
 
 /* ── STEPS ── */
 .steps-bar{display:flex;gap:0;margin:0 0 16px;position:relative}
-.steps-bar::before{content:'';position:absolute;top:15px;left:16px;right:16px;height:2px;
+.steps-bar::before{content:'';position:absolute;top:15px;left:16px;right:16px;height:1px;
   background:var(--border);z-index:0}
 .step-pill{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;z-index:1}
 .step-dot{width:30px;height:30px;border-radius:50%;background:#fff;
-  border:2px solid var(--border);display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:5px}
-.step-label{font-size:10px;color:var(--text-muted);text-align:center;max-width:70px;line-height:1.3}
-.ph-step-content{background:#fff;border:1px solid var(--border);
-  border-left:3px solid var(--orange);border-radius:0 8px 8px 0;
-  padding:16px 20px;margin-bottom:10px;box-shadow:var(--shadow-sm)}
+  border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:5px;
+  box-shadow:var(--shadow-sm)}
+.step-label{font-size:10px;color:var(--text-muted);text-align:center;max-width:70px;
+  line-height:1.3;letter-spacing:.3px}
+.ph-step-content{background:#fff;border:1px solid rgba(0,79,124,.08);
+  border-left:3px solid var(--orange);border-radius:0 10px 10px 0;
+  padding:16px 20px;margin-bottom:10px;
+  box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .15s}
+.ph-step-content:hover{box-shadow:var(--shadow-md);transform:translateX(2px)}
 .ph-step-title{font-size:13px;font-weight:700;color:var(--orient);margin-bottom:10px;
   display:flex;align-items:center;gap:10px}
 .step-num-badge{display:inline-flex;align-items:center;justify-content:center;
-  width:22px;height:22px;border-radius:50%;background:var(--orange);
-  font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+  width:22px;height:22px;border-radius:50%;
+  background:linear-gradient(135deg,var(--orange) 0%,#FF6A2E 100%);
+  font-size:11px;font-weight:800;color:#fff;flex-shrink:0;
+  box-shadow:0 3px 8px rgba(254,80,0,.38)}
 .step-title-zh{color:var(--orient)}
 .step-title-en{font-size:13px;font-weight:700;color:var(--orient);display:none}
 .step-items{padding-left:0;margin:0;list-style:none}
-.step-items li{position:relative;padding:6px 0 6px 20px;font-size:13.5px;
-  color:var(--text-body);line-height:1.75;border-bottom:1px solid var(--orient-light)}
+.step-items li{position:relative;padding:6px 0 6px 20px;font-size:13px;
+  color:var(--text-body);line-height:1.75;border-bottom:1px solid var(--orient-pale)}
 .step-items li:last-child{border-bottom:none}
-.step-items li::before{content:"▸";position:absolute;left:0;color:var(--orange);font-weight:700;font-size:13px;top:8px}
+.step-items li::before{content:"▸";position:absolute;left:0;color:var(--orange);
+  font-weight:700;font-size:13px;top:8px}
 .ph-step-body{font-size:12px;color:var(--text-muted);font-style:italic}
 
 /* ── SCREENSHOT SLOT ── */
-.screenshot-slot{border:2px dashed var(--border);border-radius:10px;
-  min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--orient-pale);margin:0 0 4px;gap:10px}
-.screenshot-slot .ss-icon{font-size:34px;opacity:.35;color:var(--orient)}
-.screenshot-slot .ss-text{font-size:12px;color:var(--text-muted);letter-spacing:.5px}
+.screenshot-slot{border:1.5px dashed rgba(0,79,124,.18);border-radius:12px;
+  min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(240,247,252,.5);margin:0 0 4px;gap:10px}
+.screenshot-slot.has-images{border:none;background:transparent;display:block;min-height:unset}
+.screenshot-slot .ss-icon{font-size:34px;opacity:.25;color:var(--orient)}
+.screenshot-slot .ss-text{font-size:11px;color:var(--text-muted);letter-spacing:1px}
+.screenshot-slot img{width:100% !important;border-radius:10px !important;
+  margin-bottom:14px !important;display:block !important;
+  border:1px solid rgba(0,79,124,.09) !important;
+  box-shadow:var(--shadow-card) !important}
 
 /* ── RULES ACCORDION ── */
 .rules-accordion{margin:20px 0}
@@ -150,47 +212,93 @@ body{background:var(--bg);color:var(--text-body);font-family:var(--font);display
 /* ── SYSTEM MODULE BODY ── */
 .sys-body{margin:20px 0 8px}
 .sys-desc{font-size:14px;color:var(--text-body);line-height:1.85;margin-bottom:18px;
-  padding:16px 20px;background:var(--orange-light);
-  border-left:4px solid var(--orange);border-radius:0 8px 8px 0;
+  padding:16px 20px 16px 24px;background:rgba(255,242,236,.5);
+  border-left:3px solid var(--orange);border-radius:0 10px 10px 0;
   box-shadow:var(--shadow-sm)}
 .sys-feat-list{padding-left:0;margin:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .sys-feat-list li{padding:12px 16px 12px 38px;position:relative;font-size:13px;
   color:var(--text-body);line-height:1.6;background:#fff;
-  border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow-sm)}
-.sys-feat-list li::before{content:"✦";position:absolute;left:14px;color:var(--orange);font-size:11px;top:14px}
+  border:1px solid rgba(0,79,124,.08);border-radius:10px;
+  box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .15s}
+.sys-feat-list li:hover{box-shadow:var(--shadow-md);border-color:rgba(0,79,124,.16);
+  transform:translateY(-2px)}
+.sys-feat-list li::before{content:"✦";position:absolute;left:14px;color:var(--orange);
+  font-size:11px;top:14px}
 
 /* ── ROLE CARDS ── */
 .role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0 8px}
-.role-card{padding:22px 18px;border-radius:10px;border:1px solid var(--border);
-  background:#fff;text-align:center;box-shadow:var(--shadow-sm);
-  border-top:3px solid var(--orange)}
-.role-card .rc-icon{font-size:28px;margin-bottom:10px}
-.role-card .rc-name{font-size:14px;font-weight:700;color:var(--orient);margin-bottom:7px}
-.role-card .rc-desc{font-size:12px;color:var(--text-body);line-height:1.65}
+.role-card{padding:24px 18px;border-radius:12px;
+  border:1px solid rgba(0,79,124,.08);background:#fff;text-align:center;
+  box-shadow:var(--shadow-sm);border-top:3px solid var(--orange);
+  transition:transform .22s,box-shadow .22s}
+.role-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,79,124,.14)}
+.role-card .rc-icon{font-size:30px;margin-bottom:12px}
+.role-card .rc-name{font-size:14px;font-weight:700;color:var(--orient);
+  margin-bottom:7px;letter-spacing:.4px}
+.role-card .rc-desc{font-size:12px;color:var(--text-body);line-height:1.7}
 
 /* ── PLACEHOLDER ── */
-.placeholder-block{border:2px dashed var(--border);border-radius:10px;
+.placeholder-block{border:1.5px dashed rgba(0,79,124,.18);border-radius:12px;
   padding:40px 24px;text-align:center;color:var(--text-muted);margin:20px 0;
-  background:var(--orient-pale)}
-.placeholder-block .ph-icon{font-size:30px;margin-bottom:10px;opacity:.4}
-.placeholder-block .ph-text{font-size:12.5px;letter-spacing:.5px}
+  background:rgba(240,247,252,.5)}
+.placeholder-block .ph-icon{font-size:30px;margin-bottom:10px;opacity:.3}
+.placeholder-block .ph-text{font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+
+/* ── GLOSSARY ── */
+.gloss-filter{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.gloss-cat{padding:6px 16px;border:1.5px solid var(--border);border-radius:20px;
+  background:#fff;color:var(--text-body);font-size:11.5px;font-weight:600;
+  cursor:pointer;transition:all .2s;letter-spacing:.3px}
+.gloss-cat:hover:not(.active){border-color:var(--orient);color:var(--orient)}
+.gloss-cat.active{background:var(--orient);color:#fff;border-color:var(--orient);
+  box-shadow:0 3px 10px rgba(0,79,124,.22)}
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.gloss-card{background:#fff;border:1px solid rgba(0,79,124,.08);border-radius:12px;
+  padding:18px 20px;box-shadow:var(--shadow-sm);transition:all .2s}
+.gloss-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.gloss-card.hidden{display:none}
+.gloss-card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
+.gloss-abbr{font-size:22px;font-weight:800;color:var(--orange);letter-spacing:-.3px;line-height:1}
+.gloss-tag{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:2px 8px;border-radius:10px;background:var(--orient-pale);color:var(--orient)}
+.gloss-fullname{font-size:13px;font-weight:700;color:var(--orient);margin-bottom:3px}
+.gloss-zh{font-size:12px;color:var(--text-muted);margin-bottom:10px;font-style:italic}
+/* language-aware visibility for glossary cards */
+body[data-lang="en"] .gloss-zh{display:none}
+body[data-lang="en"] .gloss-fullname{margin-bottom:10px}
+body[data-lang="zh"] .gloss-fullname{display:none}
+.gloss-desc{font-size:12.5px;color:var(--text-body);line-height:1.75;
+  border-top:1px solid var(--orient-pale);padding-top:10px}
 
 /* ── ABOUT PAGE ── */
 .about-feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 24px}
-.about-feat-item{background:var(--orient-pale);border-left:3px solid var(--orange);
-  border-radius:8px;padding:14px 16px;display:flex;align-items:flex-start;gap:12px}
+.about-feat-item{background:#fff;border:1px solid rgba(0,79,124,.08);
+  border-left:3px solid var(--orange);border-radius:0 10px 10px 0;
+  padding:16px 18px;display:flex;align-items:flex-start;gap:12px;
+  box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .15s}
+.about-feat-item:hover{box-shadow:var(--shadow-md);transform:translateX(3px)}
 .about-feat-icon{font-size:22px;flex-shrink:0;margin-top:2px}
-.about-feat-text{font-size:13.5px;color:var(--text-body);line-height:1.5;font-weight:600}
-.about-feat-sub{font-size:12px;color:var(--text-muted);margin-top:4px;font-weight:400;line-height:1.6}
+.about-feat-text{font-size:13.5px;color:var(--orient);line-height:1.5;font-weight:700;letter-spacing:-.1px}
+.about-feat-sub{font-size:12px;color:var(--text-muted);margin-top:4px;font-weight:400;line-height:1.65}
 .about-pillars{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0 24px}
 .about-pillar{background:linear-gradient(135deg,var(--orient) 0%,var(--orient-dark) 100%);
-  border-radius:10px;padding:22px 16px;text-align:center;color:#fff}
-.about-pillar-icon{font-size:28px;margin-bottom:10px}
-.about-pillar-text{font-size:13px;font-weight:600;line-height:1.5}
+  border-radius:12px;padding:28px 20px;text-align:center;color:#fff;
+  box-shadow:0 6px 24px rgba(0,79,124,.25);position:relative;overflow:hidden;
+  transition:transform .22s,box-shadow .22s}
+.about-pillar:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,79,124,.3)}
+.about-pillar::before{content:'';position:absolute;top:-20px;right:-20px;
+  width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.05)}
+.about-pillar::after{content:'';position:absolute;bottom:-25px;left:-10px;
+  width:60px;height:60px;border-radius:50%;background:rgba(254,80,0,.1)}
+.about-pillar-icon{font-size:30px;margin-bottom:12px;position:relative;z-index:1}
+.about-pillar-text{font-size:13px;font-weight:600;line-height:1.5;position:relative;z-index:1}
 .about-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:18px 0 28px}
-.about-stat{background:var(--orient-pale);border-radius:10px;padding:22px 16px;
-  text-align:center;border-top:3px solid var(--orange)}
-.about-stat-num{font-size:34px;font-weight:800;color:var(--orange);line-height:1.1;margin-bottom:8px}
+.about-stat{background:#fff;border-radius:12px;padding:24px 16px;
+  text-align:center;border-top:3px solid var(--orange);
+  border:1px solid rgba(0,79,124,.08);
+  box-shadow:var(--shadow-sm);transition:transform .22s,box-shadow .22s}
+.about-stat:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,79,124,.12)}
+.about-stat-num{font-size:36px;font-weight:800;color:var(--orange);line-height:1.1;margin-bottom:8px}
 .about-stat-label{font-size:12.5px;color:var(--text-body);font-weight:500}
 
 @media(max-width:900px){
@@ -230,6 +338,7 @@ body{background:var(--bg);color:var(--text-body);font-family:var(--font);display
       </button>
       <div class="sidebar-items">
         <a class="sidebar-item active" href="#" onclick="showSection('about');return false" data-k="nav_about">关于 smartMOOV</a>
+        <a class="sidebar-item" href="#" onclick="showSection('glossary');return false" data-k="nav_glossary">术语定义</a>
       </div>
     </div>
 
@@ -354,6 +463,9 @@ body{background:var(--bg);color:var(--text-body);font-family:var(--font);display
         </div>
       </div>
 
+      <div class="section-divider" data-k="about_tech_title">技术基础</div>
+      <p class="sys-desc" data-zh="我们的云系统采用模块化架构（微服务），在旺季自动扩容以防止系统变慢（弹性伸缩），通过使用多个云服务商实现持续在线（多云高可用），并为未来的 AI 集成做好了充分准备。" data-en="Our cloud system is built with modular features (Microservices), automatically scales up during peak seasons to prevent slowdowns (Elastic Scaling), stays online continuously by using multiple cloud providers (Multi-cloud High Availability), and is fully equipped for future AI integrations.">我们的云系统采用模块化架构（微服务），在旺季自动扩容以防止系统变慢（弹性伸缩），通过使用多个云服务商实现持续在线（多云高可用），并为未来的 AI 集成做好了充分准备。</p>
+
       <div class="section-divider" data-k="about_proven_title">成熟验证的平台</div>
       <div class="about-stats">
         <div class="about-stat">
@@ -388,6 +500,165 @@ body{background:var(--bg);color:var(--text-body);font-family:var(--font);display
           <div class="rc-name">Customer</div>
           <div class="rc-desc" data-k="role_customer_desc">货主 / 进口商，审批订舱、监控全程里程碑、管理目的地操作</div>
         </div>
+      </div>
+    </section>
+
+    <!-- ── 术语定义 ── -->
+    <section class="content-section" id="sec-glossary">
+      <div class="mod-header">
+        <div class="mod-label">QUICK START</div>
+        <h1 class="mod-title" data-k="glossary_title">术语定义</h1>
+        <p class="mod-subtitle" data-k="glossary_sub">smartMOOV 及国际物流领域常用术语与缩写，点击分类快速筛选。</p>
+      </div>
+      <div class="gloss-filter">
+        <button class="gloss-cat active" onclick="filterGloss(this,'all')" data-k="gloss_all">全部 · All</button>
+        <button class="gloss-cat" onclick="filterGloss(this,'time')" data-k="gloss_time">⏱ 时间节点</button>
+        <button class="gloss-cat" onclick="filterGloss(this,'port')" data-k="gloss_port">⚓ 港口地点</button>
+        <button class="gloss-cat" onclick="filterGloss(this,'doc')" data-k="gloss_doc">📄 单证</button>
+        <button class="gloss-cat" onclick="filterGloss(this,'logistics')" data-k="gloss_log">📦 物流概念</button>
+      </div>
+      <div class="gloss-grid" id="glossGrid">
+
+        <div class="gloss-card" data-cat="logistics">
+          <div class="gloss-card-head"><span class="gloss-abbr">4PL</span><span class="gloss-tag" data-zh="物流概念" data-en="Logistics">物流概念</span></div>
+          <div class="gloss-fullname">Fourth Party Logistics</div>
+          <div class="gloss-zh">第四方物流</div>
+          <div class="gloss-desc" data-zh="在传统1PL/2PL/3PL基础上发展的高阶供应链服务模式，定位为供应链战略整合者与管理者，不直接参与仓储运输等物流操作，专注解决全链路效率、成本与风险问题。" data-en="A high-level supply chain service model developed from traditional 1PL/2PL/3PL. Positioned as a strategic integrator and manager of the supply chain, it focuses on efficiency, cost, and risk — without directly performing physical logistics operations.">在传统1PL/2PL/3PL基础上发展的高阶供应链服务模式，定位为供应链战略整合者与管理者，不直接参与仓储运输等物流操作，专注解决全链路效率、成本与风险问题。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="doc">
+          <div class="gloss-card-head"><span class="gloss-abbr">PO</span><span class="gloss-tag" data-zh="单证" data-en="Document">单证</span></div>
+          <div class="gloss-fullname">Purchase Order</div>
+          <div class="gloss-zh">采购订单</div>
+          <div class="gloss-desc" data-zh="外贸交易中具有法律约束力的核心文件，由买方（进口商）向供应商（出口商）发出，明确交易条款，是后续生产备货、报关、收款的重要依据。" data-en="A core legally binding document in foreign trade. Issued by the buyer (importer) to the supplier (exporter), it clarifies transaction terms and serves as the basis for production, customs declaration, and payment.">外贸交易中具有法律约束力的核心文件，由买方（进口商）向供应商（出口商）发出，明确交易条款，是后续生产备货、报关、收款的重要依据。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="logistics">
+          <div class="gloss-card-head"><span class="gloss-abbr">OHA</span><span class="gloss-tag" data-zh="物流概念" data-en="Logistics">物流概念</span></div>
+          <div class="gloss-fullname">Original Handling Agent</div>
+          <div class="gloss-zh">起运港代理</div>
+          <div class="gloss-desc" data-zh="负责在货物起运港处理订舱手续及码头操作的代理人。订舱代理协助确认舱位并签发SO；码头操作代理负责货物进场、称重、装箱（整箱）或拼箱（散货），并配合预报关准备。" data-en="The agent handling cargo booking and terminal operations at the origin port. The booking agent confirms space and issues Shipping Orders (SO); the terminal agent arranges cargo intake, weighing, FCL stuffing or LCL consolidation, and pre-declaration preparation.">负责在货物起运港处理订舱手续及码头操作的代理人。订舱代理协助确认舱位并签发SO；码头操作代理负责货物进场、称重、装箱（整箱）或拼箱（散货），并配合预报关准备。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">CRD</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Cargo Ready Date</div>
+          <div class="gloss-zh">货物备妥日期</div>
+          <div class="gloss-desc" data-zh="货物在指定地点（如供应商工厂、仓库、集装箱堆场等）全部备妥、可供提取或交付的具体日期。" data-en="The date on which goods are fully prepared at a designated location (factory, warehouse, container yard, etc.) and ready for pickup or delivery.">货物在指定地点（如供应商工厂、仓库、集装箱堆场等）全部备妥、可供提取或交付的具体日期。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">PCRD</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Planned Cargo Ready Date</div>
+          <div class="gloss-zh">计划货物备妥日期</div>
+          <div class="gloss-desc" data-zh="出口商（供应商）计划完成备货并交付给物流方（货代或承运商）的预计日期，是规划订舱、报关、运输等后续流程的基础依据。" data-en="The expected date by which the exporter plans to have goods ready for handover to the logistics party (forwarder or carrier). It is the baseline for planning booking, customs declaration, and transportation.">出口商（供应商）计划完成备货并交付给物流方（货代或承运商）的预计日期，是规划订舱、报关、运输等后续流程的基础依据。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">HOD</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Handover Date</div>
+          <div class="gloss-zh">计划交货日期</div>
+          <div class="gloss-desc" data-zh="作为订舱、报关、配送等后续流程的"前置规划依据"——例如基于 HOD 反推最晚订舱时间。" data-en="Serves as the preliminary planning basis for booking, customs declaration, and distribution — e.g., used to calculate the latest booking cutoff time.">作为订舱、报关、配送等后续流程的"前置规划依据"——例如基于 HOD 反推最晚订舱时间。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">AHOD</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Actual Handover Date</div>
+          <div class="gloss-zh">实际交货日期</div>
+          <div class="gloss-desc" data-zh="货物实际从一方移交至另一方的日期，是对 HOD（计划交货日期）的实际执行记录。可能与计划一致，也可能因备货延误、物流拥堵、单证问题等原因出现偏差。" data-en="The date goods are actually transferred from one party to another. It records the actual execution of the HOD and may deviate due to late preparation, logistics congestion, or document issues.">货物实际从一方移交至另一方的日期，是对 HOD（计划交货日期）的实际执行记录。可能与计划一致，也可能因备货延误、物流拥堵、单证问题等原因出现偏差。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">In-DC</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">In-Distribution Center Date</div>
+          <div class="gloss-zh">入配送中心日期</div>
+          <div class="gloss-desc" data-zh="货物到达指定配送中心或仓库（如电商海外仓、客户指定仓库）的日期。" data-en="The date on which goods arrive at a designated distribution center or warehouse, such as an overseas e-commerce warehouse or customer-specified facility.">货物到达指定配送中心或仓库（如电商海外仓、客户指定仓库）的日期。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">ETD</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Estimated Time of Departure</div>
+          <div class="gloss-zh">预计离港时间</div>
+          <div class="gloss-desc" data-zh="货物预计从起运地（港口、机场、仓库）出发的时间。" data-en="The expected time when goods will depart from the place of origin (port, airport, or warehouse).">货物预计从起运地（港口、机场、仓库）出发的时间。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">ETA</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Estimated Time of Arrival</div>
+          <div class="gloss-zh">预计到港时间</div>
+          <div class="gloss-desc" data-zh="货物预计到达目的地（目的港、客户仓库）的时间。" data-en="The expected time when goods will arrive at the destination port or customer's warehouse.">货物预计到达目的地（目的港、客户仓库）的时间。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">ATD</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Actual Time of Departure</div>
+          <div class="gloss-zh">实际离港时间</div>
+          <div class="gloss-desc" data-zh="货物实际从起运地出发的时间，由物流方（如船公司）确认更新，用于修订后续运输计划。与 ETD（预计）不同，是实际执行记录。" data-en="The actual time goods departed from the origin, confirmed by the carrier. Used to revise subsequent plans — distinct from the estimated ETD.">货物实际从起运地出发的时间，由物流方（如船公司）确认更新，用于修订后续运输计划。与 ETD（预计）不同，是实际执行记录。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="time">
+          <div class="gloss-card-head"><span class="gloss-abbr">ATA</span><span class="gloss-tag" data-zh="时间节点" data-en="Time">时间节点</span></div>
+          <div class="gloss-fullname">Actual Time of Arrival</div>
+          <div class="gloss-zh">实际到港时间</div>
+          <div class="gloss-desc" data-zh="货物实际到达目的地的时间，是确认运输完成、触发后续流程（提货、清关、对账）的关键时间点。" data-en="The actual time goods arrived at the destination. A key milestone that triggers subsequent processes: cargo pickup, customs clearance, and account reconciliation.">货物实际到达目的地的时间，是确认运输完成、触发后续流程（提货、清关、对账）的关键时间点。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="port">
+          <div class="gloss-card-head"><span class="gloss-abbr">POL</span><span class="gloss-tag" data-zh="港口地点" data-en="Port">港口地点</span></div>
+          <div class="gloss-fullname">Port of Loading</div>
+          <div class="gloss-zh">装货港</div>
+          <div class="gloss-desc" data-zh="货物被装载到集装箱或船舶等运输工具上的港口，是海运运输的起点。" data-en="The port where goods are loaded onto containers or vessels. It is the starting point of the sea freight journey.">货物被装载到集装箱或船舶等运输工具上的港口，是海运运输的起点。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="port">
+          <div class="gloss-card-head"><span class="gloss-abbr">POD</span><span class="gloss-tag" data-zh="港口地点" data-en="Port">港口地点</span></div>
+          <div class="gloss-fullname">Port of Discharge</div>
+          <div class="gloss-zh">卸货港</div>
+          <div class="gloss-desc" data-zh="船舶抵港后将货物卸下的港口，是海运运输的终点（或中转点）。" data-en="The port where cargo is unloaded from the vessel after arrival. It is the endpoint (or transshipment point) of the sea freight leg.">船舶抵港后将货物卸下的港口，是海运运输的终点（或中转点）。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="port">
+          <div class="gloss-card-head"><span class="gloss-abbr">FND</span><span class="gloss-tag" data-zh="港口地点" data-en="Port">港口地点</span></div>
+          <div class="gloss-fullname">Final Destination</div>
+          <div class="gloss-zh">最终目的地</div>
+          <div class="gloss-desc" data-zh="货物经海运及后续陆运/空运后，最终交付给收货人的地点，可能是内陆城市（非港口）。" data-en="The location where goods are finally delivered to the consignee after sea freight and onward transportation. It may be an inland city, not necessarily a port.">货物经海运及后续陆运/空运后，最终交付给收货人的地点，可能是内陆城市（非港口）。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="logistics">
+          <div class="gloss-card-head"><span class="gloss-abbr">DG</span><span class="gloss-tag" data-zh="物流概念" data-en="Logistics">物流概念</span></div>
+          <div class="gloss-fullname">Dangerous Goods / Cargo</div>
+          <div class="gloss-zh">危险品</div>
+          <div class="gloss-desc" data-zh="按相关法规分为 9 大类：爆炸品、压缩/液化气体、易燃液体、易燃固体、自燃物品、氧化剂/有机过氧化物、毒害品/感染性物质、放射性物质、腐蚀品及杂类危险品。" data-en="Classified into 9 categories by regulations: explosives; compressed/liquefied gases; flammable liquids; flammable solids; spontaneous combustion substances; oxidizers/organic peroxides; toxic/infectious substances; radioactive materials; corrosives; and miscellaneous.">按相关法规分为 9 大类：爆炸品、压缩/液化气体、易燃液体、易燃固体、自燃物品、氧化剂/有机过氧化物、毒害品/感染性物质、放射性物质、腐蚀品及杂类危险品。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="logistics">
+          <div class="gloss-card-head"><span class="gloss-abbr">SOC</span><span class="gloss-tag" data-zh="物流概念" data-en="Logistics">物流概念</span></div>
+          <div class="gloss-fullname">Shipper's Own Container</div>
+          <div class="gloss-zh">货主自备箱</div>
+          <div class="gloss-desc" data-zh="由货主/发货人自行购买或租赁的集装箱，用于长途货物运输，代替使用承运商提供的箱（COC）。可避免超期使用费，或与船公司协商获得箱费折扣，降低运输成本。" data-en="Containers purchased or leased by the shipper (not the carrier). Using SOC avoids carrier container detention fees and can qualify for discounts, reducing overall transport costs versus COC (Carrier's Own Container).">由货主/发货人自行购买或租赁的集装箱，用于长途货物运输，代替使用承运商提供的箱（COC）。可避免超期使用费，或与船公司协商获得箱费折扣，降低运输成本。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="doc">
+          <div class="gloss-card-head"><span class="gloss-abbr">MBL</span><span class="gloss-tag" data-zh="单证" data-en="Document">单证</span></div>
+          <div class="gloss-fullname">Master Bill of Lading</div>
+          <div class="gloss-zh">主提单</div>
+          <div class="gloss-desc" data-zh="由船公司或其授权代理签发的核心运输单证，记录从装货港到目的港的全程运输信息，明确船公司与"主托运人"（通常为货代）的承运合同关系，是目的港提货与清关的重要凭证之一。" data-en="Issued by the shipping company or its authorized agent, the MBL records the full voyage from POL to POD, defines the contract of carriage with the master shipper (usually the forwarder), and is a key document for customs clearance and cargo pickup at the destination port.">由船公司或其授权代理签发的核心运输单证，记录从装货港到目的港的全程运输信息，明确船公司与"主托运人"（通常为货代）的承运合同关系，是目的港提货与清关的重要凭证之一。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="doc">
+          <div class="gloss-card-head"><span class="gloss-abbr">HBL</span><span class="gloss-tag" data-zh="单证" data-en="Document">单证</span></div>
+          <div class="gloss-fullname">House Bill of Lading</div>
+          <div class="gloss-zh">分提单 / 货代提单</div>
+          <div class="gloss-desc" data-zh="由货代签发给实际托运人（客户）的货运凭证，核心作用是衔接托运人与主提单（MBL）之间的物流链条。" data-en="Issued by the freight forwarder to the actual shipper (customer). Its core function is to bridge the logistics link between the shipper and the Master Bill of Lading (MBL).">由货代签发给实际托运人（客户）的货运凭证，核心作用是衔接托运人与主提单（MBL）之间的物流链条。</div>
+        </div>
+
+        <div class="gloss-card" data-cat="logistics">
+          <div class="gloss-card-head"><span class="gloss-abbr">TEU</span><span class="gloss-tag" data-zh="物流概念" data-en="Logistics">物流概念</span></div>
+          <div class="gloss-fullname">Twenty-foot Equivalent Unit</div>
+          <div class="gloss-zh">标准箱（20英尺当量单位）</div>
+          <div class="gloss-desc" data-zh="海运集装箱运量的统一计量单位。1 TEU = 1个20英尺标准集装箱（约20ft×8ft×8ft6in）。广泛用于统计港口吞吐量、船舶舱容和货运量，是全球航运业通用计量标准。" data-en="The standard unit for measuring container transport volume. 1 TEU = one 20-foot container (≈ 20ft × 8ft × 8ft 6in). Universally used to measure port throughput, vessel capacity, and cargo volume.">海运集装箱运量的统一计量单位。1 TEU = 1个20英尺标准集装箱（约20ft×8ft×8ft6in）。广泛用于统计港口吞吐量、船舶舱容和货运量，是全球航运业通用计量标准。</div>
+        </div>
+
       </div>
     </section>
 
@@ -707,6 +978,14 @@ const STR = {
   grp_dest:['目的地操作','Destination Operations'],
   grp_sys:['系统功能','System Functions'],
   nav_about:['关于 smartMOOV','About smartMOOV'],
+  nav_glossary:['术语定义','Glossary'],
+  glossary_title:['术语定义','Glossary'],
+  glossary_sub:['smartMOOV 及国际物流领域常用术语与缩写，点击分类快速筛选。','Common terms and abbreviations used in smartMOOV and international logistics. Filter by category.'],
+  gloss_all:['全部 · All','All'],
+  gloss_time:['⏱ 时间节点','⏱ Time Milestones'],
+  gloss_port:['⚓ 港口地点','⚓ Ports & Locations'],
+  gloss_doc:['📄 单证','📄 Documents'],
+  gloss_log:['📦 物流概念','📦 Logistics'],
   nav_login:['登录与账号设置','Login & Account Setup'],
   nav_booking_note:['委托订舱','Booking Note'],
   nav_carrier_booking:['承运订舱','Carrier Booking'],
@@ -742,6 +1021,7 @@ const STR = {
   about_what_title:['什么是 smartMOOV 4PL？','What is smartMOOV 4PL?'],
   about_backbone:['smartMOOV 是 MOOV 4PL 数字化运营的核心引擎，连接货主、货代、承运商与口岸代理，构建供应链的"单一数据真相"。','The digital backbone of MOOV 4PL — connecting shippers, forwarders, carriers and port agents to establish a single version of the supply chain truth.'],
   about_pillars_title:['核心价值','Core Value Pillars'],
+  about_tech_title:['技术基础','Technical Foundation'],
   about_proven_title:['成熟验证的平台','Proven at Scale'],
   roles_title:['三大角色介绍','Roles Overview'],
   roles_sub:['smartMOOV 围绕三类核心用户角色设计，不同角色拥有不同的操作权限与视图范围。','smartMOOV is designed around three core user roles, each with distinct permissions and views.'],
@@ -821,6 +1101,7 @@ let curLang = 'zh';
 function setLang(l) {
   curLang = l;
   localStorage.setItem('smv_lang', l);
+  document.body.setAttribute('data-lang', l);
   document.getElementById('btn-zh').classList.toggle('active', l==='zh');
   document.getElementById('btn-en').classList.toggle('active', l==='en');
   const idx = l==='zh' ? 0 : 1;
@@ -842,8 +1123,8 @@ function setLang(l) {
 }
 // Restore saved language preference on page load
 document.addEventListener('DOMContentLoaded', function() {
-  const saved = localStorage.getItem('smv_lang');
-  if (saved && saved !== 'zh') setLang(saved);
+  const saved = localStorage.getItem('smv_lang') || 'zh';
+  setLang(saved);
 });
 
 /* ── SECTION NAVIGATION ── */
@@ -869,6 +1150,15 @@ function toggleGroup(btn) {
 /* ── RULES ACCORDION ── */
 function toggleRules(btn) {
   btn.classList.toggle('open');
+}
+
+/* ── GLOSSARY FILTER ── */
+function filterGloss(btn, cat) {
+  document.querySelectorAll('.gloss-cat').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gloss-card').forEach(c => {
+    c.classList.toggle('hidden', cat !== 'all' && c.dataset.cat !== cat);
+  });
 }
 
 /* ── URL HASH ROUTING ── */
