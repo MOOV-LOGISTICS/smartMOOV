@@ -311,7 +311,7 @@ var USERNAME = 'MOOVLOGISTIC';
 var PASSWORD = 'smartMOOV@2026';
 var EXPIRY   = new Date('2026-06-17T23:59:59+08:00').getTime();
 var AUTH_KEY = 'smv_auth';
-var DAY      = 86400000;
+// sessionStorage: auth clears automatically when tab/window is closed
 var CUR_LANG = 'en';
 
 var STR = {
@@ -375,7 +375,7 @@ function doLogin(){
   var user = document.getElementById('inp-user').value.trim();
   var pass = document.getElementById('inp-pass').value;
   if(user === USERNAME && pass === PASSWORD){
-    localStorage.setItem(AUTH_KEY, Date.now().toString());
+    sessionStorage.setItem(AUTH_KEY, '1');
     window.location.replace('smartMOOV-overview.html');
   } else {
     showErr(STR[CUR_LANG].errCred);
@@ -403,8 +403,7 @@ document.head.appendChild(style);
     document.getElementById('form-wrap').style.display    = 'none';
     document.getElementById('expired-wrap').style.display = 'flex';
   } else {
-    var t = parseInt(localStorage.getItem(AUTH_KEY) || '0');
-    if(t && Date.now() - t < DAY){
+    if(sessionStorage.getItem(AUTH_KEY) === '1'){
       window.location.replace('smartMOOV-overview.html');
       return;
     }
