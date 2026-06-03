@@ -217,7 +217,7 @@ function doLogin(){
   var user = document.getElementById('inp-user').value.trim();
   var pass = document.getElementById('inp-pass').value;
   if(user === USERNAME && pass === PASSWORD){
-    localStorage.setItem(AUTH_KEY, '1');
+    localStorage.setItem(AUTH_KEY, Date.now().toString());
     window.location.replace('smartMOOV-overview.html');
   } else {
     showErr(STR[CUR_LANG].errCred);
@@ -235,7 +235,8 @@ document.addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin();
     document.getElementById('login-card').style.display     = 'none';
     document.getElementById('expired-screen').style.display = 'flex';
   } else {
-    if(localStorage.getItem(AUTH_KEY) === '1'){
+    var t = parseInt(localStorage.getItem(AUTH_KEY) || '0');
+    if(t && Date.now() - t < 86400000){
       window.location.replace('smartMOOV-overview.html');
       return;
     }

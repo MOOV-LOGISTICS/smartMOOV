@@ -309,7 +309,7 @@ body[data-lang="zh"] .gloss-fullname{display:none}
 </style>
 </head>
 <body>
-<script>(function(){var E=new Date('2026-06-17T23:59:59+08:00').getTime();if(!localStorage.getItem('smv_auth')||Date.now()>E){localStorage.removeItem('smv_auth');window.location.replace('smartMOOV-login.html');}})();</script>
+<script>(function(){var E=new Date('2026-06-17T23:59:59+08:00').getTime(),D=86400000,t=parseInt(localStorage.getItem('smv_auth')||'0');if(!t||Date.now()>E||Date.now()-t>D){localStorage.removeItem('smv_auth');window.location.replace('smartMOOV-login.html');}})();</script>
 
 <!-- TOPBAR -->
 <div class="topbar">
