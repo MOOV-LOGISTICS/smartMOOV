@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>smartMOOV · Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orient:#004F7C;
+  --orient-dark:#003361;
+  --orient-light:#EBF3F9;
+  --orange:#FE5000;
+  --text-primary:#0C1E2E;
+  --text-secondary:#5A7A90;
+  --text-placeholder:#A8BDC9;
+  --border:#D5E2EA;
+  --bg-field:#F7FAFC;
+  --font:'Outfit',sans-serif;
+}
+
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--font);background:#fff}
+
+/* ── LAYOUT ── */
+.wrapper{display:flex;height:100vh;width:100vw}
+
+/* ── LEFT PANEL ── */
+.left{
+  flex:0 0 480px;width:480px;
+  display:flex;flex-direction:column;
+  padding:40px 56px;
+  background:#fff;
+  position:relative;
+  z-index:2;
+  box-shadow:4px 0 32px rgba(0,0,0,.06);
+  overflow-y:auto;
+}
+
+.logo-wrap{margin-bottom:auto;padding-bottom:32px}
+.logo-wrap img{height:38px;display:block}
+
+.form-body{
+  flex:1;display:flex;flex-direction:column;
+  justify-content:center;padding:20px 0;
+}
+
+/* ── HEADING ── */
+.greeting{
+  font-size:28px;font-weight:700;
+  color:var(--text-primary);
+  line-height:1.2;margin-bottom:6px;
+  letter-spacing:-.3px;
+}
+.greeting-sub{
+  font-size:14px;color:var(--text-secondary);
+  margin-bottom:36px;font-weight:400;
+}
+
+/* ── FIELDS ── */
+.field{margin-bottom:20px}
+.field label{
+  display:block;font-size:12px;font-weight:600;
+  color:var(--text-secondary);letter-spacing:.6px;
+  text-transform:uppercase;margin-bottom:7px;
+}
+.field-wrap{position:relative}
+.field input{
+  width:100%;height:48px;
+  padding:0 16px;
+  background:var(--bg-field);
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  font-size:14.5px;font-family:var(--font);
+  color:var(--text-primary);
+  outline:none;
+  transition:border-color .18s,box-shadow .18s,background .18s;
+}
+.field input::placeholder{color:var(--text-placeholder);font-size:14px}
+.field input:hover{border-color:#B0C8D8}
+.field input:focus{
+  border-color:var(--orient);
+  background:#fff;
+  box-shadow:0 0 0 3.5px rgba(0,79,124,.1);
+}
+.pw-toggle{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;
+  color:var(--text-placeholder);font-size:16px;
+  padding:4px;transition:color .15s;
+  display:flex;align-items:center;
+}
+.pw-toggle:hover{color:var(--text-secondary)}
+
+/* ── ERROR ── */
+#err-msg{
+  display:none;
+  background:#FFF4F1;border:1.5px solid #FED0C0;
+  border-radius:8px;padding:11px 14px;
+  font-size:13px;color:#C03000;
+  margin-bottom:20px;
+  display:none;
+}
+
+/* ── BUTTON ── */
+.login-btn{
+  width:100%;height:50px;
+  background:var(--orient);
+  border:none;border-radius:8px;
+  color:#fff;font-size:15px;font-weight:600;
+  font-family:var(--font);letter-spacing:.3px;
+  cursor:pointer;
+  transition:background .18s,box-shadow .18s,transform .1s;
+  box-shadow:0 4px 14px rgba(0,79,124,.28);
+  margin-top:4px;
+}
+.login-btn:hover{background:var(--orient-dark);box-shadow:0 6px 20px rgba(0,79,124,.38)}
+.login-btn:active{transform:scale(.985)}
+
+/* ── TAGLINE ── */
+.tagline{
+  margin-top:28px;font-size:13px;
+  color:var(--text-secondary);text-align:center;
+  line-height:1.6;
+}
+.tagline span{color:var(--orient);font-weight:500}
+
+/* ── LANG ── */
+.lang-row{display:flex;justify-content:center;margin-top:24px}
+.lang-toggle{
+  display:flex;border:1.5px solid var(--border);
+  border-radius:20px;overflow:hidden;background:#F7FAFC;
+}
+.lang-btn{
+  padding:5px 18px;font-size:12px;font-weight:600;
+  cursor:pointer;border:none;background:transparent;
+  color:var(--text-secondary);letter-spacing:.4px;
+  font-family:var(--font);transition:all .18s;
+}
+.lang-btn.active{background:var(--orient);color:#fff;border-radius:18px}
+
+/* ── FOOTER ── */
+.left-footer{
+  margin-top:auto;padding-top:24px;
+  font-size:11px;color:#B0C4D0;letter-spacing:.3px;
+  text-align:center;
+}
+
+/* ── RIGHT PANEL ── */
+.right{
+  flex:1;position:relative;overflow:hidden;
+  background:var(--orient-dark);
+}
+.ship-img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  display:block;
+}
+.right-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to right,
+    rgba(0,30,56,.18) 0%,
+    rgba(0,20,40,.04) 40%,
+    transparent 100%
+  );
+}
+/* Bottom brand badge on image */
+.right-badge{
+  position:absolute;bottom:36px;left:36px;
+  background:rgba(255,255,255,.13);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:10px;
+  padding:12px 18px;
+  color:#fff;
+}
+.right-badge .rb-title{
+  font-size:16px;font-weight:700;letter-spacing:.5px;
+}
+.right-badge .rb-sub{
+  font-size:11px;opacity:.7;margin-top:2px;letter-spacing:.4px;
+  text-transform:uppercase;
+}
+
+/* ── EXPIRED SCREEN ── */
+#expired-wrap{
+  display:none;flex-direction:column;
+  align-items:center;text-align:center;
+  justify-content:center;padding:20px 0;flex:1;
+}
+.lock-circle{
+  width:72px;height:72px;border-radius:50%;
+  background:var(--orient-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;margin:0 auto 20px;
+}
+.exp-title{font-size:22px;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.exp-sub{font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:28px}
+.exp-divider{
+  width:36px;height:2px;
+  background:linear-gradient(90deg,var(--orient),var(--orient-light));
+  margin:0 auto 24px;border-radius:2px;
+}
+.exp-contact{
+  font-size:12.5px;color:var(--text-secondary);line-height:2;
+  border-top:1px solid var(--border);padding-top:20px;
+}
+.exp-contact a{color:var(--orient);text-decoration:none;font-weight:500}
+.exp-contact a:hover{text-decoration:underline}
+
+/* ── ENTRANCE ANIMATION ── */
+@keyframes slideIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+.left{animation:slideIn .4s cubic-bezier(.25,.46,.45,.94) both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.right{animation:fadeIn .55s ease both}
+
+@media(max-width:860px){
+  .right{display:none}
+  .left{flex:none;width:100%;max-width:100%;padding:40px 32px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- ── LEFT PANEL ── -->
+  <div class="left">
+
+    <div class="logo-wrap">
+      <img src="moov-logo-color.png" alt="MOOV Logistics">
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="form-body" id="form-wrap">
+      <div class="greeting" id="greeting">Welcome back</div>
+      <div class="greeting-sub" id="greeting-sub">Supply chain, simplified.</div>
+
+      <div id="err-msg"></div>
+
+      <div class="field">
+        <label id="lbl-user">Username</label>
+        <div class="field-wrap">
+          <input type="text" id="inp-user" placeholder="Enter username" autocomplete="username">
+        </div>
+      </div>
+
+      <div class="field">
+        <label id="lbl-pass">Password</label>
+        <div class="field-wrap">
+          <input type="password" id="inp-pass" placeholder="Enter password" autocomplete="current-password">
+          <button class="pw-toggle" onclick="togglePw()" tabindex="-1">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In</button>
+
+      <div class="tagline" id="tagline">
+        <span>smartMOOV</span> · 4PL Digital Supply Chain Control Tower
+      </div>
+
+      <div class="lang-row">
+        <div class="lang-toggle">
+          <button class="lang-btn" id="btn-zh" onclick="setLang('zh')">中文</button>
+          <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPIRED STATE -->
+    <div class="form-body" id="expired-wrap" style="display:none">
+      <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div class="lock-circle">🔒</div>
+        <div class="exp-title" id="exp-title">Access Expired</div>
+        <div class="exp-divider"></div>
+        <div class="exp-sub" id="exp-sub">
+          The demo access period for this account has ended.<br>
+          此演示账号的有效访问期已结束。
+        </div>
+        <div class="exp-contact">
+          To renew access, please contact the MOOV Logistics team<br>
+          如需延续访问，请联系 MOOV Logistics 团队<br>
+          <a href="mailto:z.benny@moovlogistics.com">z.benny@moovlogistics.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="left-footer">smartMOOV · MOOV Logistics · 2026</div>
+  </div>
+
+  <!-- ── RIGHT PANEL ── -->
+  <div class="right">
+    <img class="ship-img" src="login-ship.png" alt="Container Ship">
+    <div class="right-overlay"></div>
+    <div class="right-badge">
+      <div class="rb-title">smartMOOV</div>
+      <div class="rb-sub">4PL Control Tower · End-to-End Visibility</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var USERNAME = 'moovlogistics';
+var PASSWORD = 'smartMOOV@2026';
+var EXPIRY   = new Date('2026-07-31T23:59:59+08:00').getTime();
+var AUTH_KEY = 'smv_auth';
+// sessionStorage: auth clears automatically when tab/window is closed
+var CUR_LANG = 'en';
+
+var STR = {
+  zh:{
+    greeting:'欢迎回来',
+    greetingSub:'供应链，尽在掌控。',
+    lblUser:'用户名', lblPass:'密码',
+    phUser:'输入用户名', phPass:'输入密码',
+    btn:'登 录',
+    tagline:'<span>smartMOOV</span> · 4PL 数字化供应链控制塔',
+    errCred:'用户名或密码错误，请重试',
+    expTitle:'访问已到期',
+    expSub:'此演示账号的有效访问期已结束。<br>The demo access period for this account has ended.',
+  },
+  en:{
+    greeting:'Welcome back',
+    greetingSub:'Supply chain, simplified.',
+    lblUser:'Username', lblPass:'Password',
+    phUser:'Enter username', phPass:'Enter password',
+    btn:'Sign In',
+    tagline:'<span>smartMOOV</span> · 4PL Digital Supply Chain Control Tower',
+    errCred:'Incorrect username or password. Please try again.',
+    expTitle:'Access Expired',
+    expSub:'The demo access period for this account has ended.<br>此演示账号的有效访问期已结束。',
+  }
+};
+
+function setLang(l){
+  CUR_LANG = l;
+  localStorage.setItem('smv_lang', l);
+  document.getElementById('btn-zh').classList.toggle('active', l==='zh');
+  document.getElementById('btn-en').classList.toggle('active', l==='en');
+  var s = STR[l];
+  document.getElementById('greeting').textContent     = s.greeting;
+  document.getElementById('greeting-sub').textContent = s.greetingSub;
+  document.getElementById('lbl-user').textContent     = s.lblUser;
+  document.getElementById('lbl-pass').textContent     = s.lblPass;
+  document.getElementById('inp-user').placeholder     = s.phUser;
+  document.getElementById('inp-pass').placeholder     = s.phPass;
+  document.getElementById('login-btn').textContent    = s.btn;
+  document.getElementById('tagline').innerHTML        = s.tagline;
+  if(document.getElementById('exp-title'))
+    document.getElementById('exp-title').textContent  = s.expTitle;
+  if(document.getElementById('exp-sub'))
+    document.getElementById('exp-sub').innerHTML      = s.expSub;
+}
+
+function togglePw(){
+  var i = document.getElementById('inp-pass');
+  i.type = i.type === 'password' ? 'text' : 'password';
+}
+
+function showErr(msg){
+  var el = document.getElementById('err-msg');
+  el.textContent = msg; el.style.display = 'block';
+}
+
+function doLogin(){
+  document.getElementById('err-msg').style.display = 'none';
+  if(Date.now() > EXPIRY){ showErr(STR[CUR_LANG].errCred); return; }
+  var user = document.getElementById('inp-user').value.trim();
+  var pass = document.getElementById('inp-pass').value;
+  if(user === USERNAME && pass === PASSWORD){
+    sessionStorage.setItem(AUTH_KEY, '1');
+    window.location.replace('smartMOOV-overview.html');
+  } else {
+    showErr(STR[CUR_LANG].errCred);
+    document.getElementById('inp-pass').value = '';
+    document.getElementById('inp-pass').focus();
+    // Shake animation
+    var card = document.querySelector('.form-body');
+    card.style.animation = 'none';
+    card.offsetHeight;
+    card.style.animation = 'shake .35s ease';
+  }
+}
+
+document.addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+
+// Shake keyframe
+var style = document.createElement('style');
+style.textContent = '@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}';
+document.head.appendChild(style);
+
+// ── INIT ──
+(function(){
+  var expired = Date.now() > EXPIRY;
+  if(expired){
+    document.getElementById('form-wrap').style.display    = 'none';
+    document.getElementById('expired-wrap').style.display = 'flex';
+  } else {
+    if(sessionStorage.getItem(AUTH_KEY) === '1'){
+      window.location.replace('smartMOOV-overview.html');
+      return;
+    }
+  }
+  setLang('en'); // Login page always opens in English by default
+})();
+</script>
+</body>
+</html>
